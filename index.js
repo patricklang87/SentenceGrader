@@ -1,18 +1,21 @@
 // @ts-check
 import {add, prepSentence } from './textPrep';
 import { removeFalseWords, wordOrderEditor } from './wordOrderEditor';
+import { autocorrect } from './wordSpellingEditor';
 
 console.log(add(2, 3));
 
 let phrase1 = "Ich bin vom weiten gekommen.";
-let phrase2 = "Ich bin gekommen, vom weiten.";
+let phrase2 = "Ich bin gekmmen, vom weiten.";
 
 
 const calculateEdits = (keyAns, userAns) => {
     let userAnsPrepped = prepSentence(userAns);
     let keyAnsPrepped = prepSentence(keyAns);
 
-    let falseWords = removeFalseWords(keyAnsPrepped, userAnsPrepped);
+    let autocorrectedUserAns = autocorrect(keyAnsPrepped, userAnsPrepped);
+
+    let falseWords = removeFalseWords(keyAnsPrepped, autocorrectedUserAns);
     let numWordsRemoved = falseWords[1];
     let userAnsWordsRemoved = falseWords[0];
     console.log(numWordsRemoved, userAnsWordsRemoved);

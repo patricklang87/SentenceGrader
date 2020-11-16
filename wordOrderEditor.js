@@ -1,7 +1,9 @@
+//@ts-check 
+import { levCalc } from './wordSpellingEditor';
+
 // here are the programs for removing extra words and counting words in an bag of words object
 
-let phrase1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-let phrase2 = [10, 8, 2, 9, 5, 3, 6, 1, 4, 7];
+
 
 //produces an bag of words objet that tracks the frequency of individual strings in the array
 const createWordCount = (sentence) => {
@@ -14,6 +16,7 @@ const createWordCount = (sentence) => {
 }
 
 //console.log(createWordCount(phrase1));
+
 
 //removes words that are not in the key Answer
 export const removeFalseWords = (keyAns, editedPhrase) => {
@@ -117,4 +120,4 @@ export const wordOrderEditor = (keyAns, userSub) => {
 
 
 
-console.log(wordOrderEditor(phrase1, phrase2));
+//console.log(wordOrderEditor(phrase1, phrase2));
