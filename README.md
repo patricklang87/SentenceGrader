@@ -1,0 +1,2 @@
+# js_assess_2
+This is a program designed to help auto-grade student sentences on an foreign language test. It will be appilcable in situations where the variety of acceptable answers is limited, but the instructor wants more flexibilty than the status of "match" or "not a match". Its key components will be a modified levenstein calculator, used to detect where unrecognized words are misspellings, and an organizing algorithm, meant to calculate the minimal number of word reorderings required to transform the a user submission into an acceptable submission. 
