@@ -1,6 +1,6 @@
 // @ts-check
 import { prepSentence } from './textPrep';
-import { matchSections } from './matchSections';
+import { matchSections, arToPhraseString } from './matchSections';
 import { removeFalseWords, wordOrderEditor } from './wordOrderEditor';
 import { autocorrect } from './wordSpellingEditor';
 
@@ -26,13 +26,23 @@ const calculateEdits = (keyAns, userAns) => {
     let userAnsWordsRemoved = falseWords[0];
     console.log(numWordsRemoved, userAnsWordsRemoved);
 
-    let reorderedUserSub = wordOrderEditor(keyAnsPrepped, userAnsWordsRemoved);
+    let userSectionsMatched = matchSections(keyAnsPrepped, userAnsWordsRemoved);
+    let keySectionsMatched = matchSections(userAnsWordsRemoved, keyAnsPrepped);
+
+    let userSectionString = arToPhraseString(userSectionsMatched);
+    let keySectionString = arToPhraseString(keySectionsMatched);
+
+console.log(userSectionString, keySectionString);
+
+    let reorderedUserSub = wordOrderEditor(keySectionString, userSectionString);
     let reorderCount = reorderedUserSub[0];
     let reorderedPhrase = reorderedUserSub[1];
   
 
     return [reorderedPhrase, spellingEditsTotal, numWordsRemoved, reorderCount];
+    
 }
+
 
 let outcome = calculateEdits(phrase1, phrase2);
 console.log("Edited Phrase: ", outcome[0], ", Spelling Autocorrections: ", outcome[1], ", Item Removals: ", outcome[2], ", Rearrangement Moves: ", outcome[3]);
