@@ -1,5 +1,4 @@
 //@ts-check 
-import { levCalc } from './wordSpellingEditor';
 
 // here are the programs for removing extra words and counting words in an bag of words object
 
@@ -16,6 +15,27 @@ const createWordCount = (sentence) => {
 }
 
 //console.log(createWordCount(phrase1));
+
+const removeExcessWords = (keyAns, editedPhrase) => {
+  let BoWKeyAns = createWordCount(keyAns);
+  let BoWEditedPhrase = createWordCount(editedPhrase);
+  let BoWEditedPhraseKeys = Object.keys(BoWEditedPhrase);
+  let BoWKeyAnsKeys = Object.keys(BoWKeyAns);
+  for (let keyItem of BoWEditedPhraseKeys) {
+    if (!BoWKeyAnsKeys.includes(keyItem)) {
+      //here you need to move through the correction and deletion program
+    } else if (BoWKeyAns.keyItem < BoWEditedPhrase.keyItem) {
+       for (let i in editedPhrase) {
+         if (keyItem == editedPhrase[i]) {
+          //here you have to check whether the words immediately preceding or following the word in question are correct. Delete whichever word is immediately surrounded by the least correct words first
+         }
+       }
+        
+      } else if (BoWKeyAns.keyItem > BoWEditedPhrase.keyItem) {
+        //in this case, the word is not absent from the user's answer, but there is not enough of it.
+      }
+    }
+  }
 
 
 //removes words that are not in the key Answer
@@ -56,7 +76,7 @@ export const wordOrderEditor = (keyAns, userSub) => {
   let editedPhrase = [];
   for (let item of userSub) editedPhrase.push(item);
 
-  //word order editor will recursively call reorderer so it after each chane, it starts from the beginning of the array, and does not accidentally skip contents.
+  //word order editor will recursively call reorderer so it after each change, it starts from the beginning of the array, and does not accidentally skip contents.
   const reorderer = (keyAns, userAns) => {
     for (let index = 0; index < keyAns.length; index++) {
     	
@@ -65,7 +85,6 @@ export const wordOrderEditor = (keyAns, userSub) => {
          let roundStartStatus = [];
   				for (let item of editedPhrase) roundStartStatus.push(item);
         // if the word in the user submission is incorrect, and more than one position behind where it should be, or the next word is more than one ahead of where it should be, the edit count is increased by one. Then that word at the index is removed
-        if (editedPhrase[index] != keyAns[index + 1] && editedPhrase[index + 1] != keyAns[index]) editCount++;
         let correctWord = userAns[index];
         let userWord = editedPhrase[index];
         editedPhrase.splice(index, 1);
@@ -104,6 +123,7 @@ export const wordOrderEditor = (keyAns, userSub) => {
             } else editedPhrase.splice(keyAns.indexOf(userWord), 0, userWord);
         //  if the word at the index has changed, the edit count increases by 1
         if (roundStartStatus[index] != editedPhrase[index]) editCount++;
+        if (roundStartStatus[index] != editedPhrase[index + 1]) editCount++;
         //if (roundStartStatus[index] != editedPhrase[index +1] && roundStartStatus[index] != editedPhrase[index +2]) editCount++;
         console.log("step 3: ", editedPhrase, " editCount: ", editCount);
 				console.log("userSub[index]: ", userSub[index], " editedPhrase[index]: ", editedPhrase[index] );

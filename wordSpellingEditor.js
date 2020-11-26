@@ -1,9 +1,9 @@
 // @ts-check
 
-let givenAns = "Welcome home!";
-let userAns = "Wecome home!";
+//let givenAns = "Welcome home!";
+//let userAns = "Wecome home!";
 
-export const levCalc = (givenAns, userAns) => {
+const levCalc = (givenAns, userAns) => {
 	if (typeof givenAns != "string") return "please provide string.";
     else if (givenAns == userAns) return "match";
     else {
@@ -69,17 +69,19 @@ export const levCalc = (givenAns, userAns) => {
 
 //checks for words that can be corrected and corrects them;
 export const autocorrect = (keyAns, editedPhrase) => {
+	let editTotal = 0;
     for (let index = 0; index < editedPhrase.length; index ++) {
         if (!keyAns.includes(editedPhrase[index])) {
             for (let j = 0; j < keyAns.length; j++) {
                 if (!editedPhrase.includes(keyAns[j])) {
                     let levVal = levCalc(keyAns[j], editedPhrase[index]);
                     if (levVal <= (1/3)*editedPhrase[index].length) {
-                        editedPhrase.splice(index, 1, keyAns[j]);
+						editedPhrase.splice(index, 1, keyAns[j]);
+						editTotal++;
                     } 
                 }
             }
         }
     }
-    return editedPhrase;
+    return [editTotal, editedPhrase];
 }

@@ -1,0 +1,136 @@
+let phrase1 = "I am going to scream. I am going to sing.";
+let phrase2 = "I am going to scream am going. I am going to sing.";
+
+const sepPunctuation = (str) => {
+  if (typeof str != "string") console.log("input is not a string");
+  let punctuation = str.match(/[,.":;()]/g);
+  let alreadyCovered = [];
+  if (punctuation != null) {
+    for (let i of punctuation) {
+      //console.log(str, i);
+      if (!alreadyCovered.includes(i)) {
+        if (i == ".") str = str.replace(new RegExp(/\./, 'g'), " " + i + " ");
+        else str = str.replace(new RegExp(i, 'g'), " " + i + " ");
+      }
+      alreadyCovered.push(i);
+    }
+    str = str.replace(/\s+/g, " ");
+    str = str.substr(0, str.length - 1);
+  }
+  return str;
+}
+
+// console.log(sepPunctuation(phrase));
+
+const tokenize = (str) => {
+  let tokens = str.split(" ");
+  return tokens;
+}
+
+const prepSentence = (str) => {
+  let sepStr = sepPunctuation(str);
+  let tokenStr = tokenize(sepStr);
+  return tokenStr;
+}
+
+const createWordCount = (sentence) => {
+  let KeyWordCount = {};
+  for (let index = 0; index < sentence.length; index++) {
+    if (!Object.keys(KeyWordCount).includes(sentence[index])) KeyWordCount[sentence[index]] = 1;
+    else KeyWordCount[sentence[index]]++;
+  }
+  return KeyWordCount;
+}
+
+function SelectionObject(perfectMatches, partialMatches, distance) {
+  this.perfectMatches = perfectMatches;
+  this.partialMatches = partialMatches;
+  this.distance = distance;
+}
+
+const removeExcessWords = (keyAns, userAns) => {
+  let keyAnsPrepped = prepSentence(keyAns);
+  let userAnsPrepped = prepSentence(userAns);
+
+  let keyAnsBoW = createWordCount(keyAnsPrepped);
+  let userAnsBoW = createWordCount(userAnsPrepped);
+
+  let keyAnsBoWKeys = Object.keys(keyAnsBoW);
+  let userAnsBoWKeys = Object.keys(userAnsBoW);
+  console.log(userAnsBoW);
+
+  //console.log(keyAnsBoWKeys, userAnsBoWKeys);
+  let newAnsBoW = createWordCount(userAnsPrepped);
+  for (let key of userAnsBoWKeys) {
+    if (userAnsBoW[key] > keyAnsBoW[key]) {
+
+      //create an array of correct contexts
+      let keyAnsNeighbors = [];
+      for (let j = 0; j < keyAnsPrepped.length; j++) {
+        if (keyAnsPrepped[j] == key) {
+          keyAnsNeighbors.push([keyAnsPrepped[j - 1], keyAnsPrepped[j + 1]]);
+        }
+      }
+      console.log("correct contexts: ", keyAnsNeighbors);
+
+      //move through the user array. For each instance of the word, first delete instances where neither the previous nor following word have a correct context
+      for (let i = 0; 0 < userAnsPrepped.length; i++) {
+        newAnsBoW = createWordCount(userAnsPrepped);
+        if (newAnsBoW[key] == keyAnsBoW[key]) {
+          break;
+        }
+        if (userAnsPrepped[i] == key) {
+
+          for (let [a, b] of keyAnsNeighbors) {
+
+            console.log("key in question: ", userAnsBoW[key]);
+            newAnsBoW = createWordCount(userAnsPrepped);
+            if (newAnsBoW[key] == keyAnsBoW[key]) {
+              break;
+            }
+            if (a != userAnsPrepped[i - 1] && b != userAnsPrepped[i + 1]) {
+              console.log("for deletion: ", i, userAnsPrepped[i]);
+              userAnsPrepped.splice(i, 1);
+              console.log(userAnsPrepped);
+            }
+          }
+        }
+      }
+
+      newAnsBoW = createWordCount(userAnsPrepped);
+      if (newAnsBoW[key] > keyAnsBoW[key]) {
+        for (let i = 0; 0 < userAnsPrepped.length; i++) {
+          newAnsBoW = createWordCount(userAnsPrepped);
+          if (newAnsBoW[key] == keyAnsBoW[key]) {
+            break;
+          }
+          if (userAnsPrepped[i] == key) {
+
+            for (let [a, b] of keyAnsNeighbors) {
+              console.log("location: ", userAnsBoW[key]);
+              newAnsBoW = createWordCount(userAnsPrepped);
+              if (newAnsBoW[key] == keyAnsBoW[key]) {
+                break;
+              }
+              if (a != userAnsPrepped[i - 1] || b != userAnsPrepped[i + 1]) {
+                console.log("for deletion: ", i, userAnsPrepped[i]);
+                userAnsPrepped.splice(i, 1);
+                console.log(userAnsPrepped);
+              }
+            }
+          }
+        }
+      }
+
+      /*
+      newAnsBoW = createWordCount(userAnsPrepped);
+      if (newAnsBoW[key] == keyAnsBoW[key]) {
+        break;
+      }*/
+      console.log(userAnsPrepped);
+
+    }
+  }
+}
+
+removeExcessWords(phrase1, phrase2);
