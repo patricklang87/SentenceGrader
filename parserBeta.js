@@ -59,15 +59,22 @@ let sentenceParser = (keyPhrase, parsingPhrase) => {
       console.log("newParsingPhrase: ", parsingPhrase);
       console.log("keyPhrase: ", keyPhrase);
 
+      if (parsingPhrase.length > 0) {
       let truthAr = [];
       for (n = 0; n < parsingPhrase.length; n++) {
+        console.log("pushed parsing phrase n");
         if (keyPhrase[n] == parsingPhrase[n]) truthAr.push(parsingPhrase[n]);
       }
-      if (truthAr.length == parsingPhrase.length) parsedPhrases.push(parsingPhrase);
+      if (truthAr.length == parsingPhrase.length) {
+        console.log("truth r initiated parsed phrases push", truthAr);
+        parsedPhrases.push(parsingPhrase);
+      } 
       else {
         subParse(keyPhrase, parsingPhrase);
       }
     }
+  }
+  
   }
 
   subParse(keyPhrase, parsingPhrase);
