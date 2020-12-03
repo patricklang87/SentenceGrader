@@ -1,0 +1,117 @@
+/*let phraseA = ["Dad", ", ", "I", "am", "going", "to", "the", "store", "to", "the", "store", "tomorrow", "tomorrow", "."];
+let phraseB = ["I", "am", "going", "to", "the", "store", "tomorrow", "afternoon", "."];
+*/
+
+/*
+let phraseA = ["I", "have", "a", "new", "lease", "on", "life", "."];
+let phraseB = ["I", "have", "lease", "on", "life", ".", "a", "new"];
+*/
+
+/*
+phraseA = ["Ich", "bin", "als", "jünger", "Mann", "nach", "Frankfurt", "gezogen", "."];
+*/
+
+let phraseA = ["can", "you", "catch", "me", "?", "catch", "me", "if", "you", "can", "."];
+let phraseB = ["if", "you", "can", ".", "catch", "me", "?", "can", "you", "catch", "me"];
+
+const addUntilDifferent = (phrase1, phrase2) => {
+  let iterator = 0;
+  let phrase2Advancer = 0;
+  let phrase1Advancer = 0;
+  let subphrase = [];
+  if (phrase1.length > phrase2.length) iterator = phrase2.length;
+  else iterator = phrase1.length;
+  for (let i = 0; i < iterator; i++) {
+    if (phrase1[i] != phrase2[i]) {
+      break;
+    } else {
+      subphrase.push(phrase2[i]);
+      phrase2Advancer++;
+      phrase1Advancer++;
+    }
+  }
+  console.log("addUntilDifferent result: ", subphrase, phrase2Advancer);
+  return [subphrase, phrase2Advancer, phrase1Advancer];
+}
+
+const addUntilSame = (phrase1, phrase2) => {
+  let iterator = 0;
+  let phrase2Advancer = 0;
+  let subphrase = [];
+  console.log("phrase 1 subphrase: ", phrase1);
+  if (phrase1.length > phrase2.length) iterator = phrase1.length;
+  else iterator = phrase2.length;
+  for (let i = 0; i < iterator; i++) {
+    console.log("phrase1 0: ", phrase1[0]);
+    console.log("phrase2 i:", phrase2[i]);
+		if (phrase1[0] == phrase2[i]) {
+
+      console.log("break");
+      /*if (phrase1[0] == phrase2[i + 1]) {
+        subphrase.push(phrase2[i]);
+        phrase2Advancer++;
+      }*/
+      break;
+      }
+    else if (phrase1[0] == undefined) {
+    	subphrase.push(phrase2[i]);
+      phrase2Advancer++;
+      break;
+    } else {
+      subphrase.push(phrase2[i]);
+      console.log("momentary subphrase: ", subphrase);
+      phrase2Advancer++;
+    }
+  }
+  console.log("addUntilSame result: ", subphrase, phrase2Advancer);
+  return [subphrase, phrase2Advancer];
+}
+
+const matchSections = (keyAns, userAns) => {
+  let subphrases = [];
+  let counterTotal = 0;
+  let phrase2Total = 0;
+  for (let i = 0; i < userAns.length; i++) {
+    console.log("counter total begin: ", counterTotal);
+    // this position counter likely have to be updated when dealing with incorrect words.
+    if (i < counterTotal) {
+      continue;
+    }
+    if (userAns[i] == undefined) {
+      break;
+    }
+    for (let j = 0; j < keyAns.length; j++) {
+    	if (!userAns.slice(i).includes(keyAns[j])) {
+      phrase2Total++;
+      continue;
+      }
+      if (keyAns[j] == undefined || userAns[i] == undefined) {
+        let subphrase = [];
+        do {
+          subphrase.push(userAns[i])
+        } while (userAns[i] != undefined);
+        subphrases.push(subphrase);
+      } else if (keyAns[j] == userAns[i]) {
+        console.log("Match. CounterTotal: ", counterTotal);
+        let phraseAndCounter = addUntilDifferent(keyAns.slice(j), userAns.slice(i));
+        subphrases.push(phraseAndCounter[0]);
+        counterTotal += phraseAndCounter[1];
+        phrase2Total += phraseAndCounter[2];
+        break;
+	
+	
+        
+      } else if (keyAns[phrase2Total] != userAns[i]) {
+        console.log("Discrepancy: ", keyAns[phrase2Total], userAns[i], " CounterTotal: ", counterTotal);
+        let phraseAndCounter = addUntilSame(keyAns.slice(phrase2Total), userAns.slice(i));
+        subphrases.push(phraseAndCounter[0]);
+        console.log(phraseAndCounter[1]);
+        counterTotal += phraseAndCounter[1];
+        break;
+      }
+    }
+  }
+  return subphrases;
+}
+
+console.log(matchSections(phraseA, phraseB));

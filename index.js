@@ -8,7 +8,7 @@ import { autocorrect } from './wordSpellingEditor';
 
 
 let phrase1 = "Ich bin vom weiten gekommen.";
-let phrase2 = "Ich weiten gekommen bin vom.";
+let phrase2 = "Ich bin gekommen bi vom weiten.";
 
 
 const calculateEdits = (keyAns, userAns) => {
