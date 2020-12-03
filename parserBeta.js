@@ -1,6 +1,6 @@
 let kPhrase = ["I", "can", "change", ".", "I", "can", "change", "my", "life", ".", "I", "can", "change", "my", "life", "for", "the", "better", "."];
 
-let pPhrase = ["I", "change", "my", "life", ".", "I", "can", "change", "my", "life", "for", "the", "better", "monkey", ".", "I", "can", "can", "change", "."];
+let pPhrase = ["I", "change", "my", "life", ".", "I", "can", "change", "my", "life", "for", "the", "better", "monkey",  "change", "."];
 
 let sentenceParser = (keyPhrase, parsingPhrase) => {
   let parsedPhrases = [];
@@ -22,7 +22,7 @@ let sentenceParser = (keyPhrase, parsingPhrase) => {
       exceptAr.push(parsingPhrase[0]);
       parsedPhrases.push(exceptAr);
       parsingPhrase.splice(0, 1);
-      subParse(keyPhrase, parsingPhrase);
+      if (parsingPhrase.length > 0) subParse(keyPhrase, parsingPhrase);
     } else {
 
 
@@ -59,7 +59,7 @@ let sentenceParser = (keyPhrase, parsingPhrase) => {
       console.log("newParsingPhrase: ", parsingPhrase);
       console.log("keyPhrase: ", keyPhrase);
 
-      if (parsingPhrase.length > 0) {
+      if (parsingPhrase.length != 0) {
       let truthAr = [];
       for (n = 0; n < parsingPhrase.length; n++) {
         console.log("pushed parsing phrase n");
@@ -81,4 +81,4 @@ let sentenceParser = (keyPhrase, parsingPhrase) => {
   return parsedPhrases;
 }
 
-console.log("completed result: ", sentenceParser(pPhrase, kPhrase));
+console.log("completed result: ", sentenceParser(kPhrase, pPhrase));
