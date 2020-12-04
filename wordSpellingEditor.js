@@ -107,7 +107,10 @@ export const autocorrect = (keyAns, editedPhrase) => {
                 if (arIncludeAr(keyAns[j], editedPhrase) != true) {
                     console.log("in autocorrect function keyansj and editedphraseindex: ", keyAns[j][0], editedPhrase[index][0]);
                     let levVal = levCalc(keyAns[j][0], editedPhrase[index][0]);
-                    if (levVal <= (1/3)*editedPhrase[index][0].length) {
+                    console.log("levVal: ", levVal);
+                    let lengthCompare = editedPhrase[index][0].length;
+                    if (keyAns[j][0].length > lengthCompare) lengthCompare = keyAns[j][0].length;
+                    if (levVal <= (1/3)*lengthCompare) {
                         editedPhrase[index].splice(0, 1, keyAns[j][0]);
                         changed = true;
                         autocorrections++;

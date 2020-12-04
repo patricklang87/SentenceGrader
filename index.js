@@ -23,7 +23,7 @@ const calculateEdits = (keyAns, userAns) => {
     // break the comparison sentences into individual words
     let userAnsPrepped = prepSentence(userAns);
     let keyAnsPrepped = prepSentence(keyAns);
-console.log("STEP 1: key status: ", keyAnsPrepped, "userans status: ", userAnsPrepped);
+console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: ", userAnsPrepped);
 
     //parse sentences into groups of matching phrases
     let altUserAnsPrepped = altAr(userAnsPrepped);
@@ -31,31 +31,31 @@ console.log("STEP 1: key status: ", keyAnsPrepped, "userans status: ", userAnsPr
     let groupedKeyAnsPrepped = sentenceParser(altUserAnsPrepped, altKeyAnsPrepped);
     let groupedUserAnsPrepped = sentenceParser(keyAnsPrepped, userAnsPrepped);
     
-    console.log("STEP 2: keystatus: ", groupedKeyAnsPrepped, "userans status: ", groupedUserAnsPrepped);
+    console.log("STEP 2 (parse): keystatus: ", groupedKeyAnsPrepped, "userans status: ", groupedUserAnsPrepped);
 
     // autocorrect or delete words
     let autocorrectedResult = autocorrect(groupedKeyAnsPrepped, groupedUserAnsPrepped);
     let autocorrectedUserAns = autocorrectedResult[0];
     let numAutocorrectedWords = autocorrectedResult[1];
     let numDeletedWords = autocorrectedResult[2];
-    console.log("STEP 3: keystatus: ", groupedKeyAnsPrepped , " userans status: ", autocorrectedUserAns );
+    console.log("STEP 3 (autocorrect and delete): keystatus: ", groupedKeyAnsPrepped , " userans status: ", autocorrectedUserAns );
 
 
     // turn the internal arrays back into strings
     let userSectionString = arToPhraseString(autocorrectedUserAns);
-    let keySectionString = arToPhraseString(groupedUserAnsPrepped);
+    let keySectionString = arToPhraseString(groupedKeyAnsPrepped);
 
-console.log("STEP 4: key status: ", keySectionString, " userans status: ", userSectionString);
+    console.log("STEP 4 (return inner ars to strings): key status: ", keySectionString, " userans status: ", userSectionString);
 
-return [userSectionString, numAutocorrectedWords, numDeletedWords,];
-/*
+
+
     let reorderedUserSub = wordOrderEditor(keySectionString, userSectionString);
     let reorderCount = reorderedUserSub[0];
     let reorderedPhrase = reorderedUserSub[1];
   
-
+    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, reorderCount];
  
-    */
+
 }
 
 
