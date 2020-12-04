@@ -3,9 +3,12 @@
 //let givenAns = "Welcome home!";
 //let userAns = "Wecome home!";
 
+let phrase1 = [["Today"], ["is"], ["a"], ["good"], ["day"], ["."]];
+let phrase2 = [["Today"], ["is"], ["a"], ["god"], ["tayser"], ["."]];
+
 const levCalc = (givenAns, userAns) => {
 	if (typeof givenAns != "string") return "please provide string.";
-    else if (givenAns == userAns) return "match";
+    else if (givenAns == userAns) return 0;
     else {
     	let lenID = 0;
       let userEdit = userAns;
@@ -68,7 +71,7 @@ const levCalc = (givenAns, userAns) => {
 }
 
 //checks for words that can be corrected and corrects them;
-export const autocorrect = (keyAns, editedPhrase) => {
+const autocorrect = (keyAns, editedPhrase) => {
 	let editTotal = 0;
     for (let index = 0; index < editedPhrase.length; index ++) {
         if (!keyAns.includes(editedPhrase[index])) {
@@ -85,3 +88,57 @@ export const autocorrect = (keyAns, editedPhrase) => {
     }
     return [editTotal, editedPhrase];
 }
+
+
+
+
+const compareArrays = (ar1, ar2) => {
+    if (ar1.length != ar2.length) return false;
+    else {
+        let truthAr = [];
+        for (let i = 0; i < ar1.length; i++) {
+            if (ar1[i] == ar2[i]) truthAr.push(ar1[i]);
+        }
+        if (ar1.length == truthAr.length) return true;
+        else return false;
+    }
+}
+
+const arIncludeAr = (innerAr, outerAr) => {
+    let truthAr = [];
+    for (let k = 0; k < outerAr.length; k++) {
+		console.log(innerAr, outerAr[k]);
+        if (compareArrays(innerAr, outerAr[k]) == true) {
+			truthAr.push(innerAr);
+			break;
+		} 
+    }
+    if (truthAr.length > 0) return true;
+    else return false;
+}
+
+const rectifyNonMatches = (keyPhrase, userPhrase) => {
+    let autocorrections = 0;
+    let deletions = 0;
+
+
+    for (let i = 0; i < userPhrase.length; i++) {
+        if (arIncludeAr(userPhrase[i], keyPhrase) != true) {
+            for (let j = 0; j < keyPhrase.length; j++) {
+                if (arIncludeAr(keyPhrase[j]) != true) {
+                    let autocorrection = autocorrect(userPhrase[i], keyPhrase[j]);
+                    autocorrections += autocorrection[0];
+                    userPhrase[i].splice(0, 1, autocorrect[1]);
+                    if (autocorrection[0] == 0) {
+                        userPhrase.splice(i, 1);
+                        deletions++;
+                    }
+                }
+            }
+        }
+    }
+    return [userPhrase, autocorrections, deletions];
+}
+
+let res = rectifyNonMatches(phrase1, phrase2);
+console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[1]);
