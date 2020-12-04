@@ -3,7 +3,7 @@ import { prepSentence } from './textPrep';
 import { sentenceParser } from './parserBeta';
 import { matchSections, arToPhraseString } from './matchSections';
 import { removeFalseWords, wordOrderEditor } from './wordOrderEditor';
-//import { autocorrect } from './wordSpellingEditor';
+import { autocorrect } from './wordSpellingEditor';
 
 
 
@@ -11,38 +11,50 @@ import { removeFalseWords, wordOrderEditor } from './wordOrderEditor';
 let phrase1 = "Ich bin vom weiten gekommen.";
 let phrase2 = "vom weiten Ich gekommen bi.";
 
+const altAr = (ar) => {
+    let newAr = [];
+    for (let i = 0; i < ar.length; i++) newAr.push(ar[i]);
+    return newAr;
+}
+
 
 const calculateEdits = (keyAns, userAns) => {
 
     // break the comparison sentences into individual words
     let userAnsPrepped = prepSentence(userAns);
     let keyAnsPrepped = prepSentence(keyAns);
+console.log("STEP 1: key status: ", keyAnsPrepped, "userans status: ", userAnsPrepped);
 
     //parse sentences into groups of matching phrases
-    let groupedUserAnsPrepped = sentenceParser(userAnsPrepped);
-    let groupedKeyAnsPrepped = sentenceParser(keyAnsPrepped);
+    let altUserAnsPrepped = altAr(userAnsPrepped);
+    let altKeyAnsPrepped = altAr(keyAnsPrepped);
+    let groupedKeyAnsPrepped = sentenceParser(altUserAnsPrepped, altKeyAnsPrepped);
+    let groupedUserAnsPrepped = sentenceParser(keyAnsPrepped, userAnsPrepped);
+    
+    console.log("STEP 2: keystatus: ", groupedKeyAnsPrepped, "userans status: ", groupedUserAnsPrepped);
 
-    /*
-    let autocorrectedResult = autocorrect(keyAnsPrepped, userAnsPrepped);
-    let spellingEditsTotal = autocorrectedResult[0];
-    let autocorrectedUserAns = autocorrectedResult[1];
+    // autocorrect or delete words
+    let autocorrectedResult = autocorrect(groupedKeyAnsPrepped, groupedUserAnsPrepped);
+    let autocorrectedUserAns = autocorrectedResult[0];
+    let numAutocorrectedWords = autocorrectedResult[1];
+    let numDeletedWords = autocorrectedResult[2];
+    console.log("STEP 3: keystatus: ", groupedKeyAnsPrepped , " userans status: ", autocorrectedUserAns );
 
-    let falseWords = removeFalseWords(keyAnsPrepped, autocorrectedUserAns);
-    let numWordsRemoved = falseWords[1];
-    let userAnsWordsRemoved = falseWords[0];
-    console.log(numWordsRemoved, userAnsWordsRemoved);
 
-    let userSectionString = arToPhraseString(userSectionsMatched);
-    let keySectionString = arToPhraseString(keySectionsMatched);
+    // turn the internal arrays back into strings
+    let userSectionString = arToPhraseString(autocorrectedUserAns);
+    let keySectionString = arToPhraseString(groupedUserAnsPrepped);
 
-console.log(userSectionString, keySectionString);
+console.log("STEP 4: key status: ", keySectionString, " userans status: ", userSectionString);
 
+return [userSectionString, numAutocorrectedWords, numDeletedWords,];
+/*
     let reorderedUserSub = wordOrderEditor(keySectionString, userSectionString);
     let reorderCount = reorderedUserSub[0];
     let reorderedPhrase = reorderedUserSub[1];
   
 
-    return [reorderedPhrase, spellingEditsTotal, numWordsRemoved, reorderCount];
+ 
     */
 }
 

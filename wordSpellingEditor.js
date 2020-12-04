@@ -2,10 +2,10 @@
 
 //let givenAns = "Welcome home!";
 //let userAns = "Wecome home!";
-
+/*
 let phrase1 = [["Today", "is", "a"], ["good"], ["day"], ["."]];
 let phrase2 = [["god"], ["Today", "is", "a"], ["tayser"], ["."]];
-
+*/
 const levCalc = (givenAns, userAns) => {
 	if (typeof givenAns != "string") return "please provide string.";
     else if (givenAns == userAns) return 0;
@@ -97,7 +97,7 @@ const arIncludeAr = (innerAr, outerAr) => {
 
 
 //checks for words that can be corrected and corrects them;
-const autocorrect = (keyAns, editedPhrase) => {
+export const autocorrect = (keyAns, editedPhrase) => {
     let autocorrections = 0;
     let deletions = 0;
     for (let index = 0; index < editedPhrase.length; index ++) {
@@ -128,6 +128,7 @@ const autocorrect = (keyAns, editedPhrase) => {
 }
 
 
-
+/*
 let res = autocorrect(phrase1, phrase2);
 console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[1]);
+*/

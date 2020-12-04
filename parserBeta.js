@@ -1,9 +1,8 @@
 // @ts-check
-/*
-let kPhrase = ["I", "can", "change", ".", "I", "can", "change", "my", "life", ".", "I", "can", "change", "my", "life", "for", "the", "better", "."];
 
-let pPhrase = ["I", "can", "change", ".", "I", "can", "change", "my", "cash", "fore", "life", ".", "I", "can", "change", "my", "life", "for", "money", "the", "better", "."];
-*/
+//let kPhrase = [ 'Ich', 'bin', 'vom', 'weiten', 'gekommen', '.' ];  
+
+//let pPhrase = ['vom', 'weiten', 'Ich', 'gekommen', 'bi', '.' ];
 
 export const sentenceParser = (keyPhrase, parsingPhrase) => {
   let parsedPhrases = [];
@@ -19,7 +18,7 @@ export const sentenceParser = (keyPhrase, parsingPhrase) => {
 
   const subParse = (keyPhrase, parsingPhrase) => {
     console.log("subParse Begin");
-
+    console.log("parsingPhrase, parsingPhrase[0]: ", parsingPhrase, parsingPhrase[0] );
     if (!keyPhrase.includes(parsingPhrase[0])) {
       let exceptAr = [];
       exceptAr.push(parsingPhrase[0]);
@@ -56,7 +55,7 @@ export const sentenceParser = (keyPhrase, parsingPhrase) => {
       parsedPhrases.push(tentativeSubphraseS[longestIndex]);
       console.log("longest Index: ", longestIndex, " tentativeSubphraseS: ", tentativeSubphraseS);
       console.log(longestIndex, longestIndex + tentativeSubphraseS[longestIndex].length);
-      keyPhrase.splice(matchingTerms[longestIndex], tentativeSubphraseS[longestIndex].length);
+      keyPhrase.splice(matchingTerms[longestIndex], tentativeSubphraseS[longestIndex].length, '$PLACEHOLDER$');
       parsingPhrase.splice(0, tentativeSubphraseS[longestIndex].length);
       console.log("parsedPhrases: ", parsedPhrases);
       console.log("newParsingPhrase: ", parsingPhrase);
@@ -84,4 +83,4 @@ export const sentenceParser = (keyPhrase, parsingPhrase) => {
   return parsedPhrases;
 }
 
-// console.log("completed result: ", sentenceParser(kPhrase, pPhrase));
+//console.log("completed result: ", sentenceParser(pPhrase, kPhrase));
