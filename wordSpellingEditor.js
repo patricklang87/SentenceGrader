@@ -3,8 +3,8 @@
 //let givenAns = "Welcome home!";
 //let userAns = "Wecome home!";
 
-let phrase1 = [["Today"], ["is"], ["a"], ["good"], ["day"], ["."]];
-let phrase2 = [["Today"], ["is"], ["a"], ["god"], ["tayser"], ["."]];
+let phrase1 = [["Today", "is", "a"], ["good"], ["day"], ["."]];
+let phrase2 = [["god"], ["Today", "is", "a"], ["tayser"], ["."]];
 
 const levCalc = (givenAns, userAns) => {
 	if (typeof givenAns != "string") return "please provide string.";
@@ -70,28 +70,6 @@ const levCalc = (givenAns, userAns) => {
 	
 }
 
-//checks for words that can be corrected and corrects them;
-const autocorrect = (keyAns, editedPhrase) => {
-	let editTotal = 0;
-    for (let index = 0; index < editedPhrase.length; index ++) {
-        if (!keyAns.includes(editedPhrase[index])) {
-            for (let j = 0; j < keyAns.length; j++) {
-                if (!editedPhrase.includes(keyAns[j])) {
-                    let levVal = levCalc(keyAns[j], editedPhrase[index]);
-                    if (levVal <= (1/3)*editedPhrase[index].length) {
-						editedPhrase.splice(index, 1, keyAns[j]);
-						editTotal++;
-                    } 
-                }
-            }
-        }
-    }
-    return [editTotal, editedPhrase];
-}
-
-
-
-
 const compareArrays = (ar1, ar2) => {
     if (ar1.length != ar2.length) return false;
     else {
@@ -117,28 +95,39 @@ const arIncludeAr = (innerAr, outerAr) => {
     else return false;
 }
 
-const rectifyNonMatches = (keyPhrase, userPhrase) => {
+
+//checks for words that can be corrected and corrects them;
+const autocorrect = (keyAns, editedPhrase) => {
     let autocorrections = 0;
     let deletions = 0;
-
-
-    for (let i = 0; i < userPhrase.length; i++) {
-        if (arIncludeAr(userPhrase[i], keyPhrase) != true) {
-            for (let j = 0; j < keyPhrase.length; j++) {
-                if (arIncludeAr(keyPhrase[j]) != true) {
-                    let autocorrection = autocorrect(userPhrase[i], keyPhrase[j]);
-                    autocorrections += autocorrection[0];
-                    userPhrase[i].splice(0, 1, autocorrect[1]);
-                    if (autocorrection[0] == 0) {
-                        userPhrase.splice(i, 1);
-                        deletions++;
-                    }
+    for (let index = 0; index < editedPhrase.length; index ++) {
+        if (arIncludeAr(editedPhrase[index], keyAns) != true) {
+            let changed = false;
+            for (let j = 0; j < keyAns.length; j++) {
+                if (arIncludeAr(keyAns[j], editedPhrase) != true) {
+                    console.log("in autocorrect function keyansj and editedphraseindex: ", keyAns[j][0], editedPhrase[index][0]);
+                    let levVal = levCalc(keyAns[j][0], editedPhrase[index][0]);
+                    if (levVal <= (1/3)*editedPhrase[index][0].length) {
+                        editedPhrase[index].splice(0, 1, keyAns[j][0]);
+                        changed = true;
+                        autocorrections++;
+                        break;
+                    } 
                 }
             }
+        
+            if (changed == false) {
+                console.log("changed? editedphrase index", editedPhrase[index]);
+                editedPhrase.splice(index, 1);
+                deletions++;
+            } 
         }
+       
     }
-    return [userPhrase, autocorrections, deletions];
+    return [editedPhrase, autocorrections, deletions];
 }
 
-let res = rectifyNonMatches(phrase1, phrase2);
+
+
+let res = autocorrect(phrase1, phrase2);
 console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[1]);
