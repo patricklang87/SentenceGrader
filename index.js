@@ -9,7 +9,7 @@ import { autocorrect } from './wordSpellingEditor';
 
 
 let phrase1 = "Ich bin vom weiten gekommen.";
-let phrase2 = "vom weiten Ich gekommen bi.";
+let phrase2 = "monkey weiten glass gekommen bi.";
 
 const altAr = (ar) => {
     let newAr = [];
@@ -50,14 +50,16 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
 
 
     let reorderedUserSub = wordOrderEditor(keySectionString, userSectionString);
-    let reorderCount = reorderedUserSub[0];
-    let reorderedPhrase = reorderedUserSub[1];
+    let reorderedPhrase = reorderedUserSub[0];
+    let reorderCount = reorderedUserSub[1];
+    let numInsertedWords = reorderedUserSub[2];
+    
   
-    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, reorderCount];
+    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, numInsertedWords, reorderCount];
  
 
 }
 
 
 let outcome = calculateEdits(phrase1, phrase2);
-console.log("Edited Phrase: ", outcome[0], ", Spelling Autocorrections: ", outcome[1], ", Item Removals: ", outcome[2], ", Rearrangement Moves: ", outcome[3]);
+console.log("Edited Phrase: ", outcome[0], ", Spelling Autocorrections: ", outcome[1], ", Item Removals: ", outcome[2], ", Item insertions: ", outcome[3], ", Rearrangement Moves: ", outcome[4]);

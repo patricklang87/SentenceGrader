@@ -71,7 +71,7 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
 
 export const wordOrderEditor = (keyAns, userSub) => {
   let editCount = 0;
-
+  let insertions = 0;
   //create an editedPhrase that can be compared to the user submission
   let editedPhrase = [];
   for (let item of userSub) editedPhrase.push(item);
@@ -81,11 +81,17 @@ export const wordOrderEditor = (keyAns, userSub) => {
     for (let index = 0; index < keyAns.length; index++) {
     	
       if (keyAns[index] != editedPhrase[index]) {
+        if (!editedPhrase.includes(keyAns[index])) {
+          editedPhrase.splice(index, 0, keyAns[index]);
+          insertions++;
+        }
+        else {
+
 				console.log("round starting status: ", editedPhrase);
          let roundStartStatus = [];
   				for (let item of editedPhrase) roundStartStatus.push(item);
         // if the word in the user submission is incorrect, and more than one position behind where it should be, or the next word is more than one ahead of where it should be, the edit count is increased by one. Then that word at the index is removed
-        let correctWord = userAns[index];
+        //let correctWord = userAns[index];
         let userWord = editedPhrase[index];
         editedPhrase.splice(index, 1);
         console.log("step 1: ", editedPhrase);
@@ -133,9 +139,10 @@ export const wordOrderEditor = (keyAns, userSub) => {
         }
       }
     }
+    }
   }
   reorderer(keyAns, userSub);
-  return [editCount, editedPhrase];
+  return [editedPhrase, editCount, insertions];
 }
 
 
