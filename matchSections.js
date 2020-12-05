@@ -32,13 +32,7 @@ if ( i < subphraseItems) {
 return subphrases;
 }
 
-export const arToPhraseString = (ar) => {
-  let newAr = [];
-  for (let i = 0; i < ar.length; i++) {
-    newAr.push(ar[i].join(' ') + " ");
-  }
-return newAr;
-}
+
 
 
 //console.log(matchSections(phrase2, phrase1));

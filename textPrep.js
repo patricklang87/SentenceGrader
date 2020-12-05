@@ -30,3 +30,11 @@ const sepPunctuation = (str) => {
     let tokenStr = tokenize(sepStr);
     return tokenStr;
   }
+
+  export const arToPhraseString = (ar) => {
+    let newAr = [];
+    for (let i = 0; i < ar.length; i++) {
+      newAr.push(ar[i].join(' ') + " ");
+    }
+  return newAr;
+  }
