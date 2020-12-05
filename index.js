@@ -1,8 +1,7 @@
 // @ts-check
 import { prepSentence, arToPhraseString} from './textPrep';
 import { sentenceParser } from './parserBeta';
-import { matchSections} from './matchSections';
-import { removeFalseWords, wordOrderEditor } from './wordOrderEditor';
+import { wordOrderEditor } from './wordOrderEditor';
 import { autocorrect } from './wordSpellingEditor';
 
 

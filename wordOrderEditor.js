@@ -1,9 +1,7 @@
 //@ts-check 
 
 // here are the programs for removing extra words and counting words in an bag of words object
-
-
-
+/*
 //produces an bag of words objet that tracks the frequency of individual strings in the array
 const createWordCount = (sentence) => {
   let KeyWordCount = {};
@@ -66,6 +64,8 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
   */
   
 // once the user's submission has been reduced to the only the necessary words, it can then be put into proper order
+
+
 
 //reorderer -- this now just needs to be edited so it counts changes correctly
 
