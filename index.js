@@ -50,8 +50,9 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
 
 
     let reorderedUserSub = wordOrderEditor(keySectionString, userSectionString);
-    let reorderCount = reorderedUserSub[0];
-    let reorderedPhrase = reorderedUserSub[1];
+    let reorderedPhrase = reorderedUserSub[0];
+    let reorderCount = reorderedUserSub[2];
+    
   
     return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, reorderCount];
  

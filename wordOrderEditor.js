@@ -69,15 +69,21 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
 
 //reorderer -- this now just needs to be edited so it counts changes correctly
 
+//let phrase1 = [ [ 'Ich' ], [ 'bin' ], [ 'vom', 'weiten' ], [ 'gekommen' ], [ '.' ] ];
+//let phrase2 = [ [ 'vom', 'weiten' ], [ 'Ich' ], [ 'gekommen' ], [ 'bin' ], [ '.' ] ];
+
+
+
 export const wordOrderEditor = (keyAns, userSub) => {
   let editCount = 0;
+  let newWordInsertions = 0;
 
   //create an editedPhrase that can be compared to the user submission
   let editedPhrase = [];
   for (let item of userSub) editedPhrase.push(item);
 
   //word order editor will recursively call reorderer so it after each change, it starts from the beginning of the array, and does not accidentally skip contents.
-  const reorderer = (keyAns, userAns) => {
+  const reorderer = (keyAns, editedPhrase) => {
     for (let index = 0; index < keyAns.length; index++) {
     	
       if (keyAns[index] != editedPhrase[index]) {
@@ -85,7 +91,7 @@ export const wordOrderEditor = (keyAns, userSub) => {
          let roundStartStatus = [];
   				for (let item of editedPhrase) roundStartStatus.push(item);
         // if the word in the user submission is incorrect, and more than one position behind where it should be, or the next word is more than one ahead of where it should be, the edit count is increased by one. Then that word at the index is removed
-        let correctWord = userAns[index];
+        
         let userWord = editedPhrase[index];
         editedPhrase.splice(index, 1);
         console.log("step 1: ", editedPhrase);
@@ -135,7 +141,7 @@ export const wordOrderEditor = (keyAns, userSub) => {
     }
   }
   reorderer(keyAns, userSub);
-  return [editCount, editedPhrase];
+  return [editedPhrase, newWordInsertions, editCount];
 }
 
 
