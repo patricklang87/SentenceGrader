@@ -1,3 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Source+Sans+Pro:wght@400;900&display=swap');
+ 
 body {
     background-color: azure;
+    
 }
+
+h1,
+h2,
+h3 {
+    font-family: 'Alfa Slab One', cursive;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    background-color: cadetblue;
+    max-width: 100%;
+    padding: 2em; 
+}
+
+h2 {
+    background-color: skyblue;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+h4,
+th {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.25em;
+    font-weight: 900;
+}
+
+p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.25em;
+}
+
+table {
+    background-color: skyblue;
+    width: 100%;
+}
+
+.preset-example {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    justify-content: center;
+    margin: auto;
+}
+
+@media only screen and (min-width: 770px) {
+    .preset-example {
+        grid-template-columns: repeat(2, 1fr);
+        width: 80%;
+        grid-template-rows: 1fr;
+        grid-gap: 2em;
+    }
+}
+
