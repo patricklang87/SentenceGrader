@@ -4,7 +4,7 @@
 
 //let pPhrase = ['vom', 'weiten', 'Ich', 'gekommen', 'bi', '.' ];
 
-export const sentenceParser = (keyPhrase, parsingPhrase) => {
+const sentenceParser = (keyPhrase, parsingPhrase) => {
   let parsedPhrases = [];
 
   let identifyMatchIn = (subKeyPhrase, character) => {

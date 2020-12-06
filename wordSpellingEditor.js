@@ -97,7 +97,7 @@ const arIncludeAr = (innerAr, outerAr) => {
 
 
 //checks for words that can be corrected and corrects them;
-export const autocorrect = (keyAns, editedPhrase) => {
+const autocorrect = (keyAns, editedPhrase) => {
     let autocorrections = 0;
     let deletions = 0;
     for (let index = 0; index < editedPhrase.length; index ++) {

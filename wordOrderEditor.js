@@ -69,7 +69,7 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
 
 //reorderer -- this now just needs to be edited so it counts changes correctly
 
-export const wordOrderEditor = (keyAns, userSub) => {
+const wordOrderEditor = (keyAns, userSub) => {
   let editCount = 0;
   let insertions = 0;
   //create an editedPhrase that can be compared to the user submission

@@ -18,20 +18,20 @@ const sepPunctuation = (str) => {
     return str;
   }
   
-  // console.log(sepPunctuation(phrase));
-  
-  const tokenize = (str) => {
+// console.log(sepPunctuation(phrase));
+
+const tokenize = (str) => {
       let tokens = str.split(" ");
     return tokens;
   }
   
-  export const prepSentence = (str) => {
+const prepSentence = (str) => {
     let sepStr = sepPunctuation(str);
     let tokenStr = tokenize(sepStr);
     return tokenStr;
   }
 
-  export const arToPhraseString = (ar) => {
+const arToPhraseString = (ar) => {
     let newAr = [];
     for (let i = 0; i < ar.length; i++) {
       newAr.push(ar[i].join(' ') + " ");

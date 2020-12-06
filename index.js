@@ -1,8 +1,9 @@
+/*
 import { prepSentence, arToPhraseString} from './textPrep';
 import { sentenceParser } from './parserBeta';
 import { wordOrderEditor } from './wordOrderEditor';
 import { autocorrect } from './wordSpellingEditor';
-
+*/
 /*
 let phrase1 = "Ich bin vom weiten gekommen.";
 let phrase2 = "monkey weiten glass gekommen bi.";
@@ -63,9 +64,9 @@ const englishTest = () => {
     let englishAnsKey = "My sister wants to try to eat healthily.";
     let userResponse = document.getElementById("english-response").value;
     let outcome = calculateEdits(englishAnsKey, userResponse);
-    console.log("working");
+    let closestResponse = outcome[0].join(' ');
     document.getElementById("user-english-response").innerHTML = userResponse;
-    document.getElementById("closest-result").innerHTML = outcome[0];
+    document.getElementById("english-closest-result").innerHTML = closestResponse;
     document.getElementById("english-spelling-autocorrections").innerHTML = outcome[1];
     document.getElementById("english-deletions").innerHTML = outcome[2];
     document.getElementById("english-insertions").innerHTML = outcome[3];
