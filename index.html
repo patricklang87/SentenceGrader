@@ -33,7 +33,7 @@
                     <div class="question">
                         <h3>English</h3>
                         <p>Write a sensible sentence in present tense using the following words. Where necessary, conjugate the verbs or add the infinitive "to".</p>
-                        <p>1. My sister / want / try / eat / healthily / .</p>
+                        <p>1. My sister / want / eat / healthily / .</p>
                         <label for="english-response" value="Your Response: "></label>
                         <input type="text" name="english-response" id="english-response"  required></input>
                         <br>
@@ -68,10 +68,80 @@
                     </div>
                 </div>
                 <div class="preset-example">
-                    
+                    <div class="question">
+                        <h3>German</h3>
+                        <p>Write a sensible sentence in past perfect tense using the following words. Where necessary, provide the past participle and conjugated helping verb.</p>
+                        <p>1. ich / gehen / nach Hause / spät / .</p>
+                        <label for="german-response" value="Your Response: "></label>
+                        <input type="text" name="german-response" id="german-response"  required></input>
+                        <br>
+                        <button value="submit" id="german-button">Submit</button>
+                    </div>
+                    <div class="result">
+                        <h4>Your Response: </h4>
+                        <div id="user-german-response">
+                        </div>
+                        <h4>Closest Correct Answer: </h4>
+                        <div id="german-closest-result">
+                        </div>
+                        <h4>Edits Counts: </h4>
+                        <table>
+                            <tr>
+                                <th>Spelling Autocorrections: </th>
+                                <td id="german-spelling-autocorrections">a</td>
+                            </tr>
+                            <tr>
+                                <th>Deletions: </th>
+                                <td id="german-deletions">b</td>
+                            </tr>
+                            <tr>
+                                <th>Insertions: </th>
+                                <td id="german-insertions">c</td>
+                            </tr>
+                            <tr>
+                                <th>Word Order Edits: </th>
+                                <td id="german-WOEs">d</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="preset-example">
-                    
+                    <div class="question">
+                        <h3>Russian</h3>
+                        <p>Respond to the following question, saying that you do not know the answer. Use the conjunction 'ли' in your answer, and pay attention to word order.</p>
+                        <p>1. Твоя сестра хочет пойти в кино?</p>
+                        <label for="russian-response" value="Your Response: "></label>
+                        <input type="text" name="russian-response" id="russian-response"  required></input>
+                        <br>
+                        <button value="submit" id="russian-button">Submit</button>
+                    </div>
+                    <div class="result">
+                        <h4>Your Response: </h4>
+                        <div id="user-russian-response">
+                        </div>
+                        <h4>Closest Correct Answer: </h4>
+                        <div id="russian-closest-result">
+                        </div>
+                        <h4>Edits Counts: </h4>
+                        <table>
+                            <tr>
+                                <th>Spelling Autocorrections: </th>
+                                <td id="russian-spelling-autocorrections">a</td>
+                            </tr>
+                            <tr>
+                                <th>Deletions: </th>
+                                <td id="russian-deletions">b</td>
+                            </tr>
+                            <tr>
+                                <th>Insertions: </th>
+                                <td id="russian-insertions">c</td>
+                            </tr>
+                            <tr>
+                                <th>Word Order Edits: </th>
+                                <td id="russian-WOEs">d</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </section>
         </header>

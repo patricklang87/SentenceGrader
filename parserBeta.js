@@ -4,7 +4,9 @@
 
 //let pPhrase = ['vom', 'weiten', 'Ich', 'gekommen', 'bi', '.' ];
 
-const sentenceParser = (keyPhrase, parsingPhrase) => {
+
+
+/*export*/ const sentenceParser = (keyPhrase, parsingPhrase) => {
   let parsedPhrases = [];
 
   let identifyMatchIn = (subKeyPhrase, character) => {
@@ -55,7 +57,7 @@ const sentenceParser = (keyPhrase, parsingPhrase) => {
       parsedPhrases.push(tentativeSubphraseS[longestIndex]);
       console.log("longest Index: ", longestIndex, " tentativeSubphraseS: ", tentativeSubphraseS);
       console.log(longestIndex, longestIndex + tentativeSubphraseS[longestIndex].length);
-      keyPhrase.splice(matchingTerms[longestIndex], tentativeSubphraseS[longestIndex].length, '$PLACEHOLDER$');
+      /*keyPhrase.splice(matchingTerms[longestIndex], tentativeSubphraseS[longestIndex].length, '$PLACEHOLDER$');*/
       parsingPhrase.splice(0, tentativeSubphraseS[longestIndex].length);
       console.log("parsedPhrases: ", parsedPhrases);
       console.log("newParsingPhrase: ", parsingPhrase);
@@ -83,4 +85,14 @@ const sentenceParser = (keyPhrase, parsingPhrase) => {
   return parsedPhrases;
 }
 
-//console.log("completed result: ", sentenceParser(pPhrase, kPhrase));
+/*
+let kPhrase = [
+  'Я',     'не',
+  'знаю',  ',',
+  'хочет', 'ли',
+  'моя',   'сестра',
+  'пойти', 'в',
+  'кино',  '.'
+];
+let pPhrase = ["Я", "не", "знаю", ",", "хот", "ли", "она", "пойти", "в", "кино", "."];
+*/

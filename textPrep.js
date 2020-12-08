@@ -25,16 +25,31 @@ const tokenize = (str) => {
     return tokens;
   }
   
-const prepSentence = (str) => {
+/*export*/ const prepSentence = (str) => {
     let sepStr = sepPunctuation(str);
     let tokenStr = tokenize(sepStr);
     return tokenStr;
   }
 
-const arToPhraseString = (ar) => {
+/*export*/ const arToPhraseString = (ar) => {
     let newAr = [];
     for (let i = 0; i < ar.length; i++) {
       newAr.push(ar[i].join(' ') + " ");
     }
   return newAr;
   }
+
+
+
+
+  /*console.log(arToPhraseString([
+  [ 'Я', 'не', 'знаю', ',' ],
+  [ 'хочет' ],
+  [ 'ли' ],
+  [ 'моя' ],
+  [ 'сестра' ],
+  [ 'пойти', 'в', 'кино', '.' ]
+]));
+  console.log(arToPhraseString([ [ 'Я', 'не', 'знаю', ',' ], [ 'ли' ], [ 'пойти', 'в', 'кино', '.' ] ]));
+
+ */ 

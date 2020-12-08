@@ -2,10 +2,8 @@
 
 //let givenAns = "Welcome home!";
 //let userAns = "Wecome home!";
-/*
-let phrase1 = [["Today", "is", "a"], ["good"], ["day"], ["."]];
-let phrase2 = [["god"], ["Today", "is", "a"], ["tayser"], ["."]];
-*/
+
+
 const levCalc = (givenAns, userAns) => {
 	if (typeof givenAns != "string") return "please provide string.";
     else if (givenAns == userAns) return 0;
@@ -97,12 +95,12 @@ const arIncludeAr = (innerAr, outerAr) => {
 
 
 //checks for words that can be corrected and corrects them;
-const autocorrect = (keyAns, editedPhrase) => {
+/*export*/ const autocorrect = (keyAns, editedPhrase) => {
     let autocorrections = 0;
     let deletions = 0;
     for (let index = 0; index < editedPhrase.length; index ++) {
         if (arIncludeAr(editedPhrase[index], keyAns) != true) {
-            let changed = false;
+            let change = false;
             for (let j = 0; j < keyAns.length; j++) {
                 if (arIncludeAr(keyAns[j], editedPhrase) != true) {
                     console.log("in autocorrect function keyansj and editedphraseindex: ", keyAns[j][0], editedPhrase[index][0]);
@@ -110,28 +108,43 @@ const autocorrect = (keyAns, editedPhrase) => {
                     console.log("levVal: ", levVal);
                     let lengthCompare = editedPhrase[index][0].length;
                     if (keyAns[j][0].length > lengthCompare) lengthCompare = keyAns[j][0].length;
+                    console.log("length compare: ", lengthCompare);
                     if (levVal <= (1/3)*lengthCompare) {
                         editedPhrase[index].splice(0, 1, keyAns[j][0]);
-                        changed = true;
+                        change = true;
                         autocorrections++;
                         break;
-                    } 
-                }
-            }
-        
-            if (changed == false) {
-                console.log("changed? editedphrase index", editedPhrase[index]);
-                editedPhrase.splice(index, 1);
-                deletions++;
-            } 
-        }
-       
+                    }            
+                } 
+                if (change == false) {
+                  console.log("deletion: ", editedPhrase[index]);
+                  editedPhrase.splice(index, 1);
+                  deletions++;
+                  break;
+                }         
+            }       
+        }    
     }
     return [editedPhrase, autocorrections, deletions];
 }
 
 
 /*
+let phrase1 = [
+  [ 'Я', 'не', 'знаю', ',' ],
+  [ 'хочет' ],
+  [ 'ли' ],
+  [ 'моя' ],
+  [ 'сестра' ],
+  [ 'пойти', 'в', 'кино', '.' ]
+];
+let phrase2 = [
+  [ 'Я', 'не', 'знаю', ',' ],
+  [ 'хот' ],
+  [ 'ли' ],
+  [ 'она' ],
+  [ 'пойти', 'в', 'кино', '.' ]
+];
 let res = autocorrect(phrase1, phrase2);
-console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[1]);
+console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[2]);
 */

@@ -67,9 +67,10 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
 
 
 
+
 //reorderer -- this now just needs to be edited so it counts changes correctly
 
-const wordOrderEditor = (keyAns, userSub) => {
+/*export*/ const wordOrderEditor = (keyAns, userSub) => {
   let editCount = 0;
   let insertions = 0;
   //create an editedPhrase that can be compared to the user submission
@@ -78,10 +79,12 @@ const wordOrderEditor = (keyAns, userSub) => {
 
   //word order editor will recursively call reorderer so it after each change, it starts from the beginning of the array, and does not accidentally skip contents.
   const reorderer = (keyAns, userAns) => {
+  
     for (let index = 0; index < keyAns.length; index++) {
     	
       if (keyAns[index] != editedPhrase[index]) {
         if (!editedPhrase.includes(keyAns[index])) {
+          console.log("insertion required: ", keyAns[index]);
           editedPhrase.splice(index, 0, keyAns[index]);
           insertions++;
         }
@@ -146,5 +149,16 @@ const wordOrderEditor = (keyAns, userSub) => {
 }
 
 
-
-//console.log(wordOrderEditor(phrase1, phrase2));
+/*
+let phrase1 = [
+  'Я не знаю , ',
+  'хочет ',
+  'ли ',
+  'моя ',
+  'сестра ',
+  'пойти в кино . '
+];
+let phrase2 = [ 'Я не знаю , ', 'ли ', 'пойти в кино . ' ];
+let res = wordOrderEditor(phrase1, phrase2);
+console.log("edited phrase: ", res[0], " editCount: ", res[1], " insertions: ", res[2]);
+*/
