@@ -16,7 +16,6 @@ const levCalc = (givenAns, userAns) => {
     	console.log("lenID: " + lenID);
       do {
       for (let i = 0; i < lenID; i++) {
-      	console.log(i);
       	// check for inversions
         if (userEdit[i] != givenAns[i]) {
         	if (userEdit[i+1] == givenAns[i] && userEdit[i] == givenAns[i+1]) {
@@ -48,20 +47,18 @@ const levCalc = (givenAns, userAns) => {
           	console.log(i, userEdit[i]);
         		userEdit = userEdit.substr(0, i) + userEdit.substr(i+1);
         		editCount ++;
-          	console.log("excess final char " + userEdit);
         	}
           //if simply different
           else {
+            console.log("simply different: " , userEdit[i], givenAns[i]);
           	userEdit = userEdit.substr(0, i) + givenAns[i]  + userEdit.substr(i+1);
           	editCount ++;
-            console.log("simply wrong " + userEdit);
           }
         }
       }
       }
       while (userEdit != givenAns);
-	  console.log(userEdit);
-	  //document.getElementById("words").innerHTML = userEdit;  
+	   
 	  return editCount;	
 	  
 	}  
@@ -83,7 +80,6 @@ const compareArrays = (ar1, ar2) => {
 const arIncludeAr = (innerAr, outerAr) => {
     let truthAr = [];
     for (let k = 0; k < outerAr.length; k++) {
-		console.log(innerAr, outerAr[k]);
         if (compareArrays(innerAr, outerAr[k]) == true) {
 			truthAr.push(innerAr);
 			break;
@@ -98,53 +94,56 @@ const arIncludeAr = (innerAr, outerAr) => {
 /*export*/ const autocorrect = (keyAns, editedPhrase) => {
     let autocorrections = 0;
     let deletions = 0;
-    for (let index = 0; index < editedPhrase.length; index ++) {
+    for (let index = editedPhrase.length - 1; index >= 0; index --) {
+        console.log("postion in interation: ", index, editedPhrase[index]);
+        //console.log(" iteration ", index, " section: ", editedPhrase[index]);
         if (arIncludeAr(editedPhrase[index], keyAns) != true) {
-            let change = false;
+          console.log(editedPhrase[index], " IS NOT IN ", keyAns);
+
+            let levCalcS = [];
             for (let j = 0; j < keyAns.length; j++) {
+                //console.log("keyAns[j]: ", keyAns[j], " editedPhrase: ", editedPhrase);
                 if (arIncludeAr(keyAns[j], editedPhrase) != true) {
-                    console.log("in autocorrect function keyansj and editedphraseindex: ", keyAns[j][0], editedPhrase[index][0]);
-                    let levVal = levCalc(keyAns[j][0], editedPhrase[index][0]);
-                    console.log("levVal: ", levVal);
-                    let lengthCompare = editedPhrase[index][0].length;
-                    if (keyAns[j][0].length > lengthCompare) lengthCompare = keyAns[j][0].length;
-                    console.log("length compare: ", lengthCompare);
-                    if (levVal <= (1/3)*lengthCompare) {
-                        editedPhrase[index].splice(0, 1, keyAns[j][0]);
-                        change = true;
-                        autocorrections++;
-                        break;
-                    }            
+                  console.log(keyAns[j], " IS NOT IN ", editedPhrase);
+                  let levVal = levCalc(keyAns[j][0], editedPhrase[index][0]);
+                  console.log("levVal: ", levVal);
+                  levCalcS.push([levVal, keyAns[j][0]]);
+                }
+                 
                 } 
-                if (change == false) {
-                  console.log("deletion: ", editedPhrase[index]);
-                  editedPhrase.splice(index, 1);
-                  deletions++;
-                  break;
-                }         
-            }       
+                console.log("levCalcS: ", levCalcS);
+                if (levCalcS[0] != undefined) {
+                  let lowestLevValIndex = 0;
+                    for (let k = 0; k < levCalcS.length; k++) {
+                      if (levCalcS[k][0] < levCalcS[lowestLevValIndex][0]) lowestLevValIndex = k;
+                    }
+                    console.log("lowestValIndex: ", lowestLevValIndex);
+
+                    let lengthCompare = editedPhrase[index][0].length;
+                    console.log("levCalcS[lowestLevValIndex]: ", levCalcS[lowestLevValIndex]);
+                    if (levCalcS[lowestLevValIndex][1].length > lengthCompare) lengthCompare = levCalcS[lowestLevValIndex][1].length;
+                    if (levCalcS[lowestLevValIndex][0] <= (1/3)*lengthCompare) {
+                        editedPhrase[index].splice(0, 1, levCalcS[lowestLevValIndex][1]);
+                        autocorrections++;                         
+                    } else {
+                      console.log("deletion: ", editedPhrase[index]);
+                      editedPhrase.splice(index, 1);
+                      deletions++;                 
+                    }                         
+                }                  
         }    
     }
     return [editedPhrase, autocorrections, deletions];
 }
 
 
+
 /*
-let phrase1 = [
-  [ 'Я', 'не', 'знаю', ',' ],
-  [ 'хочет' ],
-  [ 'ли' ],
-  [ 'моя' ],
-  [ 'сестра' ],
-  [ 'пойти', 'в', 'кино', '.' ]
-];
-let phrase2 = [
-  [ 'Я', 'не', 'знаю', ',' ],
-  [ 'хот' ],
-  [ 'ли' ],
-  [ 'она' ],
-  [ 'пойти', 'в', 'кино', '.' ]
-];
+let phrase1 = [['Ich '], ['bin '], ['spät '], ['nach Hause '], ['gekommen '], ['. ']];
+let phrase2 = [['Spät '], ['ich '], ['nach Hause '], ['kommen '], ['. ']];
+
 let res = autocorrect(phrase1, phrase2);
 console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[2]);
 */
+
+console.log(levCalc("gekommen ", "kommen "));

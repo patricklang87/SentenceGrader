@@ -28,14 +28,14 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     let groupedKeyAnsPrepped = sentenceParser(altUserAnsPrepped, altKeyAnsPrepped);
     let groupedUserAnsPrepped = sentenceParser(keyAnsPrepped, userAnsPrepped);
     
-    console.log("STEP 2 (parse): keystatus: ", groupedKeyAnsPrepped, "userans status: ", groupedUserAnsPrepped);
+    console.log("STEP 2 (parse): keystatus: ", arToPhraseString(groupedKeyAnsPrepped), "userans status: ", arToPhraseString(groupedUserAnsPrepped));
 
     // autocorrect or delete words
     let autocorrectedResult = autocorrect(groupedKeyAnsPrepped, groupedUserAnsPrepped);
     let autocorrectedUserAns = autocorrectedResult[0];
     let numAutocorrectedWords = autocorrectedResult[1];
     let numDeletedWords = autocorrectedResult[2];
-    console.log("STEP 3 (autocorrect and delete): keystatus: ", groupedKeyAnsPrepped , " userans status: ", autocorrectedUserAns );
+    console.log("STEP 3 (autocorrect and delete): keystatus: ", arToPhraseString(groupedKeyAnsPrepped) , " userans status: ", arToPhraseString(autocorrectedUserAns) );
 
     // turn the internal arrays back into strings
     let userSectionString = arToPhraseString(autocorrectedUserAns);

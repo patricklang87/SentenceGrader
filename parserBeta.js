@@ -57,7 +57,7 @@
       parsedPhrases.push(tentativeSubphraseS[longestIndex]);
       console.log("longest Index: ", longestIndex, " tentativeSubphraseS: ", tentativeSubphraseS);
       console.log(longestIndex, longestIndex + tentativeSubphraseS[longestIndex].length);
-      /*keyPhrase.splice(matchingTerms[longestIndex], tentativeSubphraseS[longestIndex].length, '$PLACEHOLDER$');*/
+      keyPhrase.splice(matchingTerms[longestIndex], tentativeSubphraseS[longestIndex].length, '$PLACEHOLDER$');
       parsingPhrase.splice(0, tentativeSubphraseS[longestIndex].length);
       console.log("parsedPhrases: ", parsedPhrases);
       console.log("newParsingPhrase: ", parsingPhrase);
