@@ -38,8 +38,10 @@
         console.log("keyPhraseSubsec: ", keyPhraseSubsec);
         for (let l = 0; l < parsingPhrase.length; l++) {
             console.log("parsingPhrase[l], keyPhraseSubsec[l]", parsingPhrase[l], keyPhraseSubsec[l]);
-          if (parsingPhrase[l] == keyPhraseSubsec[l] || keyPhraseSubsec[l] == "$PLACEHOLDER$") {
+          if (parsingPhrase[l] == keyPhraseSubsec[l]) {
             tentativeSubphrase.push(parsingPhrase[l]);
+          } else if (keyPhraseSubsec[l] == "$PLACEHOLDER$") {
+              continue;
           } else {
             console.log("tentative Subphrases: ", tentativeSubphraseS);
             break;
@@ -83,8 +85,13 @@
   return parsedPhrases;
 }
 
-
+/*
 let kPhrase = ["g", "e", "k", "o", "m", "m", "e", "n", " "];
 let pPhrase = ["k", "o", "m", "m", "e", "n", " "];
+*/
+
+let kPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
+let pPhrase = ['My', 'sister', 'want', 'try', 'to', 'ea', 'healthy/'];
+
 console.log(sentenceParser(kPhrase, pPhrase));
 

@@ -22,22 +22,27 @@ const individualLetters = (word) => {
 
 const levCalc = (keyWord, userWord) => {
   let totalEdits = 0;
+
   let tokenizedKeyWord = individualLetters(keyWord);
   let tokenizedUserWord = individualLetters(userWord);
   console.log("tokenized: ", tokenizedKeyWord, tokenizedUserWord);
-  let parsedKeyWord = sentenceParser(tokenizedUserWord, tokenizedKeyWord);
-  let parsedUserWord = sentenceParser(tokenizedKeyWord, tokenizedKeyWord);
+  let altTokenizedKeyWord = altAr(tokenizedKeyWord);
+  let altTokenizedUserWord = altAr(tokenizedUserWord);
+  let parsedKeyWord = sentenceParser(altTokenizedUserWord, altTokenizedKeyWord);
+  let parsedUserWord = sentenceParser(tokenizedKeyWord, tokenizedUserWord);
   console.log("parsed: ", parsedKeyWord, parsedUserWord);
   let joinedKeyWord = combineInnerArs(parsedKeyWord);
   let joinedUserWord = combineInnerArs(parsedUserWord);
+
   let subLevCalc = (currentUserWordAr) => {
-    for (let i = 0; i < currentUserWordAr.length; i++) {
+
+    let indexRun = currentUserWordAr.length;
+    if (keyWord.length > indexRun) indexRun = keyWord.length;
+
+    for (let i = 0; i < indexRun; i++) {
       console.log("currentUserWordAr: ", currentUserWordAr);
-      if (joinedKeyWord[i] == undefined) {
-        break;
-      }
       if (currentUserWordAr[i] != joinedKeyWord[i]) {
-        if (!joinedKeyWord.slice(i).includes(currentUserWordAr[i])) {
+        if (!joinedKeyWord.slice(i).includes(currentUserWordAr[i]) && currentUserWordAr[i] != undefined) {
           console.log("deletion");
           currentUserWordAr.splice(i, 1);
           totalEdits++;
@@ -56,7 +61,9 @@ const levCalc = (keyWord, userWord) => {
         }
       }
     }
+    
   }
+  
   subLevCalc(joinedUserWord);
   console.log("LEV CALCULATION: ", totalEdits, keyWord, userWord);
   return totalEdits;
@@ -135,6 +142,7 @@ const arIncludeAr = (innerAr, outerAr) => {
 
 
 
+
 /*
 let phrase1 = [
   [ 'My', 'sister' ],
@@ -154,7 +162,5 @@ let phrase2 = [
 
 let res = autocorrect(phrase1, phrase2);
 console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[2]);*/
-
-
 /*
-console.log(levCalc("kommen ", "gekommen "));*/
+console.log(levCalc("пойт", "пойти"));*/
