@@ -83,19 +83,14 @@
   return parsedPhrases;
 }
 
-/*
+
 let kPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
-let pPhrase = ['My', 'sister', 'want', 'try', 'to', 'eat', 'healthily', '.'];
+let pPhrase = ['My', 'sister', 'want', 'try', 'eat', 'healthily', "."];
 console.log(sentenceParser(kPhrase, pPhrase));
 
 
-
-
-[
-  [ 'My', 'sister' ],
-  [ 'want' ],
-  [ 'try', 'to', 'eat', 'healthily', '.' ]
-]
+/*
+[ [ 'My', 'sister' ], [ 'want' ], [ 'try' ], [ 'eat', 'healthily' ] ]
 
 [
   [ 'My', 'sister' ],
@@ -106,5 +101,27 @@ console.log(sentenceParser(kPhrase, pPhrase));
   [ 'eat', 'healthily', '.' ]
 ]
 
+[
+  [ 'My', 'sister' ],
+  [ 'want' ],
+  [ 'try' ],
+  [ 'eat', 'healthily', '.' ]
+]
+________________
+[
+  [ 'My', 'sister' ],
+  [ 'want' ],
+  [ 'try', 'to', 'eat', 'healthily', '.' ]
+]
+
+[
+  [ 'My', 'sister' ],
+  [ 'wants' ],
+  [ 'to' ],
+  [ 'try', 'to', 'eat', 'healthily', '.' ]
+]
+
+----
+[ [ 'My', 'sister' ], [ 'want' ], [ 'try', 'to' ] ]
 
 */

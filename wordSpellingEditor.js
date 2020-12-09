@@ -137,11 +137,24 @@ const arIncludeAr = (innerAr, outerAr) => {
 
 
 /*
-let phrase1 = [['Ich '], ['bin '], ['spät '], ['nach Hause '], ['gekommen '], ['. ']];
-let phrase2 = [['Spät '], ['ich '], ['nach Hause '], ['kommen '], ['. ']];
+let phrase1 = [
+  [ 'My', 'sister' ],
+  [ 'wants' ],
+  [ 'to' ],
+  [ 'try' ],
+  [ 'to' ],
+  [ 'eat', 'healthily', '.' ]
+];
+
+let phrase2 = [
+  [ 'My', 'sister' ],
+  [ 'want' ],
+  [ 'try' ],
+  [ 'eat', 'healthily', '.' ]
+];
 
 let res = autocorrect(phrase1, phrase2);
 console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[2]);
-*/
+
 /*
 console.log(levCalc("gekommen ", "kommen "));*/

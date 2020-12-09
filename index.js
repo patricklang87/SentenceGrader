@@ -1,5 +1,3 @@
-// @ts-check
-
 /*
 import { prepSentence, arToPhraseString} from './textPrep';
 import { sentenceParser } from './parserBeta';

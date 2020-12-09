@@ -40,16 +40,20 @@ const tokenize = (str) => {
   }
 
 
+/*
 
-
-  /*console.log(arToPhraseString([
-  [ 'Я', 'не', 'знаю', ',' ],
-  [ 'хочет' ],
-  [ 'ли' ],
-  [ 'моя' ],
-  [ 'сестра' ],
-  [ 'пойти', 'в', 'кино', '.' ]
+  console.log(arToPhraseString([
+  [ 'My', 'sister' ],
+  [ 'wants' ],
+  [ 'to' ],
+  [ 'try' ],
+  [ 'to' ],
+  [ 'eat', 'healthily', '.' ]
 ]));
-  console.log(arToPhraseString([ [ 'Я', 'не', 'знаю', ',' ], [ 'ли' ], [ 'пойти', 'в', 'кино', '.' ] ]));
+  console.log(arToPhraseString([
+    [ 'My', 'sister' ],
+    [ 'wants' ],
+    [ 'try' ],
+    [ 'eat', 'healthily', '.' ]]));
 
- */ 
+*/

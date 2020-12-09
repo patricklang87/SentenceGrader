@@ -83,7 +83,7 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
     for (let index = 0; index < keyAns.length; index++) {
     	
       if (keyAns[index] != editedPhrase[index]) {
-        if (!editedPhrase.includes(keyAns[index])) {
+        if (!editedPhrase.slice(index).includes(keyAns[index])) {
           console.log("insertion required: ", keyAns[index]);
           editedPhrase.splice(index, 0, keyAns[index]);
           insertions++;
@@ -149,16 +149,8 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
 }
 
 
-/*
-let phrase1 = [
-  'Я не знаю , ',
-  'хочет ',
-  'ли ',
-  'моя ',
-  'сестра ',
-  'пойти в кино . '
-];
-let phrase2 = [ 'Я не знаю , ', 'ли ', 'пойти в кино . ' ];
+
+let phrase1 = [ 'My sister ', 'wants ', 'to ', 'try ', 'to ', 'eat healthily . ' ]
+let phrase2 = [ 'My sister ', 'wants ', 'try ', 'eat healthily . ' ]
 let res = wordOrderEditor(phrase1, phrase2);
 console.log("edited phrase: ", res[0], " editCount: ", res[1], " insertions: ", res[2]);
-*/
