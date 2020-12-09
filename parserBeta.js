@@ -19,7 +19,7 @@
   }
 
   const subParse = (keyPhrase, parsingPhrase) => {
-    console.log("subParse Begin");
+    console.log("subParse Begin", parsingPhrase);
     console.log("parsingPhrase, parsingPhrase[0]: ", parsingPhrase, parsingPhrase[0] );
     if (!keyPhrase.includes(parsingPhrase[0])) {
       let exceptAr = [];
@@ -84,44 +84,7 @@
 }
 
 
-let kPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
-let pPhrase = ['My', 'sister', 'want', 'try', 'eat', 'healthily', "."];
+let kPhrase = ["g", "e", "k", "o", "m", "m", "e", "n", " "];
+let pPhrase = ["k", "o", "m", "m", "e", "n", " "];
 console.log(sentenceParser(kPhrase, pPhrase));
 
-
-/*
-[ [ 'My', 'sister' ], [ 'want' ], [ 'try' ], [ 'eat', 'healthily' ] ]
-
-[
-  [ 'My', 'sister' ],
-  [ 'wants' ],
-  [ 'to' ],
-  [ 'try' ],
-  [ 'to' ],
-  [ 'eat', 'healthily', '.' ]
-]
-
-[
-  [ 'My', 'sister' ],
-  [ 'want' ],
-  [ 'try' ],
-  [ 'eat', 'healthily', '.' ]
-]
-________________
-[
-  [ 'My', 'sister' ],
-  [ 'want' ],
-  [ 'try', 'to', 'eat', 'healthily', '.' ]
-]
-
-[
-  [ 'My', 'sister' ],
-  [ 'wants' ],
-  [ 'to' ],
-  [ 'try', 'to', 'eat', 'healthily', '.' ]
-]
-
-----
-[ [ 'My', 'sister' ], [ 'want' ], [ 'try', 'to' ] ]
-
-*/

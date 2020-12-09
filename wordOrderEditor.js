@@ -149,8 +149,9 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
 }
 
 
-
+/*
 let phrase1 = [ 'My sister ', 'wants ', 'to ', 'try ', 'to ', 'eat healthily . ' ]
 let phrase2 = [ 'My sister ', 'wants ', 'try ', 'eat healthily . ' ]
 let res = wordOrderEditor(phrase1, phrase2);
 console.log("edited phrase: ", res[0], " editCount: ", res[1], " insertions: ", res[2]);
+*/

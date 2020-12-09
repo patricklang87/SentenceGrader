@@ -4,63 +4,62 @@
 //let userAns = "Wecome home!";
 
 
-const levCalc = (givenAns, userAns) => {
+const combineInnerArs = (ar) => {
+  let combArS = [];
+  for (let i = 0; i < ar.length; i++) {
+    combArS.push(ar[i].join(""));
+  }
+  return combArS;
+}
 
-    	
-      let userEdit = userAns;
-      let editCount = 0;
-      let lenID = 0;
-      if (userAns.length > givenAns.length) lenID = userAns.length;
-    else lenID = givenAns.length;
-    	console.log("lenID: " + lenID);
+const individualLetters = (word) => {
+  let tokenizedWord = [];
+  for (let i = 0; i < word.length; i++) {
+    tokenizedWord.push(word[i]);
+  }
+  return tokenizedWord;
+}
 
-      const subLevCalc = () => {
-        console.log("begin subLevCalc; keyAns: " , givenAns, " userEdit: ", userEdit);
-      for (let i = 0; i < lenID; i++) {
-      	// check for inversions
-        if (userEdit[i] != givenAns[i]) {
-        	if (userEdit[i+1] == givenAns[i] && userEdit[i] == givenAns[i+1]) {
-          	userEdit = userEdit.substr(0, i)  + givenAns[i] + givenAns[i+1] + userEdit.substr(i+2);
-          	console.log("invert " + userEdit);
-          	editCount ++;
-        	}
-        	//check for omissions
-        	else if (userEdit[i] == givenAns[i+1]) {
-        		userEdit = userEdit.substr(0, i) + givenAns[i] + userEdit.substr(i); 
-        		console.log("omission " + userEdit);
-        		editCount ++;
-        	}
-        	// check for false insertions
-        	else if (userEdit[i+1] == givenAns[i]) {
-        		userEdit = userEdit.substr(0, i) + userEdit.substr(i+1);
-          	console.log("false insertion " + userEdit);
-          	editCount ++;
-        	}
-        	//check if missing final character
-        	else if (userEdit[i] == undefined) {
-          	console.log(i, userEdit[i]);
-        		userEdit = userEdit + givenAns[i];
-        		editCount ++;
-          	console.log("missing final char " + userEdit);
-        	}
-          //check if too long
-        	else if (givenAns[i] == undefined) {
-          	console.log(i, userEdit[i]);
-        		userEdit = userEdit.substr(0, i) + userEdit.substr(i+1);
-        		editCount ++;
-        	}
-          //if simply different
-          else {
-            console.log("simply different: " , userEdit[i], givenAns[i]);
-          	userEdit = userEdit.substr(0, i) + givenAns[i]  + userEdit.substr(i+1);
-          	editCount ++;
-          }  
-          subLevCalc();
+const levCalc = (keyWord, userWord) => {
+  let totalEdits = 0;
+  let tokenizedKeyWord = individualLetters(keyWord);
+  let tokenizedUserWord = individualLetters(userWord);
+  console.log("tokenized: ", tokenizedKeyWord, tokenizedUserWord);
+  let parsedKeyWord = sentenceParser(tokenizedUserWord, tokenizedKeyWord);
+  let parsedUserWord = sentenceParser(tokenizedKeyWord, tokenizedKeyWord);
+  console.log("parsed: ", parsedKeyWord, parsedUserWord);
+  let joinedKeyWord = combineInnerArs(parsedKeyWord);
+  let joinedUserWord = combineInnerArs(parsedUserWord);
+  let subLevCalc = (currentUserWordAr) => {
+    for (let i = 0; i < currentUserWordAr.length; i++) {
+      console.log("currentUserWordAr: ", currentUserWordAr);
+      if (joinedKeyWord[i] == undefined) {
+        break;
+      }
+      if (currentUserWordAr[i] != joinedKeyWord[i]) {
+        if (!joinedKeyWord.slice(i).includes(currentUserWordAr[i])) {
+          console.log("deletion");
+          currentUserWordAr.splice(i, 1);
+          totalEdits++;
+          subLevCalc(currentUserWordAr);
+        } else if (currentUserWordAr[i] == joinedKeyWord[i + 1] && currentUserWordAr[i + 1] == joinedKeyWord[i]) {
+          console.log("inversion");
+          currentUserWordAr.splice(i, 1, joinedKeyWord[i]);
+          currentUserWordAr.splice(i + 1, 1, joinedKeyWord[i + 1]);
+          totalEdits++;
+          subLevCalc(currentUserWordAr);
+        } else {
+          console.log("insertion");
+          currentUserWordAr.splice(i, 0, joinedKeyWord[i]);
+          totalEdits++;
+          subLevCalc(currentUserWordAr);
         }
       }
     }
-    subLevCalc();
-	  return editCount;	
+  }
+  subLevCalc(joinedUserWord);
+  console.log("LEV CALCULATION: ", totalEdits, keyWord, userWord);
+  return totalEdits;
 }
 
 const compareArrays = (ar1, ar2) => {
@@ -154,7 +153,8 @@ let phrase2 = [
 ];
 
 let res = autocorrect(phrase1, phrase2);
-console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[2]);
+console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[2]);*/
+
 
 /*
-console.log(levCalc("gekommen ", "kommen "));*/
+console.log(levCalc("kommen ", "gekommen "));*/
