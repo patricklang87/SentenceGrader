@@ -2,7 +2,7 @@
  
 body {
     background-color: azure;
-    
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 h1,
@@ -27,9 +27,9 @@ h2 {
 
 h4,
 th {
-    font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.25em;
     font-weight: 900;
+    margin: none;
 }
 
 p {
@@ -37,14 +37,24 @@ p {
     font-size: 1.25em;
 }
 
+#about {
+    width: 100%;
+}
+
+@media only screen and (min-width: 470px) {
+    #about p {
+        width: 90%;
+        margin: auto;
+    }
+}
+
 table {
-    background-color: skyblue;
+    text-align: left;
     width: 100%;
 }
 
 .preset-example {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
     justify-content: center;
     margin: auto;
 }
@@ -58,3 +68,33 @@ table {
     }
 }
 
+.result {
+    display: none;
+    background-color: skyblue;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+footer {
+    min-height: 200px;
+    background-color: cadetblue;
+    margin-top: 50px;
+    
+    font-family: 'Alfa Slab One', cursive;
+}
+
+footer span {
+    display: block;
+    text-align: right;
+    margin: auto;
+    padding-right: 20px;
+    padding: none;
+}
+
+footer a {
+    color: hotpink;
+    
+    
+}

@@ -38,11 +38,9 @@
         console.log("keyPhraseSubsec: ", keyPhraseSubsec);
         for (let l = 0; l < parsingPhrase.length; l++) {
             console.log("parsingPhrase[l], keyPhraseSubsec[l]", parsingPhrase[l], keyPhraseSubsec[l]);
-          if (parsingPhrase[l] == keyPhraseSubsec[l]) {
+          if (parsingPhrase[l] == keyPhraseSubsec[l] || keyPhraseSubsec[l] == "$PLACEHOLDER$") {
             tentativeSubphrase.push(parsingPhrase[l]);
-
           } else {
-            
             console.log("tentative Subphrases: ", tentativeSubphraseS);
             break;
           }
@@ -86,13 +84,27 @@
 }
 
 /*
-let kPhrase = [
-  'Я',     'не',
-  'знаю',  ',',
-  'хочет', 'ли',
-  'моя',   'сестра',
-  'пойти', 'в',
-  'кино',  '.'
-];
-let pPhrase = ["Я", "не", "знаю", ",", "хот", "ли", "она", "пойти", "в", "кино", "."];
+let kPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
+let pPhrase = ['My', 'sister', 'want', 'try', 'to', 'eat', 'healthily', '.'];
+console.log(sentenceParser(kPhrase, pPhrase));
+
+
+
+
+[
+  [ 'My', 'sister' ],
+  [ 'want' ],
+  [ 'try', 'to', 'eat', 'healthily', '.' ]
+]
+
+[
+  [ 'My', 'sister' ],
+  [ 'wants' ],
+  [ 'to' ],
+  [ 'try' ],
+  [ 'to' ],
+  [ 'eat', 'healthily', '.' ]
+]
+
+
 */

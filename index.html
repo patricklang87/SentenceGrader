@@ -22,6 +22,7 @@
                     <h1>Sentence Assesser</h1>
                 </div>
             </section>
+        </header>
             <section id="about">
                 <h2>About</h2>
                 <p>This automatic sentence scorer was developed with short-answer questions on language tests in mind. Many of the tests given, for example in German or Russian, provide sentence components and require that a sentence be constructed to demonstrate mastery of a simple grammar point in the context of an entire sentence. At UNC, our online teaching tool, Sakai, has several auto-grade components, including multiple choice, matching, and fill-in-the-blank. However, the automatic grader can only assess whether or not a user submission answers the answer key exactly or not. Therefore, when partial credit is given, instructors must grade exercises manually. This is an attempt to approximate a human grader's editing through automation.
@@ -33,20 +34,19 @@
                     <div class="question">
                         <h3>English</h3>
                         <p>Write a sensible sentence in present tense using the following words. Where necessary, conjugate the verbs or add the infinitive "to".</p>
-                        <p>1. My sister / want / eat / healthily / .</p>
+                        <p>1. My sister / want / try / eat / healthily / .</p>
                         <label for="english-response" value="Your Response: "></label>
                         <input type="text" name="english-response" id="english-response"  required></input>
                         <br>
                         <button value="submit" id="english-button">Submit</button>
                     </div>
-                    <div class="result">
+                    <div class="result" id="english-result">
                         <h4>Your Response: </h4>
                         <div id="user-english-response">
                         </div>
                         <h4>Closest Correct Answer: </h4>
                         <div id="english-closest-result">
                         </div>
-                        <h4>Edits Counts: </h4>
                         <table>
                             <tr>
                                 <th>Spelling Autocorrections: </th>
@@ -77,14 +77,13 @@
                         <br>
                         <button value="submit" id="german-button">Submit</button>
                     </div>
-                    <div class="result">
+                    <div class="result" id="german-result">
                         <h4>Your Response: </h4>
                         <div id="user-german-response">
                         </div>
                         <h4>Closest Correct Answer: </h4>
                         <div id="german-closest-result">
                         </div>
-                        <h4>Edits Counts: </h4>
                         <table>
                             <tr>
                                 <th>Spelling Autocorrections: </th>
@@ -115,14 +114,13 @@
                         <br>
                         <button value="submit" id="russian-button">Submit</button>
                     </div>
-                    <div class="result">
+                    <div class="result" id="russian-result">
                         <h4>Your Response: </h4>
                         <div id="user-russian-response">
                         </div>
                         <h4>Closest Correct Answer: </h4>
                         <div id="russian-closest-result">
                         </div>
-                        <h4>Edits Counts: </h4>
                         <table>
                             <tr>
                                 <th>Spelling Autocorrections: </th>
@@ -144,12 +142,63 @@
                     </div>
                 </div>
             </section>
-        </header>
+        <section id="custom-box">
+            <h2>Try It Out</h2>
+            <div class="preset-example">
+                <div class="question">
+                    <h3>Your Question</h3>
+                    <p>Insert your sample answers below, exactly as you would like the answer typed. Here you may insert up to three possible key answers.</p>
+                    <label for="ans-key-1" >Answer Key 1 (required): </label>
+                    <input type="text" name="ans-key-1" id="ans-key-1"  required></input><br>
+                    <label for="ans-key-1" value="Your Response: ">Answer Key 2 (optional): </label>
+                    <input type="text" name="ans-key-2" id="ans-key-2" ></input><br>
+                    <label for="ans-key-3" value="Your Response: ">Answer Key 3 (optional):</label>
+                    <input type="text" name="ans-key-3" id="ans-key-3" ></input><br>
+                    <br>
+                    <label for="custom-response" >Your Response: </label>
+                    <input type="text" name="custom-response" id="custom-response"  required></input>
+                    <button value="submit" id="custom-button">Submit</button>
+                </div>
+                <div class="result" id="custom-result">
+                    <h4>Your Response: </h4>
+                    <div id="user-custom-response">
+                    </div>
+                    <h4>Closest Correct Answer: </h4>
+                    <div id="custom-closest-result">
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Spelling Autocorrections: </th>
+                            <td id="custom-spelling-autocorrections">a</td>
+                        </tr>
+                        <tr>
+                            <th>Deletions: </th>
+                            <td id="custom-deletions">b</td>
+                        </tr>
+                        <tr>
+                            <th>Insertions: </th>
+                            <td id="custom-insertions">c</td>
+                        </tr>
+                        <tr>
+                            <th>Word Order Edits: </th>
+                            <td id="custom-WOEs">d</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <span>A project by <a href="https://patricklang87.github.io/portfolio/">Patrick Lang</a></span></br>
+            <span>&copy; 2020</span>
+        </footer>
+            
+        
         <script src="start.js" async defer></script>
         <script src="index.js" async defer></script>
         <script src="parserBeta.js" async defer></script>
         <script src="textPrep.js" async defer></script>
         <script src="wordOrderEditor.js" async defer></script>
         <script src="wordSpellingEditor.js" async defer></script>
+        <script src="htmlTests.js" async defer></script>
     </body>
 </html>

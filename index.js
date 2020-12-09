@@ -1,3 +1,5 @@
+// @ts-check
+
 /*
 import { prepSentence, arToPhraseString} from './textPrep';
 import { sentenceParser } from './parserBeta';
@@ -58,72 +60,6 @@ console.log("Edited Phrase: ", outcome[0], ", Spelling Autocorrections: ", outco
 // html interactivity section
 
 
-const findClosestKeyAns = (keyAnsS, userAns) => {
-    let closestKeyAns = 0;
-    let lowestTotalEdits = 999;
-    let outcomeS = [];
-    for (let i = 0; i < keyAnsS.length; i++) {
-        let outcome = calculateEdits(keyAnsS[i], userAns);
-        outcomeS.push(outcome);
-        let outcomeTotalEdits = outcome[1] + outcome[2] + outcome[3] + outcome[4];
-        if (outcomeTotalEdits < lowestTotalEdits) {
-            lowestTotalEdits = outcomeTotalEdits;
-            closestKeyAns = i;
-        }
-    }
-    return outcomeS[closestKeyAns];
-}
-
-/*console.log(findClosestKeyAns(phrase1, phrase2));*/
-
-const englishTest = () => {
-    console.log("begin english test");
-    let englishAnsKey = ["My sister wants to eat healthily."];
-    let userResponse = document.getElementById("english-response").value;
-    let outcome = findClosestKeyAns(englishAnsKey, userResponse);
-    let closestResponse = outcome[0].join(' ');
-    document.getElementById("user-english-response").innerHTML = userResponse;
-    document.getElementById("english-closest-result").innerHTML = closestResponse;
-    document.getElementById("english-spelling-autocorrections").innerHTML = outcome[1];
-    document.getElementById("english-deletions").innerHTML = outcome[2];
-    document.getElementById("english-insertions").innerHTML = outcome[3];
-    document.getElementById("english-WOEs").innerHTML = outcome[4];
-}
-
-const germanTest = () => {
-    console.log("begin german test");
-    let germanAnsKey = ["Ich bin spät nach Hause gekommen.", "Spät bin ich nach Hause gekommen.", "Nach Hause bin ich spät gekommen."];
-    let userResponse = document.getElementById("german-response").value;
-    let outcome = findClosestKeyAns(germanAnsKey, userResponse);
-    let closestResponse = outcome[0].join(' ');
-    document.getElementById("user-german-response").innerHTML = userResponse;
-    document.getElementById("german-closest-result").innerHTML = closestResponse;
-    document.getElementById("german-spelling-autocorrections").innerHTML = outcome[1];
-    document.getElementById("german-deletions").innerHTML = outcome[2];
-    document.getElementById("german-insertions").innerHTML = outcome[3];
-    document.getElementById("german-WOEs").innerHTML = outcome[4];
-}
-
-const russianTest = () => {
-    console.log("begin russian test");
-    let russianAnsKey = ["Я не знаю, хочет ли она пойти в кино.", "Я не знаю, хочет ли моя сестра пойти в кино."];
-    let userResponse = document.getElementById("russian-response").value;
-    let outcome = findClosestKeyAns(russianAnsKey, userResponse);
-    let closestResponse = outcome[0].join(' ');
-    document.getElementById("user-russian-response").innerHTML = userResponse;
-    document.getElementById("russian-closest-result").innerHTML = closestResponse;
-    document.getElementById("russian-spelling-autocorrections").innerHTML = outcome[1];
-    document.getElementById("russian-deletions").innerHTML = outcome[2];
-    document.getElementById("russian-insertions").innerHTML = outcome[3];
-    document.getElementById("russian-WOEs").innerHTML = outcome[4];
-}
-
-let engSubButton = document.getElementById("english-button");
-engSubButton.addEventListener('click', englishTest);
-let gerSubButton = document.getElementById("german-button");
-gerSubButton.addEventListener('click', germanTest);
-let rusSubButton = document.getElementById("russian-button");
-rusSubButton.addEventListener('click', russianTest);
 
 /*
 const showUserInput = () => {

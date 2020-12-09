@@ -5,16 +5,17 @@
 
 
 const levCalc = (givenAns, userAns) => {
-	if (typeof givenAns != "string") return "please provide string.";
-    else if (givenAns == userAns) return 0;
-    else {
-    	let lenID = 0;
+
+    	
       let userEdit = userAns;
       let editCount = 0;
-    	if (userAns.length > givenAns.length) lenID = userAns.length;
-    	else lenID = givenAns.length;
+      let lenID = 0;
+      if (userAns.length > givenAns.length) lenID = userAns.length;
+    else lenID = givenAns.length;
     	console.log("lenID: " + lenID);
-      do {
+
+      const subLevCalc = () => {
+        console.log("begin subLevCalc; keyAns: " , givenAns, " userEdit: ", userEdit);
       for (let i = 0; i < lenID; i++) {
       	// check for inversions
         if (userEdit[i] != givenAns[i]) {
@@ -53,16 +54,13 @@ const levCalc = (givenAns, userAns) => {
             console.log("simply different: " , userEdit[i], givenAns[i]);
           	userEdit = userEdit.substr(0, i) + givenAns[i]  + userEdit.substr(i+1);
           	editCount ++;
-          }
+          }  
+          subLevCalc();
         }
       }
-      }
-      while (userEdit != givenAns);
-	   
+    }
+    subLevCalc();
 	  return editCount;	
-	  
-	}  
-	
 }
 
 const compareArrays = (ar1, ar2) => {
@@ -145,5 +143,5 @@ let phrase2 = [['Spät '], ['ich '], ['nach Hause '], ['kommen '], ['. ']];
 let res = autocorrect(phrase1, phrase2);
 console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[2]);
 */
-
-console.log(levCalc("gekommen ", "kommen "));
+/*
+console.log(levCalc("gekommen ", "kommen "));*/
