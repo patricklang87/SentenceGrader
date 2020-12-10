@@ -57,7 +57,19 @@
       parsedPhrases.push(tentativeSubphraseS[longestIndex]);
       console.log("longest Index: ", longestIndex, " tentativeSubphraseS: ", tentativeSubphraseS);
       console.log(longestIndex, longestIndex + tentativeSubphraseS[longestIndex].length);
-      keyPhrase.splice(matchingTerms[longestIndex], tentativeSubphraseS[longestIndex].length, '$PLACEHOLDER$');
+
+      let shouldWeDelete = [];
+      for (let n = 0; n < parsingPhrase.length; n++) {
+        if (parsingPhrase[n] == parsingPhrase[0]) {
+          if (parsingPhrase[n-1] == keyPhrase[matchingTerms[longestIndex] -1] || parsingPhrase[n+1] == keyPhrase[matchingTerms[longestIndex] + 1]) {
+            shouldWeDelete.push("no");  
+          } 
+        }
+      }
+      if (shouldWeDelete.length < 1) {
+        keyPhrase.splice(matchingTerms[longestIndex], tentativeSubphraseS[longestIndex].length, '$PLACEHOLDER$');
+      }
+
       parsingPhrase.splice(0, tentativeSubphraseS[longestIndex].length);
       console.log("parsedPhrases: ", parsedPhrases);
       console.log("newParsingPhrase: ", parsingPhrase);
@@ -66,7 +78,6 @@
       if (parsingPhrase.length > 0) {
       let truthAr = [];
       for (let n = 0; n < parsingPhrase.length; n++) {
-        console.log("pushed parsing phrase n");
         if (keyPhrase[n] == parsingPhrase[n]) truthAr.push(parsingPhrase[n]);
       }
       if (truthAr.length == parsingPhrase.length) {
@@ -89,9 +100,29 @@
 let kPhrase = ["g", "e", "k", "o", "m", "m", "e", "n", " "];
 let pPhrase = ["k", "o", "m", "m", "e", "n", " "];
 */
-
-let kPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
-let pPhrase = ['My', 'sister', 'want', 'try', 'to', 'ea', 'healthy/'];
+/*
+let pPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
+let kPhrase = ['My', 'sister', 'want', 'try', 'to', 'ea', 'healthy/'];
 
 console.log(sentenceParser(kPhrase, pPhrase));
+*/
+/*
+[
+  [ 'My', 'sister' ],
+  [ 'want' ],
+  [ 'try', 'to' ],
+  [ 'ea' ],
+  [ 'healthy/' ]
+]
 
+[
+  [ 'My', 'sister' ],
+  [ 'wants' ],
+  [ 'to' ],
+  [ 'try' ],
+  [ 'to' ],
+  [ 'eat' ],
+  [ 'healthily' ],
+  [ '.' ]
+]
+*/
