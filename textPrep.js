@@ -12,9 +12,11 @@ const sepPunctuation = (str) => {
         }
         alreadyCovered.push(i);
       }
+      console.log(str);
       str = str.replace(/\s+/g, " ");
-      str = str.substr(0, str.length - 1);
+      str = str.trim();
     }
+    console.log(str);
     return str;
   }
   
@@ -39,6 +41,7 @@ const tokenize = (str) => {
   return newAr;
   }
 
+console.log(prepSentence("I am. a madman"));
 
 /*
 

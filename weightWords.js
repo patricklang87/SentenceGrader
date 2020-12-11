@@ -2,6 +2,3 @@
 
 
 
-const checkWeightedWords = () => {
-    document.getElementById()
-}

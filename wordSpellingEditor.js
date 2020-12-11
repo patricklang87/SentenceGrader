@@ -3,6 +3,11 @@
 //let givenAns = "Welcome home!";
 //let userAns = "Wecome home!";
 
+const checkIfPunctuation = (ar) => {
+  let punctuation = [",", "!", "." , ":", ";", "(", ")"];
+  if (arIncludeAr(ar, punctuation) == true) return true;
+  else return false;
+}
 
 const combineInnerArs = (ar) => {
   let combArS = [];
@@ -94,10 +99,13 @@ const arIncludeAr = (innerAr, outerAr) => {
 }
 
 
+
+
 //checks for words that can be corrected and corrects them;
 /*export*/ const autocorrect = (keyAns, editedPhrase) => {
     let autocorrections = 0;
     let deletions = 0;
+    let puncDeletions = 0;
     for (let index = editedPhrase.length - 1; index >= 0; index --) {
         console.log("postion in interation: ", index, editedPhrase[index]);
         //console.log(" iteration ", index, " section: ", editedPhrase[index]);
@@ -130,14 +138,20 @@ const arIncludeAr = (innerAr, outerAr) => {
                         editedPhrase[index].splice(0, 1, levCalcS[lowestLevValIndex][1]);
                         autocorrections++;                         
                     } else {
+                      if (checkIfPunctuation(editedPhrase[index]) == true) puncDeletions++;
+                      else if (compareArrays(editedPhrase[index], ['']) != true) deletions++;
                       console.log("deletion: ", editedPhrase[index]);
-                      if (compareArrays(editedPhrase[index], ['']) != true) deletions++; 
                       editedPhrase.splice(index, 1);                      
                     }                         
-                }                  
+                } else {
+                  if (checkIfPunctuation(editedPhrase[index]) == true) puncDeletions++;
+                  else if (compareArrays(editedPhrase[index], ['']) != true) deletions++; 
+                      console.log("deletion: ", editedPhrase[index]);
+                      editedPhrase.splice(index, 1); 
+                }                 
         }    
     }
-    return [editedPhrase, autocorrections, deletions];
+    return [editedPhrase, autocorrections, deletions, puncDeletions];
 }
 
 

@@ -17,6 +17,7 @@ const altAr = (ar) => {
 }
 
 const calculateEdits = (keyAns, userAns) => {
+    let puncEdits = 0;
     // break the comparison sentences into individual words
     let userAnsPrepped = prepSentence(userAns);
     let keyAnsPrepped = prepSentence(keyAns);
@@ -40,6 +41,7 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     let autocorrectedUserAns = autocorrectedResult[0];
     let numAutocorrectedWords = autocorrectedResult[1];
     let numDeletedWords = autocorrectedResult[2];
+    puncEdits += autocorrectedResult[3];
     console.log("STEP 3 (autocorrect and delete): keystatus: ", arToPhraseString(groupedKeyAnsPrepped) , " userans status: ", arToPhraseString(autocorrectedUserAns) );
 
     // turn the internal arrays back into strings
@@ -52,8 +54,9 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     let reorderedPhrase = reorderedUserSub[0];
     let reorderCount = reorderedUserSub[1];
     let numInsertedWords = reorderedUserSub[2];
+    puncEdits += reorderedUserSub[3];
     
-    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, numInsertedWords, reorderCount, capitalizationEdits];
+    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, numInsertedWords, reorderCount, capitalizationEdits, puncEdits];
 }
 
 

@@ -73,6 +73,7 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
 /*export*/ const wordOrderEditor = (keyAns, userSub) => {
   let editCount = 0;
   let insertions = 0;
+  let puncEdits = 0;
   //create an editedPhrase that can be compared to the user submission
   let editedPhrase = [];
   for (let item of userSub) editedPhrase.push(item);
@@ -86,7 +87,8 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
         if (!editedPhrase.slice(index).includes(keyAns[index])) {
           console.log("insertion required: ", keyAns[index]);
           editedPhrase.splice(index, 0, keyAns[index]);
-          insertions++;
+          if (checkIfPunctuation(keyAns[index]) == true) puncEdits++;
+          else insertions++;
         }
         else {
 
@@ -131,7 +133,11 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
              
             } else editedPhrase.splice(keyAns.indexOf(userWord), 0, userWord);
         //  if the word at the index has changed, the edit count increases by 1
-        if (roundStartStatus[index] != editedPhrase[index]) editCount++;
+
+        if (roundStartStatus[index] != editedPhrase[index]) {
+          if (checkIfPunctuation(editedPhrase[index]) == true) puncEdits++;
+          else editCount++;
+        } 
         if (roundStartStatus[index] != editedPhrase[index + 1]) editCount++;
         //if (roundStartStatus[index] != editedPhrase[index +1] && roundStartStatus[index] != editedPhrase[index +2]) editCount++;
         console.log("step 3: ", editedPhrase, " editCount: ", editCount);
@@ -145,7 +151,7 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
     }
   }
   reorderer(keyAns, userSub);
-  return [editedPhrase, editCount, insertions];
+  return [editedPhrase, editCount, insertions, puncEdits];
 }
 
 

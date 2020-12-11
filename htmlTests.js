@@ -32,6 +32,7 @@ const englishTest = () => {
     document.getElementById("english-insertions").innerHTML = outcome[3];
     document.getElementById("english-WOEs").innerHTML = outcome[4];
     document.getElementById("english-CapEdits").innerHTML = outcome[5];
+    document.getElementById("english-puncEdits").innerHTML = outcome[6];
     document.getElementById("english-result").style.display = "grid";
 }
 
