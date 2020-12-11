@@ -1,7 +1,7 @@
 // @ts-check
 const sepPunctuation = (str) => {
     if (typeof str != "string") console.log("input is not a string");
-    let punctuation = str.match(/[,.":;()]/g);
+    let punctuation = str.match(/[,!.":;()]/g);
       if (punctuation != null) {
       let alreadyCovered = [];
       for (let i of punctuation) {

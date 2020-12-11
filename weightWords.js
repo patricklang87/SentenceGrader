@@ -1,3 +1,7 @@
 // @ts-check
 
-if 
+
+
+const checkWeightedWords = () => {
+    document.getElementById()
+}
