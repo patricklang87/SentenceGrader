@@ -189,11 +189,28 @@
                     <h3>Your Question</h3>
                     <p>Insert your sample answers below, exactly as you would like the answer typed. Here you may insert up to three possible key answers.</p>
                     <label for="ans-key-1" >Answer Key 1 (required): </label>
-                    <input type="text" name="ans-key-1" id="ans-key-1"  required></input><br>
+                    <input type="text" name="ans-key-1" id="ans-key-1" value="I like to party party."  required></input><br>
                     <label for="ans-key-1" value="Your Response: ">Answer Key 2 (optional): </label>
-                    <input type="text" name="ans-key-2" id="ans-key-2" ></input><br>
+                    <input type="text" name="ans-key-2" id="ans-key-2" value="She like to party party."></input><br>
                     <label for="ans-key-3" value="Your Response: ">Answer Key 3 (optional):</label>
-                    <input type="text" name="ans-key-3" id="ans-key-3" ></input><br>
+                    <input type="text" name="ans-key-3" id="ans-key-3" value="We like to party party." ></input><br>
+                    <br>
+                    <p>Next, you can can change the question value and weigh the various correction categories. The number of errors in each category will be multiplied by the given weight, and then subtracted from the question value in order to score the queston.</p>
+                    <label for="point-value" >Point Total: </label>
+                    <input type="number" name="point-value" id="point-value" value="4" min="1"></input><br>
+                    <br>
+                    <label for="autocorrection-weight" >Autocorrection Weight: </label>
+                    <input type="number" name="autocorrection-weight" id="autocorrection-weight" value="1" step="0.25" min="0"></input><br>
+                    <label for="deletion-weight" >Word Deletion Weight: </label>
+                    <input type="number" name="deletion-weight" id="deletion-weight" value="1" step="0.25" min="0"></input><br>
+                    <label for="insertion-weight" >Word Insertion Weight: </label>
+                    <input type="number" name="insertion-weight" id="insertion-weight" value="1" step="0.25" min="0"></input><br>
+                    <label for="ordering-weight" >Word Order Weight: </label>
+                    <input type="number" name="ordering-weight" id="ordering-weight" value="1" step="0.25" min="0"></input><br>
+                    <label for="capitalization-weight" >Capitalization Weight: </label>
+                    <input type="number" name="capitalization-weight" id="capitalization-weight" value="0.5" step="0.25" min="0"></input><br>
+
+                    <br>
                     <br>
                     <label for="custom-response" >Your Response: </label>
                     <input type="text" name="custom-response" id="custom-response"  required></input>

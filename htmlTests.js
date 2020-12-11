@@ -83,8 +83,16 @@ const customTest = () => {
     console.log("ustomAnsKey: ", customAnsKey);
     let userResponse = document.getElementById("custom-response").value;
     let outcome = findClosestKeyAns(customAnsKey, userResponse);
+    
+    let pointTotal = document.getElementById("point-value").value;
+    let autoCorWeight = document.getElementById("autocorrection-weight").value;
+    let inserWeight = document.getElementById("insertion-weight").value;
+    let delWeight = document.getElementById("deletion-weight").value;
+    let orderWeight = document.getElementById("ordering-weight").value;
+    let capWeight = document.getElementById("capitalization-weight").value;
+    let score = scoreAnswer(outcome, pointTotal, autoCorWeight, inserWeight, delWeight, orderWeight, capWeight);
+
     let closestResponse = outcome[0].join(' ');
-    let score = scoreAnswer(outcome);
     document.getElementById("custom-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-custom-response").innerHTML = userResponse;
     document.getElementById("custom-closest-result").innerHTML = closestResponse;
