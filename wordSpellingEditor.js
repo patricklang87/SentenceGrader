@@ -131,8 +131,8 @@ const arIncludeAr = (innerAr, outerAr) => {
                         autocorrections++;                         
                     } else {
                       console.log("deletion: ", editedPhrase[index]);
-                      editedPhrase.splice(index, 1);
-                      deletions++;                 
+                      if (compareArrays(editedPhrase[index], ['']) != true) deletions++; 
+                      editedPhrase.splice(index, 1);                      
                     }                         
                 }                  
         }    

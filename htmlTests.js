@@ -23,12 +23,15 @@ const englishTest = () => {
     let userResponse = document.getElementById("english-response").value;
     let outcome = findClosestKeyAns(englishAnsKey, userResponse);
     let closestResponse = outcome[0].join(' ');
+    let score = scoreAnswer(outcome);
+    document.getElementById("english-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-english-response").innerHTML = userResponse;
     document.getElementById("english-closest-result").innerHTML = closestResponse;
     document.getElementById("english-spelling-autocorrections").innerHTML = outcome[1];
     document.getElementById("english-deletions").innerHTML = outcome[2];
     document.getElementById("english-insertions").innerHTML = outcome[3];
     document.getElementById("english-WOEs").innerHTML = outcome[4];
+    document.getElementById("english-CapEdits").innerHTML = outcome[5];
     document.getElementById("english-result").style.display = "block";
 }
 
@@ -38,12 +41,15 @@ const germanTest = () => {
     let userResponse = document.getElementById("german-response").value;
     let outcome = findClosestKeyAns(germanAnsKey, userResponse);
     let closestResponse = outcome[0].join(' ');
+    let score = scoreAnswer(outcome);
+    document.getElementById("german-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-german-response").innerHTML = userResponse;
     document.getElementById("german-closest-result").innerHTML = closestResponse;
     document.getElementById("german-spelling-autocorrections").innerHTML = outcome[1];
     document.getElementById("german-deletions").innerHTML = outcome[2];
     document.getElementById("german-insertions").innerHTML = outcome[3];
     document.getElementById("german-WOEs").innerHTML = outcome[4];
+    document.getElementById("german-CapEdits").innerHTML = outcome[5];
     document.getElementById("german-result").style.display = "block";
 }
 
@@ -53,12 +59,15 @@ const russianTest = () => {
     let userResponse = document.getElementById("russian-response").value;
     let outcome = findClosestKeyAns(russianAnsKey, userResponse);
     let closestResponse = outcome[0].join(' ');
+    let score = scoreAnswer(outcome);
+    document.getElementById("russian-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-russian-response").innerHTML = userResponse;
     document.getElementById("russian-closest-result").innerHTML = closestResponse;
     document.getElementById("russian-spelling-autocorrections").innerHTML = outcome[1];
     document.getElementById("russian-deletions").innerHTML = outcome[2];
     document.getElementById("russian-insertions").innerHTML = outcome[3];
     document.getElementById("russian-WOEs").innerHTML = outcome[4];
+    document.getElementById("russian-CapEdits").innerHTML = outcome[5];
     document.getElementById("russian-result").style.display = "block";
 }
 
@@ -75,12 +84,15 @@ const customTest = () => {
     let userResponse = document.getElementById("custom-response").value;
     let outcome = findClosestKeyAns(customAnsKey, userResponse);
     let closestResponse = outcome[0].join(' ');
+    let score = scoreAnswer(outcome);
+    document.getElementById("custom-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-custom-response").innerHTML = userResponse;
     document.getElementById("custom-closest-result").innerHTML = closestResponse;
     document.getElementById("custom-spelling-autocorrections").innerHTML = outcome[1];
     document.getElementById("custom-deletions").innerHTML = outcome[2];
     document.getElementById("custom-insertions").innerHTML = outcome[3];
     document.getElementById("custom-WOEs").innerHTML = outcome[4];
+    document.getElementById("custom-CapEdits").innerHTML = outcome[5];
     document.getElementById("custom-result").style.display = "block";
 }
 

@@ -30,8 +30,13 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     
     console.log("STEP 2 (parse): keystatus: ", arToPhraseString(groupedKeyAnsPrepped), "userans status: ", arToPhraseString(groupedUserAnsPrepped));
 
+    //check for false capitalizations or lower case words
+    let checkUserPhraseCapitalization = capitalizationChecker(groupedKeyAnsPrepped, groupedUserAnsPrepped);
+    let caseCheckedUserPhrase = checkUserPhraseCapitalization[0];
+    let capitalizationEdits = checkUserPhraseCapitalization[1];
+
     // autocorrect or delete words
-    let autocorrectedResult = autocorrect(groupedKeyAnsPrepped, groupedUserAnsPrepped);
+    let autocorrectedResult = autocorrect(groupedKeyAnsPrepped, caseCheckedUserPhrase);
     let autocorrectedUserAns = autocorrectedResult[0];
     let numAutocorrectedWords = autocorrectedResult[1];
     let numDeletedWords = autocorrectedResult[2];
@@ -48,23 +53,22 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     let reorderCount = reorderedUserSub[1];
     let numInsertedWords = reorderedUserSub[2];
     
-    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, numInsertedWords, reorderCount];
+    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, numInsertedWords, reorderCount, capitalizationEdits];
 }
 
 
 /*let outcome = calculateEdits(phrase1, phrase2);
 console.log("Edited Phrase: ", outcome[0], ", Spelling Autocorrections: ", outcome[1], ", Item Removals: ", outcome[2], ", Item insertions: ", outcome[3], ", Rearrangement Moves: ", outcome[4]);*/
 
-// html interactivity section
-
-
-
-/*
-const showUserInput = () => {
-	let userInput = document.getElementById("english-response").value;
-  console.log(userInput);
-  document.getElementById("user-english-response").innerHTML = userInput;
+const scoreAnswer = (calcEditsOutcome, maxPoints=4, spellingWeight=1, insertionWeight=1, deletionWeight=1, orderWeight=1, capitalizationWeight=0.5) => {
+    let points = maxPoints;
+    points -= calcEditsOutcome[1]*spellingWeight;
+    points -= calcEditsOutcome[2]*deletionWeight;
+    points -= calcEditsOutcome[3]*insertionWeight;
+    points -= calcEditsOutcome[4]*orderWeight;
+    points -= calcEditsOutcome[5]*capitalizationWeight;
+    if (points < 0) points = 0;
+    return [points, maxPoints];
 }
 
-document.getElementById("english-button").addEventListener('click', showUserInput);
-*/
+

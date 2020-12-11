@@ -45,18 +45,24 @@
                         <p>Write a sensible sentence in present tense using the following words. Where necessary, conjugate the verbs or add the infinitive "to".</p>
                         <p>1. My sister / want / try / eat / healthily / .</p>
                         <label for="english-response" value="Your Response: "></label>
-                        <input type="text" name="english-response" id="english-response"  required></input>
+                        <input type="text" name="english-response" id="english-response" required></input>
                         <br>
                         <button value="submit" id="english-button">Submit</button>
                     </div>
                     <div class="result" id="english-result">
-                        <h4>Your Response: </h4>
-                        <div id="user-english-response">
-                        </div>
-                        <h4>Closest Correct Answer: </h4>
-                        <div id="english-closest-result">
-                        </div>
                         <table>
+                            <tr>
+                                <th>Score: </th>
+                                <td id="english-score"></td>
+                            </tr>
+                            <tr>
+                                <th>Your Response: </th>
+                                <td id="user-english-response"></td>
+                            </tr>
+                            <tr>
+                                <th>Closest Correct Answer: </th>
+                                <td id="english-closest-result"></td>
+                            </tr>
                             <tr>
                                 <th>Spelling Autocorrections: </th>
                                 <td id="english-spelling-autocorrections">a</td>
@@ -73,6 +79,10 @@
                                 <th>Word Order Edits: </th>
                                 <td id="english-WOEs">d</td>
                             </tr>
+                            <tr>
+                                <th>Capitalization Edits: </th>
+                                <td id="english-CapEdits">d</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -87,13 +97,20 @@
                         <button value="submit" id="german-button">Submit</button>
                     </div>
                     <div class="result" id="german-result">
-                        <h4>Your Response: </h4>
-                        <div id="user-german-response">
-                        </div>
-                        <h4>Closest Correct Answer: </h4>
-                        <div id="german-closest-result">
-                        </div>
+                        
                         <table>
+                            <tr>
+                                <th>Score: </th>
+                                <td id="german-score"></td>
+                            </tr>
+                            <tr>
+                                <th>Your Response: </th>
+                                <td id="user-german-response"></td>
+                            </tr>
+                            <tr>
+                                <th>Closest Correct Answer: </th>
+                                <td id="german-closest-result"></td>
+                            </tr>
                             <tr>
                                 <th>Spelling Autocorrections: </th>
                                 <td id="german-spelling-autocorrections">a</td>
@@ -110,6 +127,10 @@
                                 <th>Word Order Edits: </th>
                                 <td id="german-WOEs">d</td>
                             </tr>
+                            <tr>
+                                <th>Capitalization Edits: </th>
+                                <td id="german-CapEdits">d</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -124,13 +145,19 @@
                         <button value="submit" id="russian-button">Submit</button>
                     </div>
                     <div class="result" id="russian-result">
-                        <h4>Your Response: </h4>
-                        <div id="user-russian-response">
-                        </div>
-                        <h4>Closest Correct Answer: </h4>
-                        <div id="russian-closest-result">
-                        </div>
                         <table>
+                            <tr>
+                                <th>Score: </th>
+                                <td id="russian-score"></td>
+                            </tr>
+                            <tr>
+                                <th>Your Response: </th>
+                                <td id="user-russian-response"></td>
+                            </tr>
+                            <tr>
+                                <th>Closest Correct Answer: </th>
+                                <td id="russian-closest-result"></td>
+                            </tr>
                             <tr>
                                 <th>Spelling Autocorrections: </th>
                                 <td id="russian-spelling-autocorrections">a</td>
@@ -146,6 +173,10 @@
                             <tr>
                                 <th>Word Order Edits: </th>
                                 <td id="russian-WOEs">d</td>
+                            </tr>
+                            <tr>
+                                <th>Capitalization Edits: </th>
+                                <td id="russian-CapEdits">d</td>
                             </tr>
                         </table>
                     </div>
@@ -169,13 +200,19 @@
                     <button value="submit" id="custom-button">Submit</button>
                 </div>
                 <div class="result" id="custom-result">
-                    <h4>Your Response: </h4>
-                    <div id="user-custom-response">
-                    </div>
-                    <h4>Closest Correct Answer: </h4>
-                    <div id="custom-closest-result">
-                    </div>
                     <table>
+                        <tr>
+                            <th>Score: </th>
+                            <td id="custom-score"></td>
+                        </tr>
+                        <tr>
+                            <th>Your Response: </th>
+                            <td id="user-custom-response"></td>
+                        </tr>
+                        <tr>
+                            <th>Closest Correct Answer: </th>
+                            <td id="custom-closest-result"></td>
+                        </tr>
                         <tr>
                             <th>Spelling Autocorrections: </th>
                             <td id="custom-spelling-autocorrections">a</td>
@@ -192,6 +229,10 @@
                             <th>Word Order Edits: </th>
                             <td id="custom-WOEs">d</td>
                         </tr>
+                        <tr>
+                            <th>Capitalization Edits: </th>
+                            <td id="custom-CapEdits">d</td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -206,6 +247,7 @@
         <script src="index.js" async defer></script>
         <script src="parserBeta.js" async defer></script>
         <script src="textPrep.js" async defer></script>
+        <script src="capitalizationChecker.js" async defer></script>
         <script src="wordOrderEditor.js" async defer></script>
         <script src="wordSpellingEditor.js" async defer></script>
         <script src="htmlTests.js" async defer></script>
