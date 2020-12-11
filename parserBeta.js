@@ -1,15 +1,9 @@
 // @ts-check
-
 //let kPhrase = [ 'Ich', 'bin', 'vom', 'weiten', 'gekommen', '.' ];  
-
 //let pPhrase = ['vom', 'weiten', 'Ich', 'gekommen', 'bi', '.' ];
-
-
-
 /*export*/ const sentenceParser = (keyPhrase, parsingPhrase) => {
   let parsedPhrases = [];
-
-  let identifyMatchIn = (subKeyPhrase, character) => {
+  const identifyMatchIn = (subKeyPhrase, character) => {
     let matchIndices = [];
     for (let j = 0; j < subKeyPhrase.length; j++) {
       if (subKeyPhrase[j] == character) matchIndices.push(j);
@@ -17,7 +11,6 @@
     console.log("match Indices: ", matchIndices);
     return matchIndices;
   }
-
   const subParse = (keyPhrase, parsingPhrase) => {
     console.log("subParse Begin", parsingPhrase);
     console.log("parsingPhrase, parsingPhrase[0]: ", parsingPhrase, parsingPhrase[0] );
@@ -28,8 +21,6 @@
       parsingPhrase.splice(0, 1);
       if (parsingPhrase.length > 0) subParse(keyPhrase, parsingPhrase);
     } else {
-
-
       let matchingTerms = identifyMatchIn(keyPhrase, parsingPhrase[0]);
       let tentativeSubphraseS = [];
       for (let k = 0; k < matchingTerms.length; k++) {
@@ -59,9 +50,9 @@
       console.log(longestIndex, longestIndex + tentativeSubphraseS[longestIndex].length);
 
       let shouldWeDelete = [];
-      for (let n = 0; n < parsingPhrase.length; n++) {
+      for (let n = 1; n < parsingPhrase.length; n++) {
         if (parsingPhrase[n] == parsingPhrase[0]) {
-          if (parsingPhrase[n-1] == keyPhrase[matchingTerms[longestIndex] -1] || parsingPhrase[n+1] == keyPhrase[matchingTerms[longestIndex] + 1]) {
+          if (parsingPhrase[n-1] == keyPhrase[matchingTerms[longestIndex] -1 ] ) {
             shouldWeDelete.push("no");  
           } 
         }
@@ -74,10 +65,10 @@
       console.log("parsedPhrases: ", parsedPhrases);
       console.log("newParsingPhrase: ", parsingPhrase);
       console.log("keyPhrase: ", keyPhrase);
-
       if (parsingPhrase.length > 0) {
       let truthAr = [];
       for (let n = 0; n < parsingPhrase.length; n++) {
+        console.log("pushed parsing phrase n");
         if (keyPhrase[n] == parsingPhrase[n]) truthAr.push(parsingPhrase[n]);
       }
       if (truthAr.length == parsingPhrase.length) {
@@ -91,20 +82,17 @@
   }
   
   }
-
   subParse(keyPhrase, parsingPhrase);
   return parsedPhrases;
 }
 
-/*
-let kPhrase = ["g", "e", "k", "o", "m", "m", "e", "n", " "];
-let pPhrase = ["k", "o", "m", "m", "e", "n", " "];
-*/
+
+let kPhrase = ["I", "like", "to", "party", "party", "."];
+let pPhrase = ["I", "like", "to", "party", "."];
+console.log(sentenceParser(kPhrase, pPhrase));
 /*
 let pPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
 let kPhrase = ['My', 'sister', 'want', 'try', 'to', 'ea', 'healthy/'];
-
-console.log(sentenceParser(kPhrase, pPhrase));
 */
 /*
 [

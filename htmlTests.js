@@ -32,7 +32,7 @@ const englishTest = () => {
     document.getElementById("english-insertions").innerHTML = outcome[3];
     document.getElementById("english-WOEs").innerHTML = outcome[4];
     document.getElementById("english-CapEdits").innerHTML = outcome[5];
-    document.getElementById("english-result").style.display = "block";
+    document.getElementById("english-result").style.display = "grid";
 }
 
 const germanTest = () => {
@@ -50,7 +50,7 @@ const germanTest = () => {
     document.getElementById("german-insertions").innerHTML = outcome[3];
     document.getElementById("german-WOEs").innerHTML = outcome[4];
     document.getElementById("german-CapEdits").innerHTML = outcome[5];
-    document.getElementById("german-result").style.display = "block";
+    document.getElementById("german-result").style.display = "grid";
 }
 
 const russianTest = () => {
@@ -68,7 +68,7 @@ const russianTest = () => {
     document.getElementById("russian-insertions").innerHTML = outcome[3];
     document.getElementById("russian-WOEs").innerHTML = outcome[4];
     document.getElementById("russian-CapEdits").innerHTML = outcome[5];
-    document.getElementById("russian-result").style.display = "block";
+    document.getElementById("russian-result").style.display = "grid";
 }
 
 const customTest = () => {
@@ -101,7 +101,7 @@ const customTest = () => {
     document.getElementById("custom-insertions").innerHTML = outcome[3];
     document.getElementById("custom-WOEs").innerHTML = outcome[4];
     document.getElementById("custom-CapEdits").innerHTML = outcome[5];
-    document.getElementById("custom-result").style.display = "block";
+    document.getElementById("custom-result").style.display = "grid";
 }
 
 let engSubButton = document.getElementById("english-button");
