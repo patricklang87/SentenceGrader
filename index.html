@@ -50,42 +50,24 @@
                         <button value="submit" id="english-button">Submit</button>
                     </div>
                     <div class="result" id="english-result">
-                        
-                            
                                 <div>Score: </div>
                                 <div id="english-score"></div>
-                            
-                            
                                 <div>Your Response: </div>
                                 <div id="user-english-response"></div>
-                            
-                            
                                 <div>Closest Correct Answer: </div>
                                 <div id="english-closest-result"></div>
-                            
-                            
                                 <div>Spelling Autocorrections: </div>
                                 <div id="english-spelling-autocorrections">a</div>
-                            
-                            
                                 <div>Deletions: </div>
                                 <div id="english-deletions">b</div>
-                            
-                            
                                 <div>Insertions: </div>
                                 <div id="english-insertions">c</div>
-                            
-                            
                                 <div>Word Order Edits: </div>
                                 <div id="english-WOEs">d</div>
-                            
-                            
                                 <div>Capitalization Edits: </div>
                                 <div id="english-CapEdits">d</div>
                                 <div>Punctuation Edits: </div>
                                 <div id="english-puncEdits">d</div>
-                            
-                        
                     </div>
                 </div>
                 <div class="preset-example">
@@ -114,7 +96,9 @@
                         <div>Word Order Edits: </div>
                         <div id="german-WOEs">d</div>
                         <div>Capitalization Edits: </div>
-                        <div id="german-CapEdits">d</div>       
+                        <div id="german-CapEdits">d</div> 
+                        <div>Punctuation Edits: </div>
+                        <div id="german-puncEdits">d</div>      
                     </div>
                 </div>
                 <div class="preset-example">
@@ -144,6 +128,8 @@
                                 <div id="russian-WOEs">d</div>
                                 <div>Capitalization Edits: </div>
                                 <div id="russian-CapEdits">d</div>
+                                <div>Punctuation Edits: </div>
+                                <div id="russian-puncEdits">d</div>
                     </div>
                 </div>
             </section>
@@ -174,6 +160,8 @@
                     <input type="number" name="ordering-weight" id="ordering-weight" value="1" step="0.25" min="0"></input><br>
                     <label for="capitalization-weight" >Capitalization Weight: </label>
                     <input type="number" name="capitalization-weight" id="capitalization-weight" value="0.5" step="0.25" min="0"></input><br>
+                    <label for="punctuation-weight" >Punctuation Weight: </label>
+                    <input type="number" name="punctuation-weight" id="punctuation-weight" value="0.5" step="0.25" min="0"></input><br>
                     <br>
                     <p>Now you can optionally choose a word you would like to give special weighting to. This might pertain to the specific grammar point your question is testing. Point deductions for errors made on this word will be multiplied by the selected weight factor. Note: This should be a word you expect to see in the answer.</p>
                     <label for="weighted-word">Weighted Word: </label>
@@ -204,6 +192,10 @@
                         <div id="custom-WOEs"></div>
                         <div>Capitalization Edits: </div>
                         <div id="custom-CapEdits"></div>
+                        <div>Punctuation Edits: </div>
+                        <div id="custom-puncEdits"></div>
+                        <div>Weighted Word Edits (<i><span id="dispWeightedWord"></span></i>): </div>
+                        <div id="custom-weightedWordEdits"></div>
                 </div>
             </div>
         </section>

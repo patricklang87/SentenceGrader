@@ -12,11 +12,9 @@ const sepPunctuation = (str) => {
         }
         alreadyCovered.push(i);
       }
-      console.log(str);
       str = str.replace(/\s+/g, " ");
       str = str.trim();
     }
-    console.log(str);
     return str;
   }
   
@@ -36,12 +34,13 @@ const tokenize = (str) => {
 /*export*/ const arToPhraseString = (ar) => {
     let newAr = [];
     for (let i = 0; i < ar.length; i++) {
-      newAr.push(ar[i].join(' ') + " ");
+      newAr.push(ar[i].join(' '));
     }
   return newAr;
   }
 
-console.log(prepSentence("I am. a madman"));
+console.log(prepSentence("My sister wants to try to eat healthily."));
+console.log(prepSentence("My sister to try wants to eat healthily."));
 
 /*
 

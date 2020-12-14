@@ -1,3 +1,4 @@
+
 //@ts-check 
 
 // here are the programs for removing extra words and counting words in an bag of words object
@@ -61,11 +62,21 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
   for (let index = 0; index < editedPhrase; index ++) {
   		if (UserAnsWordCount[userAns[index]]
   }  
+
+ 
   */
   
 // once the user's submission has been reduced to the only the necessary words, it can then be put into proper order
 
-
+const compArsOfArs = (ar1, ar2) => {
+  let truthAr = [];
+  if (ar1.length != ar2.length) return false;
+  for (let i = 0; i < ar1.length; i++) {
+    if (compareArrays(ar1[i], ar2[i]) == true) truthAr.push("yep");
+  }
+  if (truthAr.length == ar1.length) return true;
+  else return false;
+}
 
 
 //reorderer -- this now just needs to be edited so it counts changes correctly
@@ -77,19 +88,21 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
   //create an editedPhrase that can be compared to the user submission
   let editedPhrase = [];
   for (let item of userSub) editedPhrase.push(item);
-
   //word order editor will recursively call reorderer so it after each change, it starts from the beginning of the array, and does not accidentally skip contents.
   const reorderer = (keyAns, userAns) => {
   
     for (let index = 0; index < keyAns.length; index++) {
+      console.log("current index: ", index);
     	
       if (keyAns[index] != editedPhrase[index]) {
+        console.log("sliced edited Phrase: " , index, editedPhrase.slice(index));
         if (!editedPhrase.slice(index).includes(keyAns[index])) {
           console.log("insertion required: ", keyAns[index]);
           editedPhrase.splice(index, 0, keyAns[index]);
           if (checkIfPunctuation(keyAns[index]) == true) puncEdits++;
           else insertions++;
         }
+        
         else {
 
 				console.log("round starting status: ", editedPhrase);
@@ -107,7 +120,6 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
           editedPhrase.splice(index, 0, keyAns[index]);
           console.log("step 2B: ", editedPhrase);
         }
-
         // then the program prepares to put the word back. By default it places it at its correct index, but if it finds that the word behind it in the edited phrase has a higher correct index, it is moved back until it hits a word with a lower index. Failing this, it checks the next word in the list, and places it ahead of it.
         if (keyAns.indexOf(userWord) < keyAns.indexOf(editedPhrase[keyAns.indexOf(userWord) - 1])) {
         	console.log("index shift -");
@@ -130,34 +142,85 @@ export const removeFalseWords = (keyAns, editedPhrase) => {
             indexShift++;
           }
           editedPhrase.splice(keyAns.indexOf(userWord) + indexShift, 0, userWord);
-             
+
             } else editedPhrase.splice(keyAns.indexOf(userWord), 0, userWord);
         //  if the word at the index has changed, the edit count increases by 1
-
+     
         if (roundStartStatus[index] != editedPhrase[index]) {
-          if (checkIfPunctuation(editedPhrase[index]) == true) puncEdits++;
+          if (checkIfPunctuation(roundStartStatus[index][0]) == true) puncEdits++;
           else editCount++;
         } 
-        if (roundStartStatus[index] != editedPhrase[index + 1]) editCount++;
-        //if (roundStartStatus[index] != editedPhrase[index +1] && roundStartStatus[index] != editedPhrase[index +2]) editCount++;
+        if (roundStartStatus[index + 1] != editedPhrase[index] ) {
+          if (checkIfPunctuation(roundStartStatus[index + 1]) == true) puncEdits++;
+          else editCount++;
+        } 
+        
         console.log("step 3: ", editedPhrase, " editCount: ", editCount);
 				console.log("userSub[index]: ", userSub[index], " editedPhrase[index]: ", editedPhrase[index] );
         // this is always repeated from the beginning of the array until the edited Phrase matches the key answer.
-        if (editedPhrase != keyAns) {
-          reorderer(keyAns, editedPhrase);
-        }
+      
       }
+    
+     
+      if (compArsOfArs(editedPhrase, keyAns) != true) {
+        console.log("not the same: ", editedPhrase, keyAns );
+        //reorderer(keyAns, editedPhrase);
+        }
     }
-    }
+  
   }
+}
   reorderer(keyAns, userSub);
   return [editedPhrase, editCount, insertions, puncEdits];
 }
 
 
 /*
-let phrase1 = [ 'My sister ', 'wants ', 'to ', 'try ', 'to ', 'eat healthily . ' ]
-let phrase2 = [ 'My sister ', 'wants ', 'try ', 'eat healthily . ' ]
+My sister to try to eat wants healthily.
+
+and 
+
+My sister tries to want to eat healthily.
+
+causing problems
+
+*/
+
+/*
+const checkIfPunctuation = (ar) => {
+  let punctuation = [",", "!", "." , ":", ";", "(", ")"];
+  if (arIncludeAr(ar, punctuation) == true) return true;
+  else return false;
+}
+
+const compareArrays = (ar1, ar2) => {
+    if (ar1.length != ar2.length) return false;
+    else {
+        let truthAr = [];
+        for (let i = 0; i < ar1.length; i++) {
+            if (ar1[i] == ar2[i]) truthAr.push(ar1[i]);
+        }
+        if (ar1.length == truthAr.length) return true;
+        else return false;
+    }
+}
+
+const arIncludeAr = (innerAr, outerAr) => {
+    let truthAr = [];
+    for (let k = 0; k < outerAr.length; k++) {
+        if (compareArrays(innerAr, outerAr[k]) == true) {
+			truthAr.push(innerAr);
+			break;
+		} 
+    }
+    if (truthAr.length > 0) return true;
+    else return false;
+}
+
+*/
+/*
+let phrase1 = ['My sister', 'tries', 'to', 'want', 'to', 'eat healthily .'];
+let phrase2 = ['My sister', 'to', 'to', 'want', 'eat healthily .'];
 let res = wordOrderEditor(phrase1, phrase2);
-console.log("edited phrase: ", res[0], " editCount: ", res[1], " insertions: ", res[2]);
+console.log("edited phrase: ", res[0], " editCount: ", res[1], " insertions: ", res[2], " punc edits: ", res[3]);
 */

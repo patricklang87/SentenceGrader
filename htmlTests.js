@@ -1,10 +1,10 @@
 
-const findClosestKeyAns = (keyAnsS, userAns) => {
+const findClosestKeyAns = (keyAnsS, userAns, weightedWord) => {
     let closestKeyAns = 0;
     let lowestTotalEdits = 999;
     let outcomeS = [];
     for (let i = 0; i < keyAnsS.length; i++) {
-        let outcome = calculateEdits(keyAnsS[i], userAns);
+        let outcome = calculateEdits(keyAnsS[i], userAns, weightedWord);
         outcomeS.push(outcome);
         let outcomeTotalEdits = outcome[1] + outcome[2] + outcome[3] + outcome[4];
         if (outcomeTotalEdits < lowestTotalEdits) {
@@ -51,6 +51,7 @@ const germanTest = () => {
     document.getElementById("german-insertions").innerHTML = outcome[3];
     document.getElementById("german-WOEs").innerHTML = outcome[4];
     document.getElementById("german-CapEdits").innerHTML = outcome[5];
+    document.getElementById("german-puncEdits").innerHTML = outcome[6];
     document.getElementById("german-result").style.display = "grid";
 }
 
@@ -69,6 +70,7 @@ const russianTest = () => {
     document.getElementById("russian-insertions").innerHTML = outcome[3];
     document.getElementById("russian-WOEs").innerHTML = outcome[4];
     document.getElementById("russian-CapEdits").innerHTML = outcome[5];
+    document.getElementById("russian-puncEdits").innerHTML = outcome[6];
     document.getElementById("russian-result").style.display = "grid";
 }
 
@@ -81,9 +83,12 @@ const customTest = () => {
     customAnsKey.push(ansKey1);
     if (ansKey2 != undefined) customAnsKey.push(ansKey2);
     if (ansKey3 != undefined) customAnsKey.push(ansKey3);
-    console.log("ustomAnsKey: ", customAnsKey);
+    console.log("customAnsKey: ", customAnsKey);
+    let weightedWord = [];
+    weightedWord.push(document.getElementById("weighted-word").value);
+    weightedWord.push(document.getElementById("weighted-word-weight").value);
     let userResponse = document.getElementById("custom-response").value;
-    let outcome = findClosestKeyAns(customAnsKey, userResponse);
+    let outcome = findClosestKeyAns(customAnsKey, userResponse, weightedWord);
     
     let pointTotal = document.getElementById("point-value").value;
     let autoCorWeight = document.getElementById("autocorrection-weight").value;
@@ -91,7 +96,8 @@ const customTest = () => {
     let delWeight = document.getElementById("deletion-weight").value;
     let orderWeight = document.getElementById("ordering-weight").value;
     let capWeight = document.getElementById("capitalization-weight").value;
-    let score = scoreAnswer(outcome, pointTotal, autoCorWeight, inserWeight, delWeight, orderWeight, capWeight);
+    let puncWeight = document.getElementById("punctuation-weight").value;
+    let score = scoreAnswer(outcome, pointTotal, autoCorWeight, inserWeight, delWeight, orderWeight, capWeight, puncWeight, weightedWord);
 
     let closestResponse = outcome[0].join(' ');
     document.getElementById("custom-score").innerHTML = score[0] + " out of " + score[1];
@@ -102,6 +108,9 @@ const customTest = () => {
     document.getElementById("custom-insertions").innerHTML = outcome[3];
     document.getElementById("custom-WOEs").innerHTML = outcome[4];
     document.getElementById("custom-CapEdits").innerHTML = outcome[5];
+    document.getElementById("custom-puncEdits").innerHTML = outcome[6];
+    document.getElementById("dispWeightedWord").innerHTML = weightedWord[0];
+    document.getElementById("custom-weightedWordEdits").innerHTML = outcome[7];
     document.getElementById("custom-result").style.display = "grid";
 }
 

@@ -3,11 +3,7 @@
 //let givenAns = "Welcome home!";
 //let userAns = "Wecome home!";
 
-const checkIfPunctuation = (ar) => {
-  let punctuation = [",", "!", "." , ":", ";", "(", ")"];
-  if (arIncludeAr(ar, punctuation) == true) return true;
-  else return false;
-}
+
 
 const combineInnerArs = (ar) => {
   let combArS = [];
@@ -47,7 +43,12 @@ const levCalc = (keyWord, userWord) => {
     for (let i = 0; i < indexRun; i++) {
       console.log("currentUserWordAr: ", currentUserWordAr);
       if (currentUserWordAr[i] != joinedKeyWord[i]) {
-        if (!joinedKeyWord.slice(i).includes(currentUserWordAr[i]) && currentUserWordAr[i] != undefined) {
+      if (currentUserWordAr[i+1] == joinedKeyWord[i+1]) {
+        console.log("replacement");
+        currentUserWordAr.splice(i, 1, joinedKeyWord[i]);
+        totalEdits++;
+        subLevCalc(currentUserWordAr);
+      } else if (!joinedKeyWord.slice(i).includes(currentUserWordAr[i]) && currentUserWordAr[i] != undefined) {
           console.log("deletion");
           currentUserWordAr.splice(i, 1);
           totalEdits++;
@@ -72,6 +73,12 @@ const levCalc = (keyWord, userWord) => {
   subLevCalc(joinedUserWord);
   console.log("LEV CALCULATION: ", totalEdits, keyWord, userWord);
   return totalEdits;
+}
+
+const checkIfPunctuation = (ar) => {
+  let punctuation = [",", "!", "." , ":", ";", "(", ")"];
+  if (arIncludeAr(ar, punctuation) == true) return true;
+  else return false;
 }
 
 const compareArrays = (ar1, ar2) => {

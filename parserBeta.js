@@ -1,7 +1,5 @@
 // @ts-check
-//let kPhrase = [ 'Ich', 'bin', 'vom', 'weiten', 'gekommen', '.' ];  
-//let pPhrase = ['vom', 'weiten', 'Ich', 'gekommen', 'bi', '.' ];
-/*export*/ const sentenceParser = (keyPhrase, parsingPhrase) => {
+const sentenceParser = (keyPhrase, parsingPhrase) => {
   let parsedPhrases = [];
   const identifyMatchIn = (subKeyPhrase, character) => {
     let matchIndices = [];
@@ -33,8 +31,9 @@
             tentativeSubphrase.push(parsingPhrase[l]);
           } else if (keyPhraseSubsec[l] == "$PLACEHOLDER$") {
               continue;
+              
           } else {
-            console.log("tentative Subphrases: ", tentativeSubphraseS);
+            console.log("tentative Subphrase: ", tentativeSubphrase);
             break;
           }
         }
@@ -43,21 +42,25 @@
       let longestIndex = 0;
       for (let m = 0; m < tentativeSubphraseS.length; m++) {
         if (tentativeSubphraseS[m].length > tentativeSubphraseS[longestIndex].length) longestIndex = m;
-        console.log("longest index: ", longestIndex);
       }
       parsedPhrases.push(tentativeSubphraseS[longestIndex]);
-      console.log("longest Index: ", longestIndex, " tentativeSubphraseS: ", tentativeSubphraseS);
-      console.log(longestIndex, longestIndex + tentativeSubphraseS[longestIndex].length);
+     
 
       let shouldWeDelete = [];
       for (let n = 1; n < parsingPhrase.length; n++) {
         if (parsingPhrase[n] == parsingPhrase[0]) {
-          if (parsingPhrase[n-1] == keyPhrase[matchingTerms[longestIndex] -1 ] ) {
-            shouldWeDelete.push("no");  
+          console.log("parsingPhrase[n-1], keyPhrase[matchingTerms[longestIndex] -1 ]", parsingPhrase[n-1], keyPhrase[matchingTerms[longestIndex] -1 ]);
+          let nextKeyIndex = matchingTerms[longestIndex] + keyPhrase[matchingTerms[longestIndex]].length;
+          console.log("nextKeyIndex", nextKeyIndex);
+          console.log("keyPhrase[matchingTerms[longestIndex]][0]", keyPhrase[matchingTerms[longestIndex]]);
+          console.log("keyPhrase[nextKeyIndex]", keyPhrase[nextKeyIndex]);
+          if (parsingPhrase[n-1] != keyPhrase[matchingTerms[longestIndex] -1 ] || keyPhrase[matchingTerms[longestIndex]] == keyPhrase[nextKeyIndex]) {
+            shouldWeDelete.push("yes");  
           } 
         }
       }
-      if (shouldWeDelete.length < 1) {
+      if (shouldWeDelete.length > 0) {
+        console.log("inserting placeholder");
         keyPhrase.splice(matchingTerms[longestIndex], tentativeSubphraseS[longestIndex].length, '$PLACEHOLDER$');
       }
 
@@ -68,7 +71,6 @@
       if (parsingPhrase.length > 0) {
       let truthAr = [];
       for (let n = 0; n < parsingPhrase.length; n++) {
-        console.log("pushed parsing phrase n");
         if (keyPhrase[n] == parsingPhrase[n]) truthAr.push(parsingPhrase[n]);
       }
       if (truthAr.length == parsingPhrase.length) {
@@ -86,10 +88,23 @@
   return parsedPhrases;
 }
 
-
-let kPhrase = ["I", "like", "to", "party", "party", "."];
-let pPhrase = ["I", "like", "to", "party", "."];
-console.log(sentenceParser(kPhrase, pPhrase));
+/*
+let kPhrase = [
+  'My',    'sister',
+  'wants', 'to',
+  'try',   'to',
+  'eat',   'healthily',
+  '.'
+];
+let pPhrase =  [
+  'My',    'sister',
+  'to',    'try',
+  'wants', 'to',
+  'eat',   'healthily',
+  '.'
+];
+console.log(sentenceParser(pPhrase, kPhrase));
+*/
 /*
 let pPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
 let kPhrase = ['My', 'sister', 'want', 'try', 'to', 'ea', 'healthy/'];
