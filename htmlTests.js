@@ -21,9 +21,10 @@ const englishTest = () => {
     console.log("begin english test");
     let englishAnsKey = ["My sister wants to try to eat healthily.", "My sister tries to want to eat healthily."];
     let userResponse = document.getElementById("english-response").value;
-    let outcome = findClosestKeyAns(englishAnsKey, userResponse);
+    let weightedWord = ["NONE", 0];
+    let outcome = findClosestKeyAns(englishAnsKey, userResponse, weightedWord);
     let closestResponse = outcome[0].join(' ');
-    let score = scoreAnswer(outcome);
+    let score = scoreAnswer(outcome, weightedWord);
     document.getElementById("english-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-english-response").innerHTML = userResponse;
     document.getElementById("english-closest-result").innerHTML = closestResponse;
@@ -33,6 +34,8 @@ const englishTest = () => {
     document.getElementById("english-WOEs").innerHTML = outcome[4];
     document.getElementById("english-CapEdits").innerHTML = outcome[5];
     document.getElementById("english-puncEdits").innerHTML = outcome[6];
+    document.getElementById("german-dispWeightedWord").innerHTML = weightedWord[0];
+    document.getElementById("german-weightedWordEdits").innerHTML = outcome[7];
     document.getElementById("english-result").style.display = "grid";
 }
 
@@ -40,9 +43,10 @@ const germanTest = () => {
     console.log("begin german test");
     let germanAnsKey = ["Ich bin spät nach Hause gekommen.", "Spät bin ich nach Hause gekommen.", "Nach Hause bin ich spät gekommen."];
     let userResponse = document.getElementById("german-response").value;
-    let outcome = findClosestKeyAns(germanAnsKey, userResponse);
+    let weightedWord = ["gekommen", 0.5];
+    let outcome = findClosestKeyAns(germanAnsKey, userResponse, weightedWord);
     let closestResponse = outcome[0].join(' ');
-    let score = scoreAnswer(outcome);
+    let score = scoreAnswer(outcome, weightedWord);
     document.getElementById("german-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-german-response").innerHTML = userResponse;
     document.getElementById("german-closest-result").innerHTML = closestResponse;
@@ -52,6 +56,8 @@ const germanTest = () => {
     document.getElementById("german-WOEs").innerHTML = outcome[4];
     document.getElementById("german-CapEdits").innerHTML = outcome[5];
     document.getElementById("german-puncEdits").innerHTML = outcome[6];
+    document.getElementById("german-dispWeightedWord").innerHTML = weightedWord[0];
+    document.getElementById("german-weightedWordEdits").innerHTML = outcome[7];
     document.getElementById("german-result").style.display = "grid";
 }
 
@@ -59,9 +65,10 @@ const russianTest = () => {
     console.log("begin russian test");
     let russianAnsKey = ["Я не знаю, хочет ли она пойти в кино.", "Я не знаю, хочет ли моя сестра пойти в кино."];
     let userResponse = document.getElementById("russian-response").value;
-    let outcome = findClosestKeyAns(russianAnsKey, userResponse);
+    let weightedWord = ["ли", 0.5];
+    let outcome = findClosestKeyAns(russianAnsKey, userResponse, weightedWord);
     let closestResponse = outcome[0].join(' ');
-    let score = scoreAnswer(outcome);
+    let score = scoreAnswer(outcome, weightedWord);
     document.getElementById("russian-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-russian-response").innerHTML = userResponse;
     document.getElementById("russian-closest-result").innerHTML = closestResponse;
@@ -71,6 +78,8 @@ const russianTest = () => {
     document.getElementById("russian-WOEs").innerHTML = outcome[4];
     document.getElementById("russian-CapEdits").innerHTML = outcome[5];
     document.getElementById("russian-puncEdits").innerHTML = outcome[6];
+    document.getElementById("russian-dispWeightedWord").innerHTML = weightedWord[0];
+    document.getElementById("russian-weightedWordEdits").innerHTML = outcome[7];
     document.getElementById("russian-result").style.display = "grid";
 }
 
@@ -97,7 +106,7 @@ const customTest = () => {
     let orderWeight = document.getElementById("ordering-weight").value;
     let capWeight = document.getElementById("capitalization-weight").value;
     let puncWeight = document.getElementById("punctuation-weight").value;
-    let score = scoreAnswer(outcome, pointTotal, autoCorWeight, inserWeight, delWeight, orderWeight, capWeight, puncWeight, weightedWord);
+    let score = scoreAnswer(outcome, weightedWord, pointTotal, autoCorWeight, inserWeight, delWeight, orderWeight, capWeight, puncWeight);
 
     let closestResponse = outcome[0].join(' ');
     document.getElementById("custom-score").innerHTML = score[0] + " out of " + score[1];

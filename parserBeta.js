@@ -54,9 +54,11 @@ const sentenceParser = (keyPhrase, parsingPhrase) => {
           console.log("nextKeyIndex", nextKeyIndex);
           console.log("keyPhrase[matchingTerms[longestIndex]][0]", keyPhrase[matchingTerms[longestIndex]]);
           console.log("keyPhrase[nextKeyIndex]", keyPhrase[nextKeyIndex]);
-          if (parsingPhrase[n-1] != keyPhrase[matchingTerms[longestIndex] -1 ] || keyPhrase[matchingTerms[longestIndex]] == keyPhrase[nextKeyIndex]) {
+          
+          if (parsingPhrase[n-1] != keyPhrase[matchingTerms[longestIndex] -1 ] || keyPhrase[matchingTerms[longestIndex]] == keyPhrase[nextKeyIndex] ) {
             shouldWeDelete.push("yes");  
           } 
+          
         }
       }
       if (shouldWeDelete.length > 0) {
@@ -88,44 +90,12 @@ const sentenceParser = (keyPhrase, parsingPhrase) => {
   return parsedPhrases;
 }
 
-/*
-let kPhrase = [
-  'My',    'sister',
-  'wants', 'to',
-  'try',   'to',
-  'eat',   'healthily',
-  '.'
-];
-let pPhrase =  [
-  'My',    'sister',
-  'to',    'try',
-  'wants', 'to',
-  'eat',   'healthily',
-  '.'
-];
-console.log(sentenceParser(pPhrase, kPhrase));
-*/
-/*
-let pPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
-let kPhrase = ['My', 'sister', 'want', 'try', 'to', 'ea', 'healthy/'];
-*/
-/*
-[
-  [ 'My', 'sister' ],
-  [ 'want' ],
-  [ 'try', 'to' ],
-  [ 'ea' ],
-  [ 'healthy/' ]
-]
 
-[
-  [ 'My', 'sister' ],
-  [ 'wants' ],
-  [ 'to' ],
-  [ 'try' ],
-  [ 'to' ],
-  [ 'eat' ],
-  [ 'healthily' ],
-  [ '.' ]
-]
+let kPhrase = ['I', 'like', 'to', 'party', 'party', '.'];
+let pPhrase =   ['I', 'like', 'to', 'PARTY', 'party', '.'];
+console.log(sentenceParser(kPhrase, pPhrase));
+
+/*
+[ [ 'I', 'like', 'to' ], [ 'PARTY' ], [ 'party', '.' ] ]
+[ [ 'I', 'like', 'to' ], [ 'party' ], [ 'party' ], [ '.' ] ]
 */

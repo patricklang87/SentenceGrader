@@ -81,10 +81,11 @@ const compArsOfArs = (ar1, ar2) => {
 
 //reorderer -- this now just needs to be edited so it counts changes correctly
 
-/*export*/ const wordOrderEditor = (keyAns, userSub) => {
+/*export*/ const wordOrderEditor = (keyAns, userSub, weightedWord) => {
   let editCount = 0;
   let insertions = 0;
   let puncEdits = 0;
+  let weightedWordEdits = 0;
   //create an editedPhrase that can be compared to the user submission
   let editedPhrase = [];
   for (let item of userSub) editedPhrase.push(item);
@@ -100,7 +101,12 @@ const compArsOfArs = (ar1, ar2) => {
           console.log("insertion required: ", keyAns[index]);
           editedPhrase.splice(index, 0, keyAns[index]);
           if (checkIfPunctuation(keyAns[index]) == true) puncEdits++;
-          else insertions++;
+          else {
+            insertions++;
+            if (keyAns[index].toLowerCase() == weightedWord.toLowerCase()) {
+              weightedWordEdits++;
+            }         
+          }
         }
         
         else {
@@ -149,10 +155,18 @@ const compArsOfArs = (ar1, ar2) => {
         if (roundStartStatus[index] != editedPhrase[index]) {
           if (checkIfPunctuation(roundStartStatus[index][0]) == true) puncEdits++;
           else editCount++;
+          console.log("roundStartStatus[index].toLowerCase(), weightedWord.toLowerCase(): ", roundStartStatus[index].toLowerCase(), weightedWord.toLowerCase());
+          if (roundStartStatus[index].toLowerCase() == weightedWord.toLowerCase()) {
+            weightedWordEdits++;
+          }
         } 
         if (roundStartStatus[index + 1] != editedPhrase[index] ) {
           if (checkIfPunctuation(roundStartStatus[index + 1]) == true) puncEdits++;
           else editCount++;
+          console.log("roundStartStatus[index + 1].toLowerCase(), weightedWord.toLowerCase(): ",roundStartStatus[index][0].toLowerCase(), weightedWord.toLowerCase() );
+          if (roundStartStatus[index + 1].toLowerCase() == weightedWord.toLowerCase()) {
+            weightedWordEdits++;
+          }
         } 
         
         console.log("step 3: ", editedPhrase, " editCount: ", editCount);
@@ -171,7 +185,7 @@ const compArsOfArs = (ar1, ar2) => {
   }
 }
   reorderer(keyAns, userSub);
-  return [editedPhrase, editCount, insertions, puncEdits];
+  return [editedPhrase, editCount, insertions, puncEdits, weightedWordEdits];
 }
 
 
