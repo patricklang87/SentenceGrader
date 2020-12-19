@@ -27,8 +27,10 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     //parse sentences into groups of matching phrases
     let altUserAnsPrepped = altAr(userAnsPrepped);
     let altKeyAnsPrepped = altAr(keyAnsPrepped);
-    let groupedKeyAnsPrepped = sentenceParser(altUserAnsPrepped, altKeyAnsPrepped);
-    let groupedUserAnsPrepped = sentenceParser(keyAnsPrepped, userAnsPrepped);
+    let groupedUserAnsPrepped = sentenceParser(altKeyAnsPrepped, altUserAnsPrepped);
+    console.log("groupedUserAnsPrepped", groupedUserAnsPrepped);
+    let altGroupedUserAnsPrepped = altAr(groupedUserAnsPrepped);
+    let groupedKeyAnsPrepped = keyParser(keyAnsPrepped, altGroupedUserAnsPrepped);
     
     console.log("STEP 2 (parse): keystatus: ", arToPhraseString(groupedKeyAnsPrepped), "userans status: ", arToPhraseString(groupedUserAnsPrepped));
 
