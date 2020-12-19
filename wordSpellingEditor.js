@@ -109,11 +109,12 @@ const arIncludeAr = (innerAr, outerAr) => {
 
 
 //checks for words that can be corrected and corrects them;
-/*export*/ const autocorrect = (keyAns, editedPhrase, weightedWord) => {
+const autocorrect = (keyAns, editedPhrase, weightedWord) => {
     let autocorrections = 0;
     let deletions = 0;
     let puncDeletions = 0;
     let weightedWordEdits = 0;
+    let deletedWords = [];
     for (let index = editedPhrase.length - 1; index >= 0; index --) {
         console.log("postion in interation: ", index, editedPhrase[index]);
         //console.log(" iteration ", index, " section: ", editedPhrase[index]);
@@ -152,18 +153,20 @@ const arIncludeAr = (innerAr, outerAr) => {
                     } else {
                       if (checkIfPunctuation(editedPhrase[index]) == true) puncDeletions++;
                       else if (compareArrays(editedPhrase[index], ['']) != true) deletions++;
+                      deletedWords.push(editedPhrase[index]);
                       console.log("deletion: ", editedPhrase[index]);
                       editedPhrase.splice(index, 1);                      
                     }                         
                 } else {
                   if (checkIfPunctuation(editedPhrase[index]) == true) puncDeletions++;
-                  else if (compareArrays(editedPhrase[index], ['']) != true) deletions++; 
+                  else if (compareArrays(editedPhrase[index], ['']) != true) deletions++;
+                  deletedWords.push(editedPhrase[index]); 
                       console.log("deletion: ", editedPhrase[index]);
                       editedPhrase.splice(index, 1); 
                 }                 
         }    
     }
-    return [editedPhrase, autocorrections, deletions, puncDeletions, weightedWordEdits];
+    return [editedPhrase, autocorrections, deletions, puncDeletions, weightedWordEdits, deletedWords];
 }
 
 

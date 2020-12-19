@@ -47,6 +47,7 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     let numDeletedWords = autocorrectedResult[2];
     puncEdits += autocorrectedResult[3];
     weightedWordEdits += autocorrectedResult[4];
+    let deletedWords = autocorrectedResult[5];
     console.log("STEP 3 (autocorrect and delete): keystatus: ", arToPhraseString(groupedKeyAnsPrepped) , " userans status: ", arToPhraseString(autocorrectedUserAns) );
 
     // turn the internal arrays back into strings
@@ -62,7 +63,7 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     puncEdits += reorderedUserSub[3];
     weightedWordEdits += reorderedUserSub[4];
     
-    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, numInsertedWords, reorderCount, capitalizationEdits, puncEdits, weightedWordEdits];
+    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, numInsertedWords, reorderCount, capitalizationEdits, puncEdits, weightedWordEdits, deletedWords];
 }
 
 

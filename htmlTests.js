@@ -34,8 +34,9 @@ const englishTest = () => {
     document.getElementById("english-WOEs").innerHTML = outcome[4];
     document.getElementById("english-CapEdits").innerHTML = outcome[5];
     document.getElementById("english-puncEdits").innerHTML = outcome[6];
-    document.getElementById("german-dispWeightedWord").innerHTML = weightedWord[0];
-    document.getElementById("german-weightedWordEdits").innerHTML = outcome[7];
+    document.getElementById("english-dispWeightedWord").innerHTML = weightedWord[0];
+    document.getElementById("english-weightedWordEdits").innerHTML = outcome[7];
+    document.getElementById("english-deletedWords").innerHTML = outcome[8];
     document.getElementById("english-result").style.display = "grid";
 }
 
@@ -58,6 +59,7 @@ const germanTest = () => {
     document.getElementById("german-puncEdits").innerHTML = outcome[6];
     document.getElementById("german-dispWeightedWord").innerHTML = weightedWord[0];
     document.getElementById("german-weightedWordEdits").innerHTML = outcome[7];
+    document.getElementById("german-deletedWords").innerHTML = outcome[8];
     document.getElementById("german-result").style.display = "grid";
 }
 
@@ -80,6 +82,7 @@ const russianTest = () => {
     document.getElementById("russian-puncEdits").innerHTML = outcome[6];
     document.getElementById("russian-dispWeightedWord").innerHTML = weightedWord[0];
     document.getElementById("russian-weightedWordEdits").innerHTML = outcome[7];
+    document.getElementById("russian-deletedWords").innerHTML = outcome[8];
     document.getElementById("russian-result").style.display = "grid";
 }
 
@@ -120,6 +123,7 @@ const customTest = () => {
     document.getElementById("custom-puncEdits").innerHTML = outcome[6];
     document.getElementById("dispWeightedWord").innerHTML = weightedWord[0];
     document.getElementById("custom-weightedWordEdits").innerHTML = outcome[7];
+    document.getElementById("custom-deletedWords").innerHTML = outcome[8];
     document.getElementById("custom-result").style.display = "grid";
 }
 
