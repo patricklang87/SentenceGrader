@@ -105,7 +105,14 @@ const arIncludeAr = (innerAr, outerAr) => {
     else return false;
 }
 
-
+const determineAutocorrectStrictness = (wordLength) => {
+    let strictnessFactor = 1/5;
+    if (wordLength == 1) strictnessFactor = 1;
+    else if (wordLength == 2) strictnessFactor = 1/2;
+    else if (wordLength <= 8) strictnessFactor = 1/3;
+    else if (wordLength <= 16 ) strictnessFactor = 1/4;
+    return strictnessFactor;
+}
 
 
 //checks for words that can be corrected and corrects them;
@@ -143,7 +150,10 @@ const autocorrect = (keyAns, editedPhrase, weightedWord) => {
                     let lengthCompare = editedPhrase[index][0].length;
                     console.log("levCalcS[lowestLevValIndex]: ", levCalcS[lowestLevValIndex]);
                     if (levCalcS[lowestLevValIndex][1].length > lengthCompare) lengthCompare = levCalcS[lowestLevValIndex][1].length;
-                    if (levCalcS[lowestLevValIndex][0] <= (1/3)*lengthCompare) {
+
+                    let strictnessFactor = determineAutocorrectStrictness(lengthCompare);
+
+                    if (levCalcS[lowestLevValIndex][0] <= (strictnessFactor)*lengthCompare) {
                         editedPhrase[index].splice(0, 1, levCalcS[lowestLevValIndex][1]);
                         autocorrections++; 
                         console.log("lowestLevValIndex][1].toLowerCase(), weightedWord.toLowerCase(): ",levCalcS[lowestLevValIndex][1].toLowerCase(), weightedWord.toLowerCase());
