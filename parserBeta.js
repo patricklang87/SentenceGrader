@@ -29,8 +29,8 @@ const sentenceParser = (keyPhrase, parsingPhrase) => {
             console.log("parsingPhrase[l], keyPhraseSubsec[l]", parsingPhrase[l], keyPhraseSubsec[l]);
           if (parsingPhrase[l] == keyPhraseSubsec[l]) {
             tentativeSubphrase.push(parsingPhrase[l]);
-          } else if (keyPhraseSubsec[l] == "$PLACEHOLDER$") {
-              continue;
+          //} else if (keyPhraseSubsec[l] == "$PLACEHOLDER$") {
+            //  continue;
               
           } else {
             console.log("tentative Subphrase: ", tentativeSubphrase);
@@ -149,11 +149,21 @@ const keyParser = (keyAns, parsedUserAns) => {
   return parsedPhrases;
 }
 
-let kPhrase = ['I', 'like', 'to', 'party', 'party', '.'];
-let pPhrase =  [['Me'], ['likey'], ['paty'], ['party', '.']];
+/*
+let kPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
+let pPhrase = ['My', 'sister', 'to', 'try', 'to', 'wants', 'to', 'eat', 'healthily', '.'];
+
+console.log(sentenceParser(kPhrase, pPhrase));
+*/
+/*
+let kPhrase = ['My', 'sister', 'wants', 'to', 'try', 'to', 'eat', 'healthily', '.'];
+let pPhrase = [
+  [ 'My', 'sister' ],
+  [ 'to', 'try', 'to' ],
+  [ 'wants' ],
+  [ 'to' ],
+  [ 'eat', 'healthily', '.' ]
+];
 
 console.log(keyParser(kPhrase, pPhrase));
-/*
-[ [ 'I', 'like', 'to' ], [ 'PARTY' ], [ 'party', '.' ] ]
-[ [ 'I', 'like', 'to' ], [ 'party' ], [ 'party' ], [ '.' ] ]
 */
