@@ -32,31 +32,29 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     let altGroupedUserAnsPrepped = altAr(groupedUserAnsPrepped);
     let groupedKeyAnsPrepped = keyParser(keyAnsPrepped, altGroupedUserAnsPrepped);
     
-    console.log("STEP 2 (parse): keystatus: ", arToPhraseString(groupedKeyAnsPrepped), "userans status: ", arToPhraseString(groupedUserAnsPrepped));
+
+    let strfyGroupedKeyAnsPrepped = arToPhraseString(groupedKeyAnsPrepped);
+    let strfyGroupedUserAnsPrepped = arToPhraseString(groupedUserAnsPrepped);
+
+    console.log("STEP 2 (parse): keystatus: ", strfyGroupedKeyAnsPrepped, "userans status: ", strfyGroupedUserAnsPrepped);
 
     //check for false capitalizations or lower case words
-    let checkUserPhraseCapitalization = capitalizationChecker(groupedKeyAnsPrepped, groupedUserAnsPrepped, weightedWord[0]);
+    let checkUserPhraseCapitalization = capitalizationChecker(strfyGroupedKeyAnsPrepped, strfyGroupedUserAnsPrepped, weightedWord[0]);
     let caseCheckedUserPhrase = checkUserPhraseCapitalization[0];
     let capitalizationEdits = checkUserPhraseCapitalization[1];
     weightedWordEdits += checkUserPhraseCapitalization[2];
 
     // autocorrect or delete words
-    let autocorrectedResult = autocorrect(groupedKeyAnsPrepped, caseCheckedUserPhrase, weightedWord[0]);
+    let autocorrectedResult = autocorrect(strfyGroupedKeyAnsPrepped, caseCheckedUserPhrase, weightedWord[0]);
     let autocorrectedUserAns = autocorrectedResult[0];
     let numAutocorrectedWords = autocorrectedResult[1];
     let numDeletedWords = autocorrectedResult[2];
     puncEdits += autocorrectedResult[3];
     weightedWordEdits += autocorrectedResult[4];
     let deletedWords = autocorrectedResult[5];
-    console.log("STEP 3 (autocorrect and delete): keystatus: ", arToPhraseString(groupedKeyAnsPrepped) , " userans status: ", arToPhraseString(autocorrectedUserAns) );
+    console.log("STEP 3 (autocorrect and delete): keystatus: ", strfyGroupedKeyAnsPrepped , " userans status: ", autocorrectedUserAns);
 
-    // turn the internal arrays back into strings
-    let userSectionString = arToPhraseString(autocorrectedUserAns);
-    let keySectionString = arToPhraseString(groupedKeyAnsPrepped);
-
-    console.log("STEP 4 (return inner ars to strings): key status: ", keySectionString, " userans status: ", userSectionString);
-
-    let reorderedUserSub = wordOrderEditor(keySectionString, userSectionString, weightedWord[0]);
+    let reorderedUserSub = wordOrderEditor(strfyGroupedKeyAnsPrepped, autocorrectedUserAns, weightedWord[0]);
     let reorderedPhrase = reorderedUserSub[0];
     let reorderCount = reorderedUserSub[1];
     let numInsertedWords = reorderedUserSub[2];

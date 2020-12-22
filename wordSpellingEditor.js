@@ -125,17 +125,17 @@ const autocorrect = (keyAns, editedPhrase, weightedWord) => {
     for (let index = editedPhrase.length - 1; index >= 0; index --) {
         console.log("postion in interation: ", index, editedPhrase[index]);
         //console.log(" iteration ", index, " section: ", editedPhrase[index]);
-        if (arIncludeAr(editedPhrase[index], keyAns) != true) {
+        if (!keyAns.includes(editedPhrase[index])) {
           console.log(editedPhrase[index], " IS NOT IN ", keyAns);
 
             let levCalcS = [];
             for (let j = 0; j < keyAns.length; j++) {
                 //console.log("keyAns[j]: ", keyAns[j], " editedPhrase: ", editedPhrase);
-                if (arIncludeAr(keyAns[j], editedPhrase) != true) {
+                if (!editedPhrase.includes(keyAns[j])) {
                   console.log(keyAns[j], " IS NOT IN ", editedPhrase);
-                  let levVal = levCalc(keyAns[j][0], editedPhrase[index][0]);
+                  let levVal = levCalc(keyAns[j], editedPhrase[index]);
                   console.log("levVal: ", levVal);
-                  levCalcS.push([levVal, keyAns[j][0]]);
+                  levCalcS.push([levVal, keyAns[j]]);
                 }
                  
                 } 
@@ -147,19 +147,21 @@ const autocorrect = (keyAns, editedPhrase, weightedWord) => {
                     }
                     console.log("lowestValIndex: ", lowestLevValIndex);
 
-                    let lengthCompare = editedPhrase[index][0].length;
+                    let lengthCompare = editedPhrase[index].length;
                     console.log("levCalcS[lowestLevValIndex]: ", levCalcS[lowestLevValIndex]);
                     if (levCalcS[lowestLevValIndex][1].length > lengthCompare) lengthCompare = levCalcS[lowestLevValIndex][1].length;
 
                     let strictnessFactor = determineAutocorrectStrictness(lengthCompare);
 
                     if (levCalcS[lowestLevValIndex][0] <= (strictnessFactor)*lengthCompare) {
-                        editedPhrase[index].splice(0, 1, levCalcS[lowestLevValIndex][1]);
+                        console.log("editedPhrase, editedPhrase[index]: ", editedPhrase, editedPhrase[index])
+                        editedPhrase.splice(index, 1, levCalcS[lowestLevValIndex][1]);
                         autocorrections++; 
-                        console.log("lowestLevValIndex][1].toLowerCase(), weightedWord.toLowerCase(): ",levCalcS[lowestLevValIndex][1].toLowerCase(), weightedWord.toLowerCase());
+                        if (weightedWord != undefined) {
                         if (levCalcS[lowestLevValIndex][1].toLowerCase() == weightedWord.toLowerCase()) {
                           weightedWordEdits++;
-                        }                      
+                        }      
+                      }                
                     } else {
                       if (checkIfPunctuation(editedPhrase[index]) == true) puncDeletions++;
                       else if (compareArrays(editedPhrase[index], ['']) != true) deletions++;
@@ -182,24 +184,24 @@ const autocorrect = (keyAns, editedPhrase, weightedWord) => {
 
 
 
-/*
+
 let phrase1 = [
-  [ 'My', 'sister' ],
-  [ 'wants' ],
-  [ 'to' ],
-  [ 'try' ],
-  [ 'to' ],
-  [ 'eat', 'healthily', '.' ]
+  'My sister',
+  'wants',
+  'to',
+  'try',
+  'to' ,
+  'eat healthily .'
 ];
 
 let phrase2 = [
-  [ 'My', 'sister' ],
-  [ 'want' ],
-  [ 'try' ],
-  [ 'eat', 'healthily', '.' ]
+  'My sister',
+  'want',
+  'try',
+  'eat healthily .'
 ];
 
 let res = autocorrect(phrase1, phrase2);
-console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[2]);*/
+console.log("new edited phrase: ", res[0], ", autocorrections: ", res[1], ", deletions: ", res[2]);
 /*
 console.log(levCalc("пойт", "пойти"));*/
