@@ -46,11 +46,11 @@ const germanTest = () => {
     let userResponse = document.getElementById("german-response").value;
     let weightedWord = ["gekommen", 0.5];
     let outcome = findClosestKeyAns(germanAnsKey, userResponse, weightedWord);
-    let closestResponse = outcome[0].join(' ');
+    let closestResponse = printColorCodedPhrase(outcome[0]);
     let score = scoreAnswer(outcome, weightedWord);
     document.getElementById("german-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-german-response").innerHTML = userResponse;
-    document.getElementById("german-closest-result").innerHTML = closestResponse;
+    document.getElementById("german-closest-result").appendChild(closestResponse);
     document.getElementById("german-spelling-autocorrections").innerHTML = outcome[1];
     document.getElementById("german-deletions").innerHTML = outcome[2];
     document.getElementById("german-insertions").innerHTML = outcome[3];
@@ -69,11 +69,11 @@ const russianTest = () => {
     let userResponse = document.getElementById("russian-response").value;
     let weightedWord = ["ли", 0.5];
     let outcome = findClosestKeyAns(russianAnsKey, userResponse, weightedWord);
-    let closestResponse = outcome[0].join(' ');
+    let closestResponse = printColorCodedPhrase(outcome[0]);
     let score = scoreAnswer(outcome, weightedWord);
     document.getElementById("russian-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-russian-response").innerHTML = userResponse;
-    document.getElementById("russian-closest-result").innerHTML = closestResponse;
+    document.getElementById("russian-closest-result").appendChild(closestResponse);
     document.getElementById("russian-spelling-autocorrections").innerHTML = outcome[1];
     document.getElementById("russian-deletions").innerHTML = outcome[2];
     document.getElementById("russian-insertions").innerHTML = outcome[3];
@@ -111,10 +111,10 @@ const customTest = () => {
     let puncWeight = document.getElementById("punctuation-weight").value;
     let score = scoreAnswer(outcome, weightedWord, pointTotal, autoCorWeight, inserWeight, delWeight, orderWeight, capWeight, puncWeight);
 
-    let closestResponse = outcome[0].join(' ');
+    let closestResponse = printColorCodedPhrase(outcome[0]);
     document.getElementById("custom-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-custom-response").innerHTML = userResponse;
-    document.getElementById("custom-closest-result").innerHTML = closestResponse;
+    document.getElementById("custom-closest-result").appendChild(closestResponse);
     document.getElementById("custom-spelling-autocorrections").innerHTML = outcome[1];
     document.getElementById("custom-deletions").innerHTML = outcome[2];
     document.getElementById("custom-insertions").innerHTML = outcome[3];
