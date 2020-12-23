@@ -34,9 +34,9 @@ const printColorCodedPhrase = (sentence) => {
 
         console.log(sentence[i].phrase, sentence[i].autocorrect, sentence[i].insertion, sentence[i].wordOrderEdit, sentence[i].capEdit, sentence[i].weightWord);
 
-        if (sentence[i].autocorrect == "yes") subSentence.style.color = "orange";
+        if (sentence[i].autocorrect == "yes") subSentence.style.color = "orangered";
         if (sentence[i].insertion == "yes") subSentence.style.color = "red";
-        if (sentence[i].wordOrderEdit == "yes") subSentence.style.backgroundColor = "purple";
+        if (sentence[i].wordOrderEdit == "yes") subSentence.style.backgroundColor = "tomato";
         if (sentence[i].capEdit == "yes") subSentence.style.color = "blue";
         if (sentence[i].weightWord == "yes") subSentence.style.fontWeight = "bold";
 

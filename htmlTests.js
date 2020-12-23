@@ -25,19 +25,13 @@ const englishTest = () => {
     let outcome = findClosestKeyAns(englishAnsKey, userResponse, weightedWord);
     let closestResponse = printColorCodedPhrase(outcome[0]);
     let score = scoreAnswer(outcome, weightedWord);
-    document.getElementById("english-score").innerHTML = score[0] + " out of " + score[1];
-    document.getElementById("user-english-response").innerHTML = userResponse;
-    document.getElementById("english-closest-result").appendChild(closestResponse);
-    document.getElementById("english-spelling-autocorrections").innerHTML = outcome[1];
-    document.getElementById("english-deletions").innerHTML = outcome[2];
-    document.getElementById("english-insertions").innerHTML = outcome[3];
-    document.getElementById("english-WOEs").innerHTML = outcome[4];
-    document.getElementById("english-CapEdits").innerHTML = outcome[5];
-    document.getElementById("english-puncEdits").innerHTML = outcome[6];
-    document.getElementById("english-dispWeightedWord").innerHTML = weightedWord[0];
-    document.getElementById("english-weightedWordEdits").innerHTML = outcome[7];
-    document.getElementById("english-deletedWords").innerHTML = outcome[8];
-    document.getElementById("english-result").style.display = "grid";
+    let responseBox = createResponseBox(score, userResponse, closestResponse, outcome, weightedWord);
+    let resultDiv = document.getElementById("english-result");
+    if (resultDiv.hasChildNodes()) {
+        resultDiv.removeChild(resultDiv.firstChild);
+    }
+    resultDiv.appendChild(responseBox);
+    resultDiv.style.display = "grid";
 }
 
 const germanTest = () => {
@@ -48,19 +42,13 @@ const germanTest = () => {
     let outcome = findClosestKeyAns(germanAnsKey, userResponse, weightedWord);
     let closestResponse = printColorCodedPhrase(outcome[0]);
     let score = scoreAnswer(outcome, weightedWord);
-    document.getElementById("german-score").innerHTML = score[0] + " out of " + score[1];
-    document.getElementById("user-german-response").innerHTML = userResponse;
-    document.getElementById("german-closest-result").appendChild(closestResponse);
-    document.getElementById("german-spelling-autocorrections").innerHTML = outcome[1];
-    document.getElementById("german-deletions").innerHTML = outcome[2];
-    document.getElementById("german-insertions").innerHTML = outcome[3];
-    document.getElementById("german-WOEs").innerHTML = outcome[4];
-    document.getElementById("german-CapEdits").innerHTML = outcome[5];
-    document.getElementById("german-puncEdits").innerHTML = outcome[6];
-    document.getElementById("german-dispWeightedWord").innerHTML = weightedWord[0];
-    document.getElementById("german-weightedWordEdits").innerHTML = outcome[7];
-    document.getElementById("german-deletedWords").innerHTML = outcome[8];
-    document.getElementById("german-result").style.display = "grid";
+    let responseBox = createResponseBox(score, userResponse, closestResponse, outcome, weightedWord);
+    let resultDiv = document.getElementById("german-result");
+    if (resultDiv.hasChildNodes()) {
+        resultDiv.removeChild(resultDiv.firstChild);
+    }
+    resultDiv.appendChild(responseBox);
+    resultDiv.style.display = "grid";
 }
 
 const russianTest = () => {
@@ -71,19 +59,13 @@ const russianTest = () => {
     let outcome = findClosestKeyAns(russianAnsKey, userResponse, weightedWord);
     let closestResponse = printColorCodedPhrase(outcome[0]);
     let score = scoreAnswer(outcome, weightedWord);
-    document.getElementById("russian-score").innerHTML = score[0] + " out of " + score[1];
-    document.getElementById("user-russian-response").innerHTML = userResponse;
-    document.getElementById("russian-closest-result").appendChild(closestResponse);
-    document.getElementById("russian-spelling-autocorrections").innerHTML = outcome[1];
-    document.getElementById("russian-deletions").innerHTML = outcome[2];
-    document.getElementById("russian-insertions").innerHTML = outcome[3];
-    document.getElementById("russian-WOEs").innerHTML = outcome[4];
-    document.getElementById("russian-CapEdits").innerHTML = outcome[5];
-    document.getElementById("russian-puncEdits").innerHTML = outcome[6];
-    document.getElementById("russian-dispWeightedWord").innerHTML = weightedWord[0];
-    document.getElementById("russian-weightedWordEdits").innerHTML = outcome[7];
-    document.getElementById("russian-deletedWords").innerHTML = outcome[8];
-    document.getElementById("russian-result").style.display = "grid";
+    let responseBox = createResponseBox(score, userResponse, closestResponse, outcome, weightedWord);
+    let resultDiv = document.getElementById("russian-result");
+    if (resultDiv.hasChildNodes()) {
+        resultDiv.removeChild(resultDiv.firstChild);
+    }
+    resultDiv.appendChild(responseBox);
+    resultDiv.style.display = "grid";
 }
 
 const customTest = () => {
@@ -112,19 +94,13 @@ const customTest = () => {
     let score = scoreAnswer(outcome, weightedWord, pointTotal, autoCorWeight, inserWeight, delWeight, orderWeight, capWeight, puncWeight);
 
     let closestResponse = printColorCodedPhrase(outcome[0]);
-    document.getElementById("custom-score").innerHTML = score[0] + " out of " + score[1];
-    document.getElementById("user-custom-response").innerHTML = userResponse;
-    document.getElementById("custom-closest-result").appendChild(closestResponse);
-    document.getElementById("custom-spelling-autocorrections").innerHTML = outcome[1];
-    document.getElementById("custom-deletions").innerHTML = outcome[2];
-    document.getElementById("custom-insertions").innerHTML = outcome[3];
-    document.getElementById("custom-WOEs").innerHTML = outcome[4];
-    document.getElementById("custom-CapEdits").innerHTML = outcome[5];
-    document.getElementById("custom-puncEdits").innerHTML = outcome[6];
-    document.getElementById("dispWeightedWord").innerHTML = weightedWord[0];
-    document.getElementById("custom-weightedWordEdits").innerHTML = outcome[7];
-    document.getElementById("custom-deletedWords").innerHTML = outcome[8];
-    document.getElementById("custom-result").style.display = "grid";
+    let responseBox = createResponseBox(score, userResponse, closestResponse, outcome, weightedWord);
+    let resultDiv = document.getElementById("custom-result");
+    if (resultDiv.hasChildNodes()) {
+        resultDiv.removeChild(resultDiv.firstChild);
+    }
+    resultDiv.appendChild(responseBox);
+    resultDiv.style.display = "grid";
 }
 
 let engSubButton = document.getElementById("english-button");
