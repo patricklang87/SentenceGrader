@@ -23,11 +23,11 @@ const englishTest = () => {
     let userResponse = document.getElementById("english-response").value;
     let weightedWord = ["NONE", 0];
     let outcome = findClosestKeyAns(englishAnsKey, userResponse, weightedWord);
-    let closestResponse = outcome[0].join(' ');
+    let closestResponse = printColorCodedPhrase(outcome[0]);
     let score = scoreAnswer(outcome, weightedWord);
     document.getElementById("english-score").innerHTML = score[0] + " out of " + score[1];
     document.getElementById("user-english-response").innerHTML = userResponse;
-    document.getElementById("english-closest-result").innerHTML = closestResponse;
+    document.getElementById("english-closest-result").appendChild(closestResponse);
     document.getElementById("english-spelling-autocorrections").innerHTML = outcome[1];
     document.getElementById("english-deletions").innerHTML = outcome[2];
     document.getElementById("english-insertions").innerHTML = outcome[3];

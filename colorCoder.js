@@ -21,7 +21,7 @@ const colorCodePhrase = (phrase, weightWord) => {
 
 const printColorCodedPhrase = (sentence) => {
     let punctuation = [",", "."];
-    let printPhrase = document.createElement("p");
+    let printPhrase = document.createElement("span");
     for (let i = 0; i < sentence.length; i++) {
         let space = document.createElement('span');
         space.innerHTML = " ";
@@ -32,13 +32,16 @@ const printColorCodedPhrase = (sentence) => {
         let subSentence = document.createElement("span");
         subSentence.innerHTML = sentence[i].phrase;
 
-        if (sentence[i].autocorrect = "yes") subSentence.style.color = "orange";
-        if (sentence[i].insertion = "yes") subSentence.style.color = "red";
-        if (sentence[i].wordOrderEdit = "yes") subSentence.style.backgroundColor = "purple";
-        if (sentence[i].capEdit = "yes") subSentence.style.color = "blue";
-        if (sentence[i].weightWord = "yes") subSentence.style.fontWeight = "bold";
+        console.log(sentence[i].phrase, sentence[i].autocorrect, sentence[i].insertion, sentence[i].wordOrderEdit, sentence[i].capEdit, sentence[i].weightWord);
+
+        if (sentence[i].autocorrect == "yes") subSentence.style.color = "orange";
+        if (sentence[i].insertion == "yes") subSentence.style.color = "red";
+        if (sentence[i].wordOrderEdit == "yes") subSentence.style.backgroundColor = "purple";
+        if (sentence[i].capEdit == "yes") subSentence.style.color = "blue";
+        if (sentence[i].weightWord == "yes") subSentence.style.fontWeight = "bold";
 
         printPhrase.appendChild(subSentence);
     }
+    console.log(printPhrase.innerHTML);
     return printPhrase;
 }

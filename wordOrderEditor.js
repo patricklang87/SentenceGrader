@@ -93,6 +93,7 @@ const wordOrderEditor = (keyAns, userSub, weightedWord) => {
   //create an editedPhrase that can be compared to the user submission
   let editedPhrase = [];
   for (let item of userSub) editedPhrase.push(item);
+  console.log("begin WOE, editedPhrase: ", editedPhrase);
   //word order editor will recursively call reorderer so it after each change, it starts from the beginning of the array, and does not accidentally skip contents.
   const reorderer = (keyAns, userAns) => {
   
@@ -103,7 +104,9 @@ const wordOrderEditor = (keyAns, userSub, weightedWord) => {
         console.log("sliced edited Phrase: " , index, editedPhrase.slice(index));
         if (!editedPhraseS.slice(index).includes(keyAns[index])) {
           console.log("insertion required: ", keyAns[index]);
-          editedPhrase.splice(index, 0, keyAns[index]);
+          let newWord3 = new ColorCodedSubPhrase(keyAns[index]);
+          editedPhrase.splice(index, 0, newWord3);
+          editedPhrase[index].insertion = "yes";
           if (checkIfPunctuation(keyAns[index]) == true) puncEdits++;
           else {
             insertions++;
@@ -120,55 +123,64 @@ const wordOrderEditor = (keyAns, userSub, weightedWord) => {
   				for (let item of editedPhrase) roundStartStatus.push(item);
         // if the word in the user submission is incorrect, and more than one position behind where it should be, or the next word is more than one ahead of where it should be, the edit count is increased by one. Then that word at the index is removed
         //let correctWord = userAns[index];
-        let userWord = editedPhrase[index];
+        console.log("CHeck edph index phrase: ", editedPhrase[index].phrase);
+        let userWord = editedPhrase[index].phrase;
         editedPhrase.splice(index, 1);
         console.log("step 1: ", editedPhrase);
         //if the word now at that index is still not the right word, the program locates the right word places it at the index, and deletes it where it was before. 
-        if (editedPhrase[index] != keyAns[index]) {
+        if (editedPhrase[index].phrase != keyAns[index]) {
           editedPhrase.splice(editedPhrase.indexOf(keyAns[index]), 1);
           console.log("step 2A: ", editedPhrase);
-          editedPhrase.splice(index, 0, keyAns[index]);
-          console.log("step 2B: ", editedPhrase);
+          let addWord = new ColorCodedSubPhrase(keyAns[index]);
+          editedPhrase.splice(index, 0, addWord);
+          editedPhrase[index].wordOrderEdit = "yes";
+          console.log("step 2B: ", editedPhrase[index].phrase);
         }
         // then the program prepares to put the word back. By default it places it at its correct index, but if it finds that the word behind it in the edited phrase has a higher correct index, it is moved back until it hits a word with a lower index. Failing this, it checks the next word in the list, and places it ahead of it.
+        console.log("CHECKING: ", editedPhrase[keyAns.indexOf(userWord) - 1], keyAns.indexOf(userWord) - 1);
         if (keyAns.indexOf(userWord) < keyAns.indexOf(editedPhrase[keyAns.indexOf(userWord) - 1])) {
         	console.log("index shift -");
           let indexShift = 0;
           for (let newIndex = keyAns.indexOf(userWord); newIndex > index; newIndex--) {
           
-            if (keyAns.indexOf(editedPhrase[newIndex - 1]) < keyAns.indexOf(userWord)) {
+            if (keyAns.indexOf(editedPhrase[newIndex - 1].phrase) < keyAns.indexOf(userWord)) {
               break;
             }
             indexShift++;
           }
           editedPhrase.splice(keyAns.indexOf(userWord) - indexShift, 0, userWord);
-        } else if (keyAns.indexOf(userWord) > keyAns.indexOf(editedPhrase[keyAns.indexOf(userWord)])) {
+        } else if (keyAns.indexOf(userWord) > keyAns.indexOf(editedPhrase[keyAns.indexOf(userWord)].phrase)) {
         	console.log("index shift +");
          let indexShift = 0;
           for (let newIndex = keyAns.indexOf(userWord); newIndex < editedPhrase.length; newIndex++) {
-          if (keyAns.indexOf(editedPhrase[newIndex]) > keyAns.indexOf(userWord)) {
+          if (keyAns.indexOf(editedPhrase[newIndex].phrase) > keyAns.indexOf(userWord)) {
               break;
             }
             indexShift++;
           }
-          editedPhrase.splice(keyAns.indexOf(userWord) + indexShift, 0, userWord);
-
-            } else editedPhrase.splice(keyAns.indexOf(userWord), 0, userWord);
+          let addWord2 = new ColorCodedSubPhrase(userWord);
+          editedPhrase.splice(keyAns.indexOf(userWord) + indexShift, 0, addWord2);
+          editedPhrase[keyAns.indexOf(userWord) + indexShift].wordOrderEdit = "yes";
+            } else {
+              let addWord3 = new ColorCodedSubPhrase(userWord);
+              editedPhrase.splice(keyAns.indexOf(userWord), 0, addWord3);
+              editedPhrase[keyAns.indexOf(userWord)].wordOrderEdit = "yes";
+            }
         //  if the word at the index has changed, the edit count increases by 1
      
-        if (roundStartStatus[index] != editedPhrase[index]) {
-          if (checkIfPunctuation(roundStartStatus[index][0]) == true) puncEdits++;
+        if (roundStartStatus[index].phrase != editedPhrase[index].phrase) {
+          if (checkIfPunctuation(roundStartStatus[index].phrase) == true) puncEdits++;
           else editCount++;
-          console.log("roundStartStatus[index].toLowerCase(), weightedWord.toLowerCase(): ", roundStartStatus[index].toLowerCase(), weightedWord.toLowerCase());
-          if (roundStartStatus[index].toLowerCase() == weightedWord.toLowerCase()) {
+          console.log("roundStartStatus[index].phrase.toLowerCase(), weightedWord.toLowerCase(): ", roundStartStatus[index].phrase.toLowerCase(), weightedWord.toLowerCase());
+          if (roundStartStatus[index].phrase.toLowerCase() == weightedWord.toLowerCase()) {
             weightedWordEdits++;
           }
         } 
-        if (roundStartStatus[index + 1] != editedPhrase[index] ) {
-          if (checkIfPunctuation(roundStartStatus[index + 1]) == true) puncEdits++;
+        if (roundStartStatus[index + 1].phrase != editedPhrase[index].phrase ) {
+          if (checkIfPunctuation(roundStartStatus[index + 1].phrase) == true) puncEdits++;
           else editCount++;
-          console.log("roundStartStatus[index + 1].toLowerCase(), weightedWord.toLowerCase(): ",roundStartStatus[index][0].toLowerCase(), weightedWord.toLowerCase() );
-          if (roundStartStatus[index + 1].toLowerCase() == weightedWord.toLowerCase()) {
+          console.log("roundStartStatus[index + 1].toLowerCase(), weightedWord.toLowerCase(): ",roundStartStatus[index].phrase.toLowerCase(), weightedWord.toLowerCase() );
+          if (roundStartStatus[index + 1].phrase.toLowerCase() == weightedWord.toLowerCase()) {
             weightedWordEdits++;
           }
         } 
