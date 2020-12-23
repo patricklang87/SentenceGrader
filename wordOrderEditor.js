@@ -81,7 +81,11 @@ const compArsOfArs = (ar1, ar2) => {
 
 //reorderer -- this now just needs to be edited so it counts changes correctly
 
-/*export*/ const wordOrderEditor = (keyAns, userSub, weightedWord) => {
+const wordOrderEditor = (keyAns, userSub, weightedWord) => {
+  let editedPhraseS = [];
+  for (let i = 0; i < userSub.length; i++) {
+    editedPhraseS.push(userSub[i].phrase);
+  }
   let editCount = 0;
   let insertions = 0;
   let puncEdits = 0;
@@ -95,9 +99,9 @@ const compArsOfArs = (ar1, ar2) => {
     for (let index = 0; index < keyAns.length; index++) {
       console.log("current index: ", index);
     	
-      if (keyAns[index] != editedPhrase[index]) {
+      if (keyAns[index] != editedPhrase[index].phrase) {
         console.log("sliced edited Phrase: " , index, editedPhrase.slice(index));
-        if (!editedPhrase.slice(index).includes(keyAns[index])) {
+        if (!editedPhraseS.slice(index).includes(keyAns[index])) {
           console.log("insertion required: ", keyAns[index]);
           editedPhrase.splice(index, 0, keyAns[index]);
           if (checkIfPunctuation(keyAns[index]) == true) puncEdits++;

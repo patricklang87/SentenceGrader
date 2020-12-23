@@ -117,6 +117,10 @@ const determineAutocorrectStrictness = (wordLength) => {
 
 //checks for words that can be corrected and corrects them;
 const autocorrect = (keyAns, editedPhrase, weightedWord) => {
+    let editedPhraseS = [];
+    for (let i = 0; i < editedPhrase.length; i++) {
+      editedPhraseS.push(editedPhrase[i].phrase);
+    }
     let autocorrections = 0;
     let deletions = 0;
     let puncDeletions = 0;
@@ -125,15 +129,15 @@ const autocorrect = (keyAns, editedPhrase, weightedWord) => {
     for (let index = editedPhrase.length - 1; index >= 0; index --) {
         console.log("postion in interation: ", index, editedPhrase[index]);
         //console.log(" iteration ", index, " section: ", editedPhrase[index]);
-        if (!keyAns.includes(editedPhrase[index])) {
-          console.log(editedPhrase[index], " IS NOT IN ", keyAns);
+        if (!keyAns.includes(editedPhrase[index].phrase)) {
+          console.log(editedPhrase[index].phrase, " IS NOT IN ", keyAns);
 
             let levCalcS = [];
             for (let j = 0; j < keyAns.length; j++) {
                 //console.log("keyAns[j]: ", keyAns[j], " editedPhrase: ", editedPhrase);
-                if (!editedPhrase.includes(keyAns[j])) {
-                  console.log(keyAns[j], " IS NOT IN ", editedPhrase);
-                  let levVal = levCalc(keyAns[j], editedPhrase[index]);
+                if (!editedPhraseS.includes(keyAns[j])) {
+                  console.log(keyAns[j], " IS NOT IN ", editedPhraseS);
+                  let levVal = levCalc(keyAns[j], editedPhrase[index].phrase);
                   console.log("levVal: ", levVal);
                   levCalcS.push([levVal, keyAns[j]]);
                 }
@@ -147,33 +151,34 @@ const autocorrect = (keyAns, editedPhrase, weightedWord) => {
                     }
                     console.log("lowestValIndex: ", lowestLevValIndex);
 
-                    let lengthCompare = editedPhrase[index].length;
+                    let lengthCompare = editedPhrase[index].phrase.length;
                     console.log("levCalcS[lowestLevValIndex]: ", levCalcS[lowestLevValIndex]);
                     if (levCalcS[lowestLevValIndex][1].length > lengthCompare) lengthCompare = levCalcS[lowestLevValIndex][1].length;
 
                     let strictnessFactor = determineAutocorrectStrictness(lengthCompare);
 
                     if (levCalcS[lowestLevValIndex][0] <= (strictnessFactor)*lengthCompare) {
-                        console.log("editedPhrase, editedPhrase[index]: ", editedPhrase, editedPhrase[index])
-                        editedPhrase.splice(index, 1, levCalcS[lowestLevValIndex][1]);
-                        autocorrections++; 
+                        console.log("editedPhrase, editedPhrase[index].phrase: ", editedPhrase, editedPhrase[index].phrase);
+                        editedPhrase[index].phrase = levCalcS[lowestLevValIndex][1];
+                        autocorrections++;
+                        editedPhrase[index].autocorrect = "yes"; 
                         if (weightedWord != undefined) {
                         if (levCalcS[lowestLevValIndex][1].toLowerCase() == weightedWord.toLowerCase()) {
                           weightedWordEdits++;
                         }      
                       }                
                     } else {
-                      if (checkIfPunctuation(editedPhrase[index]) == true) puncDeletions++;
-                      else if (compareArrays(editedPhrase[index], ['']) != true) deletions++;
-                      deletedWords.push(editedPhrase[index]);
-                      console.log("deletion: ", editedPhrase[index]);
+                      if (checkIfPunctuation(editedPhrase[index].phrase) == true) puncDeletions++;
+                      else if (compareArrays(editedPhrase[index].phrase, ['']) != true) deletions++;
+                      deletedWords.push(editedPhrase[index].phrase);
+                      console.log("deletion: ", editedPhrase[index].phrase);
                       editedPhrase.splice(index, 1);                      
                     }                         
                 } else {
-                  if (checkIfPunctuation(editedPhrase[index]) == true) puncDeletions++;
-                  else if (compareArrays(editedPhrase[index], ['']) != true) deletions++;
-                  deletedWords.push(editedPhrase[index]); 
-                      console.log("deletion: ", editedPhrase[index]);
+                  if (checkIfPunctuation(editedPhrase[index].phrase) == true) puncDeletions++;
+                  else if (compareArrays(editedPhrase[index].phrase, ['']) != true) deletions++;
+                  deletedWords.push(editedPhrase[index].phrase); 
+                      console.log("deletion: ", editedPhrase[index].phrase);
                       editedPhrase.splice(index, 1); 
                 }                 
         }    

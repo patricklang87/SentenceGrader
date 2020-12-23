@@ -38,11 +38,17 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
 
     console.log("STEP 2 (parse): keystatus: ", strfyGroupedKeyAnsPrepped, "userans status: ", strfyGroupedUserAnsPrepped);
 
+    //turn the userAns into an array of objects
+    let colorCodedUserAns = colorCodePhrase(strfyGroupedUserAnsPrepped);
+    console.log("colorCodedUserAns: ", colorCodedUserAns[0]);
+
     //check for false capitalizations or lower case words
-    let checkUserPhraseCapitalization = capitalizationChecker(strfyGroupedKeyAnsPrepped, strfyGroupedUserAnsPrepped, weightedWord[0]);
+    let checkUserPhraseCapitalization = capitalizationChecker(strfyGroupedKeyAnsPrepped, colorCodedUserAns, weightedWord[0]);
     let caseCheckedUserPhrase = checkUserPhraseCapitalization[0];
     let capitalizationEdits = checkUserPhraseCapitalization[1];
     weightedWordEdits += checkUserPhraseCapitalization[2];
+
+    console.log("STEP 2B: ", checkUserPhraseCapitalization);
 
     // autocorrect or delete words
     let autocorrectedResult = autocorrect(strfyGroupedKeyAnsPrepped, caseCheckedUserPhrase, weightedWord[0]);
@@ -52,7 +58,12 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     puncEdits += autocorrectedResult[3];
     weightedWordEdits += autocorrectedResult[4];
     let deletedWords = autocorrectedResult[5];
-    console.log("STEP 3 (autocorrect and delete): keystatus: ", strfyGroupedKeyAnsPrepped , " userans status: ", autocorrectedUserAns);
+
+    let displayUserAns = [];
+    for (let i = 0 ; i < autocorrectedUserAns.length; i++) {
+        displayUserAns.push(autocorrectedUserAns[i].phrase, autocorrectedUserAns[i].autocorrect);
+    }
+    console.log("STEP 3 (autocorrect and delete): keystatus: ", strfyGroupedKeyAnsPrepped , " userans status: ", displayUserAns);
 
     let reorderedUserSub = wordOrderEditor(strfyGroupedKeyAnsPrepped, autocorrectedUserAns, weightedWord[0]);
     let reorderedPhrase = reorderedUserSub[0];

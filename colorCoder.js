@@ -3,12 +3,10 @@
 function ColorCodedSubPhrase(phrase) {
     this.phrase = phrase;
     this.autocorrect = "no";
-    this.deletion = "no";
     this.insertion = "no";
     this.wordOrderEdit = "no";
     this.capEdit = "no";
     this.weightWord = "no";
-
 }
 
 const colorCodePhrase = (phrase, weightWord) => {
@@ -42,4 +40,5 @@ const printColorCodedPhrase = (sentence) => {
 
         printPhrase.appendChild(subSentence);
     }
+    return printPhrase;
 }
