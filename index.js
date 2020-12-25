@@ -1,15 +1,3 @@
-/*
-import { prepSentence, arToPhraseString} from './textPrep';
-import { sentenceParser } from './parserBeta';
-import { wordOrderEditor } from './wordOrderEditor';
-import { autocorrect } from './wordSpellingEditor';
-*/
-/*
-let phrase1 = ["My sister tries to want to eat healthily.", "My sister wants to try to eat healthily."];
-let phrase2 = "My sister try to want to eat healthily.";
-
-*/
-
 const altAr = (ar) => {
     let newAr = [];
     for (let i = 0; i < ar.length; i++) newAr.push(ar[i]);
@@ -67,13 +55,14 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     console.log("STEP 3 (autocorrect and delete): keystatus: ", strfyGroupedKeyAnsPrepped , " userans status: ", displayUserAns);
 
     //delete doubled words
-    let answerWithDeletedExtras = removeExcessWords(strfyGroupedKeyAnsPrepped, autocorrectedUserAns);
+    let answerWithDeletedExtras = removeExcessWords(strfyGroupedKeyAnsPrepped, autocorrectedUserAns, weightedWord);
     let userPhraseWithDeletedExtras = answerWithDeletedExtras[0];
     numDeletedWords += answerWithDeletedExtras[1];
     let totalDeletedWords = deletedWords.concat(answerWithDeletedExtras[2]);
     console.log("answerWithDeletedExtras[2]: ", answerWithDeletedExtras[2]);
     console.log("deletedWords 2: ", totalDeletedWords);
     puncEdits += answerWithDeletedExtras[3];
+    weightedWordEdits += answerWithDeletedExtras[4];
 
     let reorderedUserSub = wordOrderEditor(strfyGroupedKeyAnsPrepped, userPhraseWithDeletedExtras, weightedWord[0]);
     let reorderedPhrase = reorderedUserSub[0];

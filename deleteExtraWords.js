@@ -43,9 +43,10 @@ const createArWordCount = (sentence) => {
       else return false;
   }
 
-  const removeExcessWords = (kPhrase, pPhrase) => {
+  const removeExcessWords = (kPhrase, pPhrase, weightedWord) => {
       let deletions = 0;
       let puncEdits = 0;
+      let weightedWordEdits = 0;
       let deletedWords = [];
 
   const subRemoveExcessWords = (kPhrase, pPhrase) => {  
@@ -98,6 +99,8 @@ const createArWordCount = (sentence) => {
 
                 if (checkIfPunctuation(pPhrase[deletionIndex].phrase) == true) puncDeletions++;
                 else deletions++;
+                if (pPhrase[deletionIndex].phrase == weightedWord[0]) weightedWordEdits++;
+
                 pPhrase.splice(deletionIndex, 1);
                 console.log("updated pPhrase: ", pPhrase);
                 break;  
@@ -112,7 +115,7 @@ const createArWordCount = (sentence) => {
         }
     }
     subRemoveExcessWords(kPhrase, pPhrase);
-    return [pPhrase, deletions, deletedWords, puncEdits];
+    return [pPhrase, deletions, deletedWords, puncEdits, weightedWordEdits];
   }
 /*
 let result = removeExcessWords(kPhrase, pPhrase);
