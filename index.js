@@ -58,6 +58,7 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     puncEdits += autocorrectedResult[3];
     weightedWordEdits += autocorrectedResult[4];
     let deletedWords = autocorrectedResult[5];
+    console.log("deleted Words 1: ", deletedWords);
 
     let displayUserAns = [];
     for (let i = 0 ; i < autocorrectedUserAns.length; i++) {
@@ -65,14 +66,23 @@ console.log("STEP 1 (tokenize): key status: ", keyAnsPrepped, "userans status: "
     }
     console.log("STEP 3 (autocorrect and delete): keystatus: ", strfyGroupedKeyAnsPrepped , " userans status: ", displayUserAns);
 
-    let reorderedUserSub = wordOrderEditor(strfyGroupedKeyAnsPrepped, autocorrectedUserAns, weightedWord[0]);
+    //delete doubled words
+    let answerWithDeletedExtras = removeExcessWords(strfyGroupedKeyAnsPrepped, autocorrectedUserAns);
+    let userPhraseWithDeletedExtras = answerWithDeletedExtras[0];
+    numDeletedWords += answerWithDeletedExtras[1];
+    let totalDeletedWords = deletedWords.concat(answerWithDeletedExtras[2]);
+    console.log("answerWithDeletedExtras[2]: ", answerWithDeletedExtras[2]);
+    console.log("deletedWords 2: ", totalDeletedWords);
+    puncEdits += answerWithDeletedExtras[3];
+
+    let reorderedUserSub = wordOrderEditor(strfyGroupedKeyAnsPrepped, userPhraseWithDeletedExtras, weightedWord[0]);
     let reorderedPhrase = reorderedUserSub[0];
     let reorderCount = reorderedUserSub[1];
     let numInsertedWords = reorderedUserSub[2];
     puncEdits += reorderedUserSub[3];
     weightedWordEdits += reorderedUserSub[4];
     
-    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, numInsertedWords, reorderCount, capitalizationEdits, puncEdits, weightedWordEdits, deletedWords];
+    return [reorderedPhrase, numAutocorrectedWords, numDeletedWords, numInsertedWords, reorderCount, capitalizationEdits, puncEdits, weightedWordEdits, totalDeletedWords];
 }
 
 

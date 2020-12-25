@@ -1,6 +1,7 @@
+/*
 let pPhrase = [{ phrase: "This"}, { phrase: "is"}, {phrase : "my"}, {phrase: "first"}, {phrase: "is"}, {phrase: "time"}, {phrase: "here"}, {phrase : "my"}, {phrase: "is"}, {phrase: "."}];
 let kPhrase = ["This", "is", "my", "first", "time", "here", "."];
-
+*/
 
 
 
@@ -13,7 +14,7 @@ const createObjWordCount = (sentence) => {
     return KeyWordCount;
   }
 
-console.log(createObjWordCount(pPhrase));
+//console.log(createObjWordCount(pPhrase));
 
 const createArWordCount = (sentence) => {
     let KeyWordCount = {};
@@ -24,7 +25,7 @@ const createArWordCount = (sentence) => {
     return KeyWordCount;
   }
 
-  console.log(createArWordCount(kPhrase));
+  //console.log(createArWordCount(kPhrase));
 
   const subAnsHigherCount = (kPhraseBOW, pPhraseBOW) => {
       let userSubKeys = Object.keys(pPhraseBOW);
@@ -42,8 +43,10 @@ const createArWordCount = (sentence) => {
       else return false;
   }
 
-  const removeExcessWords = (startkPhrase, startpPhrase) => {
+  const removeExcessWords = (kPhrase, pPhrase) => {
       let deletions = 0;
+      let puncEdits = 0;
+      let deletedWords = [];
 
   const subRemoveExcessWords = (kPhrase, pPhrase) => {  
       let userSubBOW = createObjWordCount(pPhrase);
@@ -91,9 +94,12 @@ const createArWordCount = (sentence) => {
                 let deletionIndex = userExcessIndices[indexOfLargestSmallestDistance];
                 console.log(deletionIndex);
 
+                deletedWords.push(pPhrase[deletionIndex].phrase);
+
+                if (checkIfPunctuation(pPhrase[deletionIndex].phrase) == true) puncDeletions++;
+                else deletions++;
                 pPhrase.splice(deletionIndex, 1);
                 console.log("updated pPhrase: ", pPhrase);
-                deletions++;
                 break;  
 
               }
@@ -105,10 +111,11 @@ const createArWordCount = (sentence) => {
         subRemoveExcessWords(kPhrase, pPhrase);
         }
     }
-    subRemoveExcessWords(startkPhrase, startpPhrase);
-    return [pPhrase, deletions];
-  } 
+    subRemoveExcessWords(kPhrase, pPhrase);
+    return [pPhrase, deletions, deletedWords, puncEdits];
+  }
+/*
+let result = removeExcessWords(kPhrase, pPhrase);
 
-  let result = removeExcessWords(kPhrase, pPhrase);
-
-  console.log(result[0], result[1]);
+console.log(result[0], result[1]);
+*/

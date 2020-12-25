@@ -40,7 +40,7 @@ const createResponseBox = (score, userResponse, closestResponse, outcome, weight
     let autocorrectedDiv = createDisplayBox("Autocorrections: ", outcome[1]);
     if (outcome[1] == 0) autocorrectedDiv.style.display = "none";
     responseBox.appendChild(autocorrectedDiv);
-
+    console.log("outcome[8]:", outcome[8]);
     let deletedWords = "(" + outcome[8].join(", ") + ")";
     let deletionDivInfo = outcome[2] + " " + deletedWords;
     let deletionsDiv = createDisplayBox("Deletions: ", deletionDivInfo);
