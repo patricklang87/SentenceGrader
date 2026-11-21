@@ -100,7 +100,7 @@ const wordOrderEditor = (keyAns, userSub, weightedWord) => {
     for (let index = 0; index < keyAns.length; index++) {
       console.log("current index: ", index);
     	
-      if (keyAns[index] != editedPhrase[index].phrase) {
+      if (!editedPhrase[index] || keyAns[index] != editedPhrase[index].phrase) {
         console.log("sliced edited Phrase: " , index, editedPhrase.slice(index));
         if (!editedPhraseS.slice(index).includes(keyAns[index])) {
           console.log("insertion required: ", keyAns[index]);
