@@ -143,7 +143,54 @@ footer span {
 }
 
 footer a {
-    color: hotpink;
+    color: #3b0024;
+    text-decoration: underline;
     
     
+}
+/* Corrections in the closest correct answer: each has a color and a non-color cue. */
+.edit-autocorrect {
+    color: #7a1e00;
+    text-decoration: underline wavy;
+}
+.edit-insertion {
+    color: #8a0017;
+    text-decoration: underline double;
+}
+.edit-order {
+    background-color: tomato;
+    color: black;
+    outline: 1px dashed black;
+}
+.edit-capitalization {
+    color: #0033b3;
+    text-decoration: underline dotted;
+}
+.legend span {
+    padding: 0 2px;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #1a1a8c;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 }

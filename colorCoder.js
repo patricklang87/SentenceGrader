@@ -34,11 +34,21 @@ const printColorCodedPhrase = (sentence) => {
 
         console.log(sentence[i].phrase, sentence[i].autocorrect, sentence[i].insertion, sentence[i].wordOrderEdit, sentence[i].capEdit, sentence[i].weightWord);
 
-        if (sentence[i].autocorrect == "yes") subSentence.style.color = "orangered";
-        if (sentence[i].insertion == "yes") subSentence.style.color = "red";
-        if (sentence[i].wordOrderEdit == "yes") subSentence.style.backgroundColor = "tomato";
-        if (sentence[i].capEdit == "yes") subSentence.style.color = "blue";
+        // Mark each kind of edit with a class (color plus a non-color cue, see
+        // style.css) and hidden text, so the meaning doesn't rely on color alone.
+        const edits = [];
+        if (sentence[i].autocorrect == "yes") edits.push(["edit-autocorrect", "spelling corrected"]);
+        if (sentence[i].insertion == "yes") edits.push(["edit-insertion", "inserted"]);
+        if (sentence[i].wordOrderEdit == "yes") edits.push(["edit-order", "moved"]);
+        if (sentence[i].capEdit == "yes") edits.push(["edit-capitalization", "capitalization fixed"]);
         if (sentence[i].weightWord == "yes") subSentence.style.fontWeight = "bold";
+        edits.forEach(([className]) => subSentence.classList.add(className));
+        if (edits.length) {
+            const note = document.createElement("span");
+            note.className = "visually-hidden";
+            note.textContent = ` (${edits.map(([, label]) => label).join(", ")})`;
+            subSentence.appendChild(note);
+        }
 
         printPhrase.appendChild(subSentence);
     }

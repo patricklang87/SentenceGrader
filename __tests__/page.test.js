@@ -43,3 +43,29 @@ describe('demo page', () => {
     expect(result.textContent).toContain('Score: 8 out of 10');
   });
 });
+
+describe('accessibility', () => {
+  it('labels every answer field', () => {
+    for (const input of document.querySelectorAll('input')) {
+      const label = document.querySelector(`label[for="${input.id}"]`);
+      expect(label).not.toBeNull();
+      expect(label.textContent.trim()).not.toBe('');
+    }
+  });
+
+  it('announces results through live regions', () => {
+    for (const result of document.querySelectorAll('.result')) {
+      expect(result.getAttribute('aria-live')).toBe('polite');
+    }
+  });
+
+  it('describes each correction in text, not only with color', () => {
+    const result = submit('english', 'my sister wants to try to eat helthily');
+    const closest = [...result.querySelectorAll('.resultRow')].find((row) =>
+      row.textContent.startsWith('Closest Correct Answer')
+    );
+    expect(closest.querySelector('.edit-autocorrect').textContent).toBe('healthily (spelling corrected)');
+    expect(closest.querySelector('.edit-capitalization').textContent).toBe('My (capitalization fixed)');
+    expect(closest.querySelector('.edit-insertion').textContent).toBe('. (inserted)');
+  });
+});
