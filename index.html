@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,14 +18,15 @@
         <![endif]-->
         <header>
                 <div id='logo'>
-                    <span><a href="https://patricklang87.github.io/portfolio/">PSLANG</a></span>
+                    <span><a href="https://patricklangcoding.onrender.com/">PSLANG</a></span>
                 </div>
-                <nav>
+                <nav aria-label="Main">
                     <span><a href="#about">About</a></span>
                     <span><a href="#preset-examples">Preset Examples</a></span>
                     <span><a href="#custom-box">Your Own Sentence</a></span>
                 </nav>
         </header>
+        <main>
             <section id="banner">
                 <div id="title">
                     <h1>Sentence Assesser</h1>
@@ -39,17 +40,23 @@
             </section>
             <section id="preset-examples">
                 <h2>Preset Examples</h2>
+                <p class="legend">In the closest correct answer, corrections are marked:
+                    <span class="edit-autocorrect">spelling corrected</span>,
+                    <span class="edit-insertion">word inserted</span>,
+                    <span class="edit-order">word moved</span>,
+                    <span class="edit-capitalization">capitalization fixed</span>, and the
+                    <strong>weighted word</strong> in bold.</p>
                 <div class="preset-example">
                     <div class="question">
                         <h3>English</h3>
                         <p>Write a sensible sentence in present tense using the following words. Where necessary, conjugate the verbs or add the infinitive "to".</p>
                         <p>1. My sister / want / try / eat / healthily / .</p>
-                        <label for="english-response" value="Your Response: "></label>
+                        <label for="english-response">Your response (English):</label>
                         <input type="text" name="english-response" id="english-response" value="My sister to Try to want to eat healthily." required></input>
                         <br>
-                        <button value="submit" id="english-button">Submit</button>
+                        <button type="button" id="english-button">Submit English answer</button>
                     </div>
-                    <div class="result" id="english-result">
+                    <div class="result" id="english-result" aria-live="polite">
                     </div>
                 </div>
                 <div class="preset-example">
@@ -57,12 +64,12 @@
                         <h3>German</h3>
                         <p>Write a sensible sentence in past perfect tense using the following words. Where necessary, provide the past participle and a conjugated helping verb.</p>
                         <p>1. ich / kommen / nach Hause / spät / .</p>
-                        <label for="german-response" value="Your Response: "></label>
+                        <label for="german-response">Your response (German):</label>
                         <input type="text" name="german-response" id="german-response"  required></input>
                         <br>
-                        <button value="submit" id="german-button">Submit</button>
+                        <button type="button" id="german-button">Submit German answer</button>
                     </div>
-                    <div class="result" id="german-result">     
+                    <div class="result" id="german-result" aria-live="polite">     
                     </div>
                 </div>
                 <div class="preset-example">
@@ -70,12 +77,12 @@
                         <h3>Russian</h3>
                         <p>Respond to the following question, saying that you do not know the answer. Use the conjunction 'ли' in your answer, and pay attention to word order.</p>
                         <p>1. Твоя сестра хочет пойти в кино?</p>
-                        <label for="russian-response" value="Your Response: "></label>
+                        <label for="russian-response">Your response (Russian):</label>
                         <input type="text" name="russian-response" id="russian-response"  required></input>
                         <br>
-                        <button value="submit" id="russian-button">Submit</button>
+                        <button type="button" id="russian-button">Submit Russian answer</button>
                     </div>
-                    <div class="result" id="russian-result"> 
+                    <div class="result" id="russian-result" aria-live="polite"> 
                     </div>
                 </div>
             </section>
@@ -87,9 +94,9 @@
                     <p>Insert your sample answers below, exactly as you would like the answer typed. Here you may insert up to three possible key answers.</p>
                     <label for="ans-key-1" >Answer Key 1 (required): </label>
                     <input type="text" name="ans-key-1" id="ans-key-1" value="I like to party party."  required></input><br>
-                    <label for="ans-key-1" value="Your Response: ">Answer Key 2 (optional): </label>
+                    <label for="ans-key-2">Answer Key 2 (optional): </label>
                     <input type="text" name="ans-key-2" id="ans-key-2" value="She like to party party."></input><br>
-                    <label for="ans-key-3" value="Your Response: ">Answer Key 3 (optional):</label>
+                    <label for="ans-key-3">Answer Key 3 (optional):</label>
                     <input type="text" name="ans-key-3" id="ans-key-3" value="We like to party party." ></input><br>
                     <br>
                     <p>Next, you can can change the question value and weigh the various correction categories. The number of errors in each category will be multiplied by the given weight, and then subtracted from the question value in order to score the queston.</p>
@@ -119,15 +126,16 @@
                     <p>Finally, provide an answer to test out your question.</p>
                     <label for="custom-response" >Your Response: </label>
                     <input type="text" name="custom-response" id="custom-response" value="Me likey party party."  required></input>
-                    <button value="submit" id="custom-button">Submit</button>
+                    <button type="button" id="custom-button">Submit your answer</button>
                 </div>
-                <div class="result" id="custom-result">
+                <div class="result" id="custom-result" aria-live="polite">
                 </div>
             
             </div>
         </section>
+        </main>
         <footer>
-            <span>A project by <a href="https://langportfolio.herokuapp.com/">Patrick Lang</a></span></br>
+            <span>A project by <a href="https://patricklangcoding.onrender.com/">Patrick Lang</a></span><br>
             <span>&copy; 2020</span>
         </footer>
             

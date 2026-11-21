@@ -31,7 +31,7 @@ const createResponseBox = (score, userResponse, closestResponse, outcome, weight
     let scoreDiv = createDisplayBox("Score: ", scoreContent);
     responseBox.appendChild(scoreDiv);
 
-    let userResponseDiv = createDisplayBox("User Reponse: ", userResponse);
+    let userResponseDiv = createDisplayBox("Your Response: ", userResponse);
     responseBox.appendChild(userResponseDiv);
 
     let closestResponseDiv = createClosestResBox("Closest Correct Answer: ", closestResponse);
