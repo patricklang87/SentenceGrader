@@ -1,5 +1,5 @@
 /** @jest-environment jsdom */
-const { loadPage, pageGlobals } = require('./loadPage');
+const { loadPage, pageGlobals } = require('../test-utils/loadPage');
 
 let api;
 

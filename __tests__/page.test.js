@@ -1,5 +1,5 @@
 /** @jest-environment jsdom */
-const { loadPage } = require('./loadPage');
+const { loadPage } = require('../test-utils/loadPage');
 
 // The page's scripts declare top-level consts, so they can only be loaded
 // once per window — load the page once for this file.

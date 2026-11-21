@@ -37,7 +37,7 @@ npm install
 npm test
 ```
 
-Jest loads `index.html` and each script into jsdom the same way the browser does. The tests cover tokenizing, every kind of edit and its penalty, weighted words, Cyrillic text, custom weights, and the demo page's English, German and custom questions. Tests run on every push and pull request via GitHub Actions.
+Jest (with the shared loader in `test-utils/loadPage.js`) loads `index.html` and each script into jsdom the same way the browser does. The tests cover tokenizing, every kind of edit and its penalty, weighted words, Cyrillic text, custom weights, and the demo page's English, German and custom questions. Tests run on every push and pull request via GitHub Actions.
 
 ## Built with
 
