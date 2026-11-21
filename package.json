@@ -1,10 +1,10 @@
 {
-  "name": "js_assess2",
+  "name": "sentence-grader",
   "version": "1.0.0",
-  "description": "",
+  "description": "Grades foreign-language sentence answers by counting spelling, order, insertion, deletion, capitalization and punctuation edits",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +12,9 @@
   "dependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   }
 }
